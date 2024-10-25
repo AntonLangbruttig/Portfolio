@@ -22,19 +22,27 @@ const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
-    title: 'About',
-    path: '/about',
+    title: 'Help',
+    path: '/help',
     icon: <Icon icon="lucide:info" width="24" height="24" />,
   },
   {
-    title: 'Services',
-    path: '/services',
+    title: 'Settings',
+    path: '/settings',
+    icon: <Icon icon="lucide:info" width="24" height="24" />,
+    submenu: true,
+    subMenuItems: [
+      { title: 'Account', path: '/settings/account' },
+      { title: 'Privacy', path: '/settings/privacy' },
+    ],
+  },
+  {
+    title: 'Projects',
+    path: '/projects',
     icon: <Icon icon="lucide:settings" width="24" height="24" />,
     submenu: true,
     subMenuItems: [
-      { title: 'Web Design', path: '/services/web-design' },
-      { title: 'Development', path: '/services/development' },
-      { title: 'SEO', path: '/services/seo' },
+      { title: 'Web Design', path: '/projects/web-design' },
     ],
   },
   {
@@ -46,21 +54,19 @@ const SIDENAV_ITEMS: SideNavItem[] = [
 
 const SideNav = () => {
   return (
-    <div className="md:w-100 bg-white/30 backdrop-blur-md h-screen flex-1 fixed top-0 left-0 z-50 border-r shadow-lg overflow-y-auto text-gray-800" style={{ width: '250px' }}>
-      <div className="flex flex-col space-y-6 w-full p-3">
-        <Link
-          href="/"
-          className="flex flex-row space-x-3 items-center justify-center md:justify-start"
-        >
-          <span className="font-bold text-2xl">Your Logo</span>
-        </Link>
+    <div className="bg-white/30 backdrop-blur-md h-screen fixed top-0 left-[200px] z-50 border-r shadow-lg overflow-y-auto text-gray-800 w-64">
+      <Link
+        href="/"
+        className="flex flex-row space-x-3 items-center justify-start px-4 py-4"
+      >
+        <span className="font-bold text-2xl">Your Logo</span>
+      </Link>
 
-        <nav className="flex flex-col space-y-2">
-          {SIDENAV_ITEMS.map((item, idx) => {
-            return <MenuItem key={idx} item={item} />;
-          })}
-        </nav>
-      </div>
+      <nav className="flex flex-col space-y-2 mt-4">
+        {SIDENAV_ITEMS.map((item, idx) => {
+          return <MenuItem key={idx} item={item} />;
+        })}
+      </nav>
     </div>
   );
 };

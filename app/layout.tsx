@@ -7,6 +7,7 @@ import HeaderMobile from '@/components/header-mobile';
 import MarginWidthWrapper from '@/components/margin-width-wrapper';
 import PageWrapper from '@/components/page-wrapper';
 import SideNav from '@/components/side-nav';
+import VeiwWindow from '@/components/view-window';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,16 +23,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    
     <html lang="en">
-      <body className={`bg-transparent' ${inter.className}`}>
+      <body className={`bg-transparent' ${inter.className}`} style={{
+        backgroundImage: `url('/images/background.jpg')`,
+        backgroundSize: "cover",
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundAttachment: 'fixed',
+        filter: 'brightness(70%)', // Add tint by adjusting brightness
+      }}>
         <div className="flex" >
           <SideNav />
           <main className="flex-1">
             <MarginWidthWrapper>
               {/* <Header /> */}
               <HeaderMobile />
-              <PageWrapper>{children}</PageWrapper>
+              {/* <PageWrapper>{children}</PageWrapper> */}
+              <VeiwWindow/>
             </MarginWidthWrapper>
           </main>
         </div>
