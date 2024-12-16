@@ -2,11 +2,11 @@ import "../styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Background from "@/components/background";
-import MarginWidthWrapper from "@/components/margin-width-wrapper";
 import SideNav from "@/components/side-nav";
-import VeiwWindow from "@/components/view-window";
-import Header from "@/components/header";
+import ViewWindow from "@/components/view-window";
 import HeaderMobile from "@/components/header-mobile";
+import Navbar from '@/components/top-nav'
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,17 +24,20 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Background>
-          <div className="flex">
-            <main className="flex-1">
-              <div className="grid grid-cols-12">
-                <div className="col-start-2 col-span-2  w-full">
+          <Navbar/>
+          <div className="flex justify-center items-center min-h-screen">
+            <main className="flex flex-col items-center  w-full max-w-[1200px] transition-all duration-300 ease-in-out xl:mr-44 mr-20">
+              <div className="flex w-full justify-center">
+                <div className="w-72 flex-shrink-0">
                   <SideNav />
                 </div>
-                <div className="col-span-6  w-full">
-                  <VeiwWindow />
+                <div className="w-[900px] flex-shrink-0 ">
+                  <ViewWindow>
+                    <main>{children}</main>
+                  </ViewWindow>
                 </div>
-                <HeaderMobile />
               </div>
+              <HeaderMobile/>
             </main>
           </div>
         </Background>

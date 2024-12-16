@@ -1,27 +1,9 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-body {
-    background-color: #000;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.animate-blink {
-    animation: blink 0.7s infinite;
-}
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
 .old-tv-background {
     background: #000;
     position: relative;
     overflow: hidden;
 }
+
 .old-tv-background::before {
     content: " ";
     display: block;
@@ -35,6 +17,7 @@ body {
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
 }
+
 .crt-effect {
     position: absolute;
     top: 0;
@@ -45,13 +28,16 @@ body {
     pointer-events: none;
     z-index: 10;
 }
+
 .tv-static {
     animation: tvStatic 0.2s steps(10) infinite;
 }
+
 @keyframes tvStatic {
     0% { background-position: 0 0; }
     100% { background-position: 100% 100%; }
 }
+
 .tv-flicker::before {
     content: '';
     position: absolute;
@@ -64,6 +50,7 @@ body {
     animation: tvFlicker 0.2s steps(4) 5;
     pointer-events: none;
 }
+
 .screen-on::after {
     content: '';
     position: absolute;
@@ -76,10 +63,16 @@ body {
     animation: screenOn 0.5s forwards;
     z-index: 1;
 }
+
 @keyframes screenOn {
     0% { opacity: 0; }
     100% { opacity: 0.5; }
 }
+
+.animate-draw {
+    animation: draw 3s linear forwards;
+}
+
 @keyframes draw {
     0% {
         stroke-dasharray: 0 400;
@@ -88,13 +81,21 @@ body {
         stroke-dasharray: 400 400;
     }
 }
-.animate-draw {
-    animation: draw 3s linear forwards;
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
 }
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
-.animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+
+.animate-blink {
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
