@@ -1,13 +1,59 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { animationSequence } from './animation';
+import '../styles/globals.css'
+// import {ReactNode} from 'react'
 
-const Navbar = () => {
+
+export default function ViewWindow() {
   const [isOpen, setIsOpen] = useState(false)
+  const [infoText, setInfoText] = useState('')
+  const [imageLines, setImageLines] = useState(0)
+  const [animationState, setAnimationState] = useState('initial')
+  const [showBackground, setShowBackground] = useState(false)
+  const [showLine, setShowLine] = useState(false)
+  const [showNav, setShowNav] = useState(false);
+
+  useEffect(() => {
+    animationSequence(
+      setShowLine,
+      setAnimationState,
+      setShowBackground,
+      setInfoText,
+      setImageLines,
+      500, // initialDelay
+      2000, // lineAnimationDuration
+      1000, // staticDuration
+      500, // flickerDuration
+      200, // contentDelay
+    );
+  }, [])
+
+// const Navbar = () => {
 
   return (
-    <nav className="bg-gray-800 max-xl:block hidden">
+    <div className="bg-transparent relative w-full flex-row items-center justify-center max-lg:block hidden " >
+    <div 
+        className={`relative w-full h-20  aspect-v' : ''}
+            ${animationState === 'static' ? 'tv-static' : ''}
+            ${animationState === 'screenOn' ? 'tv-flicker' : ''}
+            ${animationState === 'content' ? 'screen-on' : ''}
+        `} 
+        style={{
+            boxShadow: showBackground ? '0 0 20px #00ffff, 0 0 40px #00ffff' : 'none',
+            transition: 'all 0.5s ease-out',
+            borderRadius: '0px', // Add this line to round the corners
+        }}>  
+        
+        {animationState !== 'initial' && animationState !== 'line' && <div className="crt-effect"></div>}
+        {showLine && (
+            <svg className="absolute inset-0 w-full h-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <rect className="animate-draw" x="0" y="100" width="100" height="1" fill="none" stroke="#00ffff" strokeWidth="2" />
+            </svg>
+        )}
+        {/* {children} */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -74,9 +120,10 @@ const Navbar = () => {
           </div>
         </div>
       )}
-    </nav>
+
+</div>
+</div>
   )
 }
 
-export default Navbar
-
+// export default Navbar

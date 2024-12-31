@@ -5,7 +5,7 @@ import Background from "@/components/background";
 import SideNav from "@/components/side-nav";
 import ViewWindow from "@/components/view-window";
 import HeaderMobile from "@/components/header-mobile";
-import Navbar from '@/components/top-nav'
+import TopNav from '@/components/top-nav'
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,14 +24,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Background>
-          <Navbar/>
+          <TopNav/>
           <div className="flex justify-center items-center min-h-screen">
-            <main className="flex flex-col items-center  w-full max-w-[1200px] transition-all duration-300 ease-in-out xl:mr-44 mr-20">
+            <main className="flex flex-col items-center  w-full max-w-[1200px] transition-all duration-300 ease-in-out lg:mr-44 mr-20">
               <div className="flex w-full justify-center">
                 <div className="w-72 flex-shrink-0">
                   <SideNav />
                 </div>
-                <div className="w-[900px] flex-shrink-0 ">
+                <div className="w-[900px] flex-shrink-0">
                   <ViewWindow>
                     <main>{children}</main>
                   </ViewWindow>

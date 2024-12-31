@@ -1,4 +1,3 @@
-
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -6,8 +5,6 @@ import { animationSequence } from './animation';
 import { SIDENAV_ITEMS } from '@/constants';
 import '/styles/globals.css';
 import MenuItem from './Menu-Item';
-import '/styles/globals.css';
-
 
 export default function ViewWindow() {
   const [infoText, setInfoText] = useState('')
@@ -15,6 +12,8 @@ export default function ViewWindow() {
   const [animationState, setAnimationState] = useState('initial')
   const [showBackground, setShowBackground] = useState(false)
   const [showLine, setShowLine] = useState(false)
+  const [showNav, setShowNav] = useState(false); 
+  const [navOpacity, setNavOpacity] = useState(0); // Add this state
 
   useEffect(() => {
     animationSequence(
@@ -28,14 +27,32 @@ export default function ViewWindow() {
       1000, // staticDuration
       500, // flickerDuration
       200, // contentDelay
-      "Anton Langbruttig\n\nFull Stack\nWeb Developer\n\nSpecializing in:\n- React\n- Node.js\n- TypeScript\n- NextJS", // fullInfoText
     );
-  }, [])
+
+    // Delay the nav display by 5 seconds
+    const navTimeout = setTimeout(() => {
+      setShowNav(true);
+      // Animate nav opacity
+      const opacityInterval = setInterval(() => {
+        setNavOpacity((prevOpacity) => {
+          if (prevOpacity < 1) {
+            return Math.min(prevOpacity + 0.1, 1);
+          }
+          clearInterval(opacityInterval);
+          return prevOpacity;
+        });
+      }, 100); // 0.1 opacity every 100ms
+    }, 5000); // 5 seconds
+
+    return () => {
+      clearTimeout(navTimeout); // Cleanup timeout
+    }; 
+  }, []);
 
   return (
-    <div className="bg-transparent h-screen ml-11 hidden xl:block">
+    <div className="bg-transparent h-screen ml-12 hidden lg:block ">
       <div
-        className={`relative w-full h-full aspect-video rounded-lg overflow-hidden shadow-lg
+        className={`relative w-full h-full aspect-video rounded-lg overflow-hidden shadow-lg 
           ${showBackground ? "old-tv-background" : ""}
           ${animationState === "static" ? "tv-static" : ""}
           ${animationState === "screenOn" ? "tv-flicker" : ""}
@@ -47,15 +64,15 @@ export default function ViewWindow() {
           borderRadius: '2px',
         }}
       >
-        <div
-          className="absolute inset-0 flex items-center justify-center z-10"
-        >
-          <nav className="flex flex-col mt-4 " style={{ marginTop: '-300px' }}>
-            {SIDENAV_ITEMS.map((item, idx) => {
-              return <MenuItem key={idx} item={item} />;
-            })}
-          </nav>
-        </div>
+        {showNav && ( 
+          <div className="absolute inset-0 flex items-center justify-center z-10" style={{ opacity: navOpacity }}>
+            <nav className="flex flex-col mt-4" style={{ marginTop: '-300px' }}>
+              {SIDENAV_ITEMS.map((item, idx) => (
+                <MenuItem key={idx} item={item} />
+              ))}
+            </nav>
+          </div>
+        )}
         {animationState !== 'initial' && animationState !== 'line' && <div className="crt-effect"></div>}
         {showLine && (
           <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -65,6 +82,5 @@ export default function ViewWindow() {
         )}
       </div>
     </div>
-  )
+  );
 }
-

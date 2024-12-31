@@ -1,10 +1,15 @@
-.old-tv-background {
+.old-tv-backgroun {
     background: #000;
     position: relative;
     overflow: hidden;
-}
-
-.old-tv-background::before {
+  }
+  
+  @media (max-width: 923px) { /* lg screen size */
+    .old-tv-backgroun {
+      background: none; /* Or use display: none; if you want it gone completely */
+    }
+  }
+.old-tv-backgroun::before {
     content: " ";
     display: block;
     position: absolute;
@@ -18,7 +23,7 @@
     pointer-events: none;
 }
 
-.crt-effect {
+/* .crt-effect {
     position: absolute;
     top: 0;
     left: 0;
@@ -98,4 +103,4 @@
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
-}
+} */

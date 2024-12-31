@@ -13,11 +13,9 @@ const config: Config = {
         
       },
       screens: {
-        sm: '640px',   // Custom small screen
-        md: '1273px',   // Custom medium screen
-        lg: '900px',  // Custom large screen
-        xl: '1273px',  // Custom extra-large screen
-        '2xl': '1536px',
+        sm: '0px',   // Custom small screen
+        md: '923px',   // Custom medium screen
+        lg: '1273px',  // Custom large screen
       },
     },
   },
