@@ -13,6 +13,7 @@ const MenuItem = ({ item }) => {
 
   return (
     <div className="w-full">
+      
       {item.submenu ? (
         <>
           <button
@@ -104,7 +105,7 @@ const MenuItem = ({ item }) => {
           <span
             className="font-semibold text-xl flex"
             style={{
-              color: '#33FFFF',
+              color: '#B19CD9',
               fontFamily: '"VT323", monospace',
               fontWeight: '400',
               letterSpacing: '0.05em',

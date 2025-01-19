@@ -1,35 +1,25 @@
-'use client';
+"use client";
 
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { SIDENAV_ITEMS } from "@/constants";
+import { MenuItemWithSubMenuProps, SideNavItem } from "@/types";
+import { Icon } from "@iconify/react";
+import { motion, useCycle } from "framer-motion";
+import { animationSequence } from "./animation";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-import { SIDENAV_ITEMS } from '@/constants';
-import { SideNavItem } from '@/types';
-import { Icon } from '@iconify/react';
-import { motion, useCycle } from 'framer-motion';
-
-type MenuItemWithSubMenuProps = {
-  item: SideNavItem;
-  toggleOpen: () => void;
-};
-
-const sidebar = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 100% 0)`,
+const sidebarVariants = {
+  open: {
+    height: "100vh",
     transition: {
-      type: 'spring',
-      stiffness: 20,
-      restDelta: 2,
+      height: { duration: 0.5, easing: "easeInOut" },
     },
-  }),
+  },
   closed: {
-    clipPath: 'circle(0px at 100% 0)',
+    height: 0,
     transition: {
-      type: 'spring',
-      stiffness: 400,
-      damping: 40,
+      height: { duration: 0.5, easing: "easeInOut" },
     },
   },
 };
@@ -39,29 +29,108 @@ const HeaderMobile = () => {
   const containerRef = useRef(null);
   const { height } = useDimensions(containerRef);
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const [showNav, setShowNav] = useState(false);
+  const [navOpacity, setNavOpacity] = useState(0);
+
+  useEffect(() => {
+    // Delay the nav display by 5 seconds
+    const navTimeout = setTimeout(() => {
+      setShowNav(true);
+      // Animate nav opacity
+      const opacityInterval = setInterval(() => {
+        setNavOpacity((prevOpacity) => {
+          if (prevOpacity < 1) {
+            return Math.min(prevOpacity + 0.1, 1);
+          }
+          clearInterval(opacityInterval);
+          return prevOpacity;
+        });
+      }, 100); // 0.1 opacity every 100ms
+    }, 5000); // 5 seconds
+
+    return () => {
+      clearTimeout(navTimeout); // Cleanup timeout
+    };
+  }, []);
 
   return (
-    <motion.nav
-      initial={false}
-      animate={isOpen ? 'open' : 'closed'}
-      custom={height}
-      className={`fixed inset-0 z-50 w-full md:hidden ${
-        isOpen ? '' : 'pointer-events-none'
-      }`}
-      ref={containerRef}
-    >
-      <motion.div
-        className="absolute inset-0 right-0 w-full bg-white"
-        variants={sidebar}
-      />
-      <motion.ul
-        variants={variants}
-        className="absolute grid w-full gap-3 px-10 py-16 max-h-screen overflow-y-auto"
-      >
-        {SIDENAV_ITEMS.map((item, idx) => {
-          const isLastItem = idx === SIDENAV_ITEMS.length - 1; // Check if it's the last item
+    <>
+      {showNav && (
+        <motion.button
+  onClick={() => toggleOpen()}
+  initial={{ opacity: 0 }}
+  animate={{ opacity: navOpacity }}
+  className="pointer-events-auto fixed top-5 right-4 z-50 md:hidden"
+  aria-label="Toggle menu"
+>
+  <motion.svg width="23" height="23" viewBox="0 0 23 23">
+    <motion.path
+      fill="transparent"
+      strokeWidth="2"
+      stroke="#00ffff"
+      strokeLinecap="round"
+      animate={{
+        d: isOpen ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5", // Top line transitions
+      }}
+      transition={{ duration: 0.3 }}
+    />
+    <motion.path
+      fill="transparent"
+      strokeWidth="2"
+      stroke="#00ffff"
+      strokeLinecap="round"
+      animate={{
+        opacity: isOpen ? 0 : 1, // Middle line disappears when open
+      }}
+      d="M 2 9.423 L 20 9.423"
+      transition={{ duration: 0.3 }}
+    />
+    <motion.path
+      fill="transparent"
+      strokeWidth="2"
+      stroke="#00ffff"
+      strokeLinecap="round"
+      animate={{
+        d: isOpen ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346", // Bottom line transitions
+      }}
+      transition={{ duration: 0.3 }}
+    />
+  </motion.svg>
+</motion.button>
 
-          return (
+
+
+      )}
+
+      <motion.nav
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        custom={height}
+        className={`fixed inset-x-0 top-[68px] z-50 w-full md:hidden ${isOpen ? "" : "pointer-events-none"}`}
+        ref={containerRef}
+      >
+        <motion.div
+          className="absolute inset-0 top-0 w-full"
+          variants={sidebarVariants}
+          initial="closed"
+          animate={isOpen ? "open" : "closed"}
+          style={{
+            background: `
+              linear-gradient(45deg, rgba(212, 0, 255, 0.29), rgba(0, 191, 255, 0.3)),
+              linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25)),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)),
+              black
+            `,
+          }}
+        >
+          <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%]"></div>
+        </motion.div>
+
+        <motion.ul
+          variants={listVariants}
+          className="absolute grid w-full gap-3 px-10 py-16 max-h-screen overflow-y-auto text-[#B19CD9]"
+        >
+          {SIDENAV_ITEMS.map((item, idx) => (
             <div key={idx}>
               {item.submenu ? (
                 <MenuItemWithSubMenu item={item} toggleOpen={toggleOpen} />
@@ -71,63 +140,34 @@ const HeaderMobile = () => {
                     href={item.path}
                     onClick={() => toggleOpen()}
                     className={`flex w-full text-2xl ${
-                      item.path === pathname ? 'font-bold' : ''
+                      item.path === pathname ? "font-bold text-[#00ffff]" : ""
                     }`}
                   >
                     {item.title}
                   </Link>
                 </MenuItem>
               )}
-
-              {!isLastItem && (
-                <MenuItem className="my-3 h-px w-full bg-gray-300" />
+              {idx < SIDENAV_ITEMS.length - 1 && (
+                <MenuItem className="my-3 h-[2px] w-full bg-[#00ffff]" />
               )}
             </div>
-          );
-        })}
-      </motion.ul>
-      <MenuToggle toggle={toggleOpen} />
-    </motion.nav>
+          ))}
+        </motion.ul>
+      </motion.nav>
+    </>
   );
 };
 
 export default HeaderMobile;
 
-const MenuToggle = ({ toggle }: { toggle: any }) => (
-  <button
-    onClick={toggle}
-    className="pointer-events-auto absolute right-4 top-[14px] z-30"
-  >
-    <svg width="23" height="23" viewBox="0 0 23 23">
-      <Path
-        variants={{
-          closed: { d: 'M 2 2.5 L 20 2.5' },
-          open: { d: 'M 3 16.5 L 17 2.5' },
-        }}
-      />
-      <Path
-        d="M 2 9.423 L 20 9.423"
-        variants={{
-          closed: { opacity: 1 },
-          open: { opacity: 0 },
-        }}
-        transition={{ duration: 0.1 }}
-      />
-      <Path
-        variants={{
-          closed: { d: 'M 2 16.346 L 20 16.346' },
-          open: { d: 'M 3 2.5 L 17 16.346' },
-        }}
-      />
-    </svg>
-  </button>
-);
+
+
 
 const Path = (props: any) => (
   <motion.path
     fill="transparent"
     strokeWidth="2"
-    stroke="hsl(0, 0%, 18%)"
+    stroke="#00ffff"
     strokeLinecap="round"
     {...props}
   />
@@ -139,13 +179,11 @@ const MenuItem = ({
 }: {
   className?: string;
   children?: ReactNode;
-}) => {
-  return (
-    <motion.li variants={MenuItemVariants} className={className}>
-      {children}
-    </motion.li>
-  );
-};
+}) => (
+  <motion.li variants={menuItemVariants} className={className}>
+    {children}
+  </motion.li>
+);
 
 const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
   item,
@@ -163,42 +201,40 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
         >
           <div className="flex flex-row justify-between w-full items-center">
             <span
-              className={`${pathname.includes(item.path) ? 'font-bold' : ''}`}
+              className={`$ {
+                pathname.includes(item.path) ? "font-bold" : ""
+              }`}
             >
               {item.title}
             </span>
-            <div className={`${subMenuOpen && 'rotate-180'}`}>
+            <div className={`${subMenuOpen && "rotate-180"}`}>
               <Icon icon="lucide:chevron-down" width="24" height="24" />
             </div>
           </div>
         </button>
       </MenuItem>
-      <div className="mt-2 ml-2 flex flex-col space-y-2">
-        {subMenuOpen && (
-          <>
-            {item.subMenuItems?.map((subItem, subIdx) => {
-              return (
-                <MenuItem key={subIdx}>
-                  <Link
-                    href={subItem.path}
-                    onClick={() => toggleOpen()}
-                    className={` ${
-                      subItem.path === pathname ? 'font-bold' : ''
-                    }`}
-                  >
-                    {subItem.title}
-                  </Link>
-                </MenuItem>
-              );
-            })}
-          </>
-        )}
-      </div>
+      {subMenuOpen && (
+        <div className="mt-2 ml-2 flex flex-col space-y-2">
+          {item.subMenuItems?.map((subItem, subIdx) => (
+            <MenuItem key={subIdx}>
+              <Link
+                href={subItem.path}
+                onClick={() => toggleOpen()}
+                className={`$ {
+                  subItem.path === pathname ? "font-bold" : ""
+                }`}
+              >
+                {subItem.title}
+              </Link>
+            </MenuItem>
+          ))}
+        </div>
+      )}
     </>
   );
 };
 
-const MenuItemVariants = {
+const menuItemVariants = {
   open: {
     y: 0,
     opacity: 1,
@@ -216,7 +252,7 @@ const MenuItemVariants = {
   },
 };
 
-const variants = {
+const listVariants = {
   open: {
     transition: { staggerChildren: 0.02, delayChildren: 0.15 },
   },
@@ -233,7 +269,6 @@ const useDimensions = (ref: any) => {
       dimensions.current.width = ref.current.offsetWidth;
       dimensions.current.height = ref.current.offsetHeight;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   return dimensions.current;

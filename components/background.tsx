@@ -11,7 +11,7 @@ export default function PageWrapper({ children }: { children: ReactNode }) {
   };
 
   return (
-    <div className="fixed inset-0 z-[-1]" style={divStyle}>
+    <div className="fixed inset-0 z-[-1] " style={divStyle}>
       {children}
     </div>
   );

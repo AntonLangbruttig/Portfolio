@@ -25,7 +25,7 @@ body {
 .old-tv-background::before {
     content: " ";
     display: block;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     bottom: 0;
@@ -34,7 +34,7 @@ body {
     z-index: 2;
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
-}
+    } 
 .crt-effect {
     position: absolute;
     top: 0;
@@ -71,11 +71,23 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(255, 0, 255, 0.3), rgba(0, 255, 255, 0.3));
+    background: linear-gradient(45deg, rgba(212, 0, 255, 0.29), rgba(0, 191, 255, 0.3));
     opacity: 0;
     animation: screenOn 0.5s forwards;
     z-index: 1;
+  }
+@media (max-width: 923px) {
+    .screen-on::after {
+        background: linear-gradient(45deg, rgba(212, 0, 255, 0.29), rgba(0, 191, 255, 0.3));
+    }
+    .old-tv-background {
+        background: #0000009c;
+        position: relative;
+        overflow: hidden;
+    }
 }
+
+  
 @keyframes screenOn {
     0% { opacity: 0; }
     100% { opacity: 0.5; }
@@ -98,3 +110,34 @@ body {
 .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
 }
+/* test stuf here  */
+
+
+.animate-draw-clockwise {
+    animation: draw-clockwise 3s linear infinite;
+    stroke-dasharray: 400;
+    stroke-dashoffset: -400; /* Start fully hidden with negative offset */
+    transform-origin: center; /* Ensure correct rotation origin */
+}
+
+@keyframes draw-clockwise {
+    0% {
+        stroke-dashoffset: -400; /* Start fully hidden at the top */
+    }
+    100% {
+        stroke-dashoffset: 0; /* Fully drawn */
+    }
+}
+
+@keyframes drawTopRightToBottom {
+    0% {
+      stroke-dasharray: 0 400;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 400 400;
+      stroke-dashoffset: 0;
+    }
+  }
+  
+

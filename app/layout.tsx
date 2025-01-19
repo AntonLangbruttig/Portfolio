@@ -28,10 +28,10 @@ export default function RootLayout({
           <div className="flex justify-center items-center min-h-screen">
             <main className="flex flex-col items-center  w-full max-w-[1200px] transition-all duration-300 ease-in-out xl:mr-44 mr-20">
               <div className="flex w-full justify-center">
-                <div className="w-72 flex-shrink-0">
+                <div className="lg:w-72 md:w-20 sm:w-20 flex-shrink-0">
                   <SideNav />
                 </div>
-                <div className=":w-[900px] flex-shrink-0 ">
+                <div className="lg:w-[900px] lg:flex-shrink-0 md:w-[900px] md:flex-shrink-0 sm:w-full ">
                   <ViewWindow>
                     <main>{children}</main>
                   </ViewWindow>

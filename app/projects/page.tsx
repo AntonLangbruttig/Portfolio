@@ -1,81 +1,59 @@
-import React from 'react';
+"use client";
 
+import React from "react";
+import Image from "next/image";
 
 const projects = [
   {
-    id: 1,
-    title: "E-commerce Platform",
-    description: "A full-stack e-commerce solution with React and Node.js",
-    image: "/placeholder.svg?height=200&width=300",
-    tags: ["React", "Node.js", "MongoDB"],
-    link: "https://example.com/ecommerce"
+    title: "Project 1",
+    description: "A brief description of project 1.",
+    link: "/project1",
+    image: "/images/logo.png",
   },
   {
-    id: 2,
-    title: "Weather App",
-    description: "Real-time weather application using OpenWeatherMap API",
-    image: "/placeholder.svg?height=200&width=300",
-    tags: ["JavaScript", "API Integration", "CSS3"],
-    link: "https://example.com/weather-app"
+    title: "Project 2",
+    description: "A brief description of project 2.",
+    link: "/project2",
+    image: "/images/background1.png",
+    width:"auto",
   },
   {
-    id: 3,
-    title: "Task Management System",
-    description: "Collaborative task manager with real-time updates",
-    image: "/placeholder.svg?height=200&width=300",
-    tags: ["React", "Firebase", "Material-UI"],
-    link: "https://example.com/task-manager"
+    title: "Project 3",
+    description: "A brief description of project 3.",
+    link: "/project3",
+    image: "/images/background1.png",
   },
   {
-    id: 4,
-    title: "Portfolio Website",
-    description: "Personal portfolio website showcasing projects and skills",
-    image: "/placeholder.svg?height=200&width=300",
-    tags: ["HTML5", "CSS3", "JavaScript"],
-    link: "https://example.com/portfolio"
-  }
-]
+    title: "Project 4",
+    description: "A brief description of project 4.",
+    link: "/project4",
+    image: "/images/background.jpg",
+  },
+];
 
-export default function Portfolio() {
+export default function HomePage() {
   return (
-    <div className="min">
-      <header className="">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Web Development Portfolio</h1>
-        </div>
-      </header>
-      <main>
-        <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project) => (
-                <div key={project.id} className="bg-white overflow-hidden shadow rounded-lg">
-                  <img className="h-48 w-full object-cover" src={project.image} alt={project.title} />
-                  <div className="p-6">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h2>
-                    <p className="text-gray-600 mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, index) => (
-                        <span key={index} className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      View Project
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
+    <div className="p-0 h-screen flex flex-col w-screen ml-10">
+      <div className="overflow-y-auto">
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className="bg-white mb-10 shadow-lg rounded-lg w-full max-w-md p-4 mt-10"
+          >
+            <a href={project.link}>
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={200}
+                height={200}
+                className="rounded-lg"
+              />
+            </a>
+            <h3 className="mt-4 text-lg font-bold">{project.title}</h3>
+            <p className="text-sm text-gray-600">{project.description}</p>
           </div>
-        </div>
-      </main>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
