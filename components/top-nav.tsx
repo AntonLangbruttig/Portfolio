@@ -37,6 +37,7 @@ export default function ViewWindow() {
     <div className="bg-transparent relative w-full flex-row items-center justify-center max-lg:block hidden " >
     <div 
         className={`relative w-full h-20  aspect-v' : ''}
+            ${showBackground ? 'old-tv-background' : ''}
             ${animationState === 'static' ? 'tv-static' : ''}
             ${animationState === 'screenOn' ? 'tv-flicker' : ''}
             ${animationState === 'content' ? 'screen-on' : ''}
