@@ -33,7 +33,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="sm:w-full md:w-1/3 xl:w-1/3 p-4 flex items-center sm:justify-center flex-shrink-0 mt-5">
+      <div className="sm:w-full md:w-1/3 lg:w-1/3 p-4 flex items-center sm:justify-center flex-shrink-0 mt-5">
         <div className="w-full h-full p-4 rounded-lg flex items-top md:justify-left sm:justify-center">
           <pre
             className="text-xl"

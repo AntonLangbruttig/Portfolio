@@ -14,11 +14,13 @@ const config: Config = {
       },
       screens: {
         sm: '0px',   // Custom small screen
-        md: '923px',   // Custom medium screen
-        lg: '1201px',  // Custom large screen
+        md: '980px',   // Custom medium screen
+        lg: '1267px',  // Custom large screen
+        xl: '1354px',
+
         // sm: '0px',   // Custom small screen
         // md: '923px',   // Custom medium screen
-        // lg: '1273px',  // Custom large screen
+        // lg: '1201px',  // Custom large screen
       },
     },
   },

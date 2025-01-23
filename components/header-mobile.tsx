@@ -3,8 +3,8 @@
 import React, { ReactNode, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SIDENAV_ITEMS } from "@/constants";
-import { MenuItemWithSubMenuProps, SideNavItem } from "@/types";
+import { SIDENAV_ITEMS } from "../constants";
+import { MenuItemWithSubMenuProps, SideNavItem } from "../types";
 import { Icon } from "@iconify/react";
 import { motion, useCycle } from "framer-motion";
 import { animationSequence } from "./animation";
@@ -26,7 +26,7 @@ const sidebarVariants = {
 
 const HeaderMobile = () => {
   const pathname = usePathname();
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const { height } = useDimensions(containerRef);
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [showNav, setShowNav] = useState(false);
@@ -57,49 +57,45 @@ const HeaderMobile = () => {
     <>
       {showNav && (
         <motion.button
-  onClick={() => toggleOpen()}
-  initial={{ opacity: 0 }}
-  animate={{ opacity: navOpacity }}
-  className="pointer-events-auto fixed top-5 right-4 z-50 md:hidden"
-  aria-label="Toggle menu"
->
-  <motion.svg width="23" height="23" viewBox="0 0 23 23">
-    <motion.path
-      fill="transparent"
-      strokeWidth="2"
-      stroke="#00ffff"
-      strokeLinecap="round"
-      animate={{
-        d: isOpen ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5", // Top line transitions
-      }}
-      transition={{ duration: 0.3 }}
-    />
-    <motion.path
-      fill="transparent"
-      strokeWidth="2"
-      stroke="#00ffff"
-      strokeLinecap="round"
-      animate={{
-        opacity: isOpen ? 0 : 1, // Middle line disappears when open
-      }}
-      d="M 2 9.423 L 20 9.423"
-      transition={{ duration: 0.3 }}
-    />
-    <motion.path
-      fill="transparent"
-      strokeWidth="2"
-      stroke="#00ffff"
-      strokeLinecap="round"
-      animate={{
-        d: isOpen ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346", // Bottom line transitions
-      }}
-      transition={{ duration: 0.3 }}
-    />
-  </motion.svg>
-</motion.button>
+          onClick={() => toggleOpen()}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: navOpacity }}
+          className="pointer-events-auto fixed top-5 right-4 z-50 md:hidden"
+          aria-label="Toggle menu"
+        >
+          <motion.svg width="23" height="23" viewBox="0 0 23 23">
+          <motion.path
+  fill="transparent"
+  strokeWidth="2"
+  stroke="#00ffff"
+  strokeLinecap="round"
+  initial={{ d: "M 2 2.5 L 20 2.5" }}
+  animate={isOpen ? { d: "M 3 16.5 L 17 2.5" } : { d: "M 2 2.5 L 20 2.5" }}
+  transition={{ duration: 0.3 }}
+/>
 
+<motion.path
+  fill="transparent"
+  strokeWidth="2"
+  stroke="#00ffff"
+  strokeLinecap="round"
+  initial={{ d: "M 2 9.423 L 20 9.423", opacity: 0 }}
+  animate={isOpen ? { d: "M 2 9.423 L 20 9.423", opacity: 0 } : { d: "M 2 9.423 L 20 9.423", opacity: 1 }}
+  transition={{ duration: 0.3 }}
+/>
 
+<motion.path
+  fill="transparent"
+  strokeWidth="2"
+  stroke="#00ffff"
+  strokeLinecap="round"
+  initial={{ d: "M 2 16.346 L 20 16.346" }}
+  animate={isOpen ? { d: "M 3 2.5 L 17 16.346" } : { d: "M 2 16.346 L 20 16.346" }}
+  transition={{ duration: 0.3 }}
+/>
 
+          </motion.svg>
+        </motion.button>
       )}
 
       <motion.nav
@@ -160,8 +156,7 @@ const HeaderMobile = () => {
 
 export default HeaderMobile;
 
-
-
+// Utility functions and components:
 
 const Path = (props: any) => (
   <motion.path
@@ -201,9 +196,7 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
         >
           <div className="flex flex-row justify-between w-full items-center">
             <span
-              className={`$ {
-                pathname.includes(item.path) ? "font-bold" : ""
-              }`}
+              className={`${pathname.includes(item.path) ? "font-bold" : ""}`}
             >
               {item.title}
             </span>
@@ -220,7 +213,7 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
               <Link
                 href={subItem.path}
                 onClick={() => toggleOpen()}
-                className={`$ {
+                className={`${
                   subItem.path === pathname ? "font-bold" : ""
                 }`}
               >

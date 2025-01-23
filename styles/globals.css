@@ -76,9 +76,10 @@ body {
     animation: screenOn 0.5s forwards;
     z-index: 1;
   }
-@media (max-width: 923px) {
+@media (max-width: 979px) {
     .screen-on::after {
         background: linear-gradient(45deg, rgba(212, 0, 255, 0.29), rgba(0, 191, 255, 0.3));
+        bottom:73px;
     }
     .old-tv-background {
         background: #0000009c;
@@ -141,3 +142,6 @@ body {
   }
   
 
+
+
+ 

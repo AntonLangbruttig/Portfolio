@@ -102,7 +102,7 @@ export default function ViewWindow() {
     <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%]"></div>
 
     {/* Navigation content */}
-    <div className="relative z-0 flex ">
+    <div className="relative z-0 flex">
       <Link href="/" className="text-2xl font-bold text-[#00ffff] mr-3 ml-0">
         <img src="/images/AL.png" alt="AL Logo" className="md:w-[77px] md:h-[77px] md:mt-[1px] sm:w-[50px] sm:h-[50px] sm:mt-2" />
       </Link>

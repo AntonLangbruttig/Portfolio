@@ -107,9 +107,7 @@ export default function ViewWindow() {
               transition: "opacity 0.5s ease-out",
               zIndex: 2,
             }}
-          >
-         
-            
+          >  
             <nav
               className="flex flex-col mt-4 z-10"
               style={{ marginTop: "-300px" }}
