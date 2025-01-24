@@ -1,59 +1,37 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
 
+// Example data: Replace with your résumé/website skills
+const skills = {
+  "Used Often": ["JavaScript", "React", "CSS", "HTML", "Tailwind CSS", "Node.js"],
+  "Secondary Skills": ["Python", "Express", "MongoDB", "Prisma", "Vue"],
+  "Developing": ["Rust", "Svelte", "Next.js", "GraphQL", "Django"],
+};
 
-const projects = [
-  {
-    title: "Project 1",
-    description: "A brief description of project 1.",
-    link: "/project1",
-    image: "/images/project1.png",
-  },
-  {
-    title: "Project 2",
-    description: "A brief description of project 2.",
-    link: "/project2",
-    image: "/images/project2.png",
-  },
-  {
-    title: "Project 3",
-    description: "A brief description of project 3.",
-    link: "/project3",
-    image: "/images/project3.png",
-  },
-  {
-    title: "Project 4",
-    description: "A brief description of project 4.",
-    link: "/project4",
-    image: "/images/project4.png",
-  },
-];
-
-export default function HomePage() {
+const Skills = () => {
   return (
-<section id="skills" className="section">
-  <div className="container">
-    <h2 className="section-title">Skills</h2>
-    <div className="skills-content">
-      <div className="skills-category">
-        <h3>Use Often</h3>
-        <p>• Python • JavaScript • React.js • Django • Git/GitHub • PostgreSQL • HTML/CSS • Agile/Scrum</p>
-      </div>
-      <div className="skills-category">
-        <h3>Secondary Skills</h3>
-        <p>• NumPy • Pandas • TensorFlow • Docker • Jenkins • Automated Testing (Selenium) • Data Visualization</p>
-      </div>
-      <div className="skills-category">
-        <h3>Developing</h3>
-        <p>• Lua • Angular.js • AWS • Firebase • Probability & Statistics • Linear Algebra</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <section className="py-16 px-6 md:px-12 lg:px-24">
+      {/* Main Header */}
+      <h2 className="font-bold text-cyan-200 text-4xl mb-8 underline">Skills</h2>
 
-  
+      {/* Categories */}
+      {Object.entries(skills).map(([category, items]) => (
+        <div key={category} className="mb-8">
+          {/* Category Header */}
+          <h3 className="text-red-50 md:text-xl  text-2xl font-bold mb-4">{category}</h3>
+
+          {/* Horizontal Skills List */}
+          <p className="text-contactColor text-base font-medium text-white">
+            {items.map((skill, index) => (
+              <span key={skill}>
+                {skill}
+                {index < items.length - 1 && <span className="mx-2">•</span>}
+              </span>
+            ))}
+          </p>
+        </div>
+      ))}
+    </section>
   );
-}
+};
 
+export default Skills;
