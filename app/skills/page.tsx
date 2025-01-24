@@ -9,27 +9,33 @@ const skills = {
 
 const Skills = () => {
   return (
-    <section className="py-16 px-6 md:px-12 lg:px-24">
-      {/* Main Header */}
-      <h2 className="font-bold text-cyan-200 text-4xl mb-8 underline">Skills</h2>
+    <section className="h-[calc(100vh-50px)] overflow-hidden">
+      <div className="h-full overflow-y-scroll no-scrollbar py-6">
+        {/* Main Header */}
+        <h2 className="font-bold text-cyan-200 text-4xl mb-8 underline px-14">Skills</h2>
 
-      {/* Categories */}
-      {Object.entries(skills).map(([category, items]) => (
-        <div key={category} className="mb-8">
-          {/* Category Header */}
-          <h3 className="text-red-50 md:text-xl  text-2xl font-bold mb-4">{category}</h3>
+        {/* Scrollable Content */}
+        <div className="px-[75px]">
+          {Object.entries(skills).map(([category, items]) => (
+            <div key={category} className="mb-10">
+              {/* Category Header */}
+              <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">{category}</h3>
 
-          {/* Horizontal Skills List */}
-          <p className="text-contactColor text-base font-medium text-white">
-            {items.map((skill, index) => (
-              <span key={skill}>
-                {skill}
-                {index < items.length - 1 && <span className="mx-2">•</span>}
-              </span>
-            ))}
-          </p>
+              {/* Indented Skills List */}
+              <div className="pl-6 flex flex-wrap gap-4">
+                {items.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </section>
   );
 };
