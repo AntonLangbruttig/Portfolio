@@ -144,4 +144,58 @@ body {
 
 
 
- 
+ /* General Section Styling */
+.section {
+    padding: 40px 0;
+    background-color: transparent; /* No background color */
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    text-align: left;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Skills Content */
+  .skills-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .skills-category {
+    text-align: left;
+    padding: 10px 0;
+  }
+  
+  .skills-category h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .skills-category p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Space between skills */
+  }
+  
+  .skills-category p::before {
+    content: "";
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+  
+    .skills-category p {
+      flex-direction: column;
+    }
+  }
+  
