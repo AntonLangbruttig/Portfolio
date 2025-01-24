@@ -160,6 +160,23 @@ export default function ViewWindow() {
             Projects
           </Link>
           <Link
+            href="/skills"
+            className="text-[#00ffff] text-2xl"
+            style={{
+              color: '#B19CD9',
+              fontFamily: '"VT323", monospace',
+              fontWeight: '400',
+              letterSpacing: '0.05em',
+              lineHeight: '1.6',
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              textAlign: 'left',
+              fontSize: '1.5rem',
+            }}
+          >
+            Skills
+          </Link>
+          <Link
             href="/contact"
             className="text-[#00ffff] text-2xl"
             style={{

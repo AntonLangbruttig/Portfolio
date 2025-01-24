@@ -61,10 +61,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="sm:w-screen md:w-1/3 p-4 flex items-center sm:justify-center flex-shrink-0 mt-5">
+            <div className="sm:w-screen md:w-[50%] p-4 flex items-center sm:justify-center flex-shrink-0 mt-5">
               <div className="w-full h-full p-4 rounded-lg  items-top md:justify-left sm:justify-center">
                 <pre
-                  className="text-xl"
+                  className="text-lg"
                   style={{
                     color: "#ffffff",
                     fontFamily: '"VT323", monospace',
@@ -72,6 +72,13 @@ export default function HomePage() {
                     letterSpacing: "0.05em",
                     lineHeight: "1.6",
                     textAlign: "left",
+                    whiteSpace: "pre-wrap", // This allows wrapping
+                    wordWrap: "break-word", // Breaks long words if necessary
+                    wordBreak: "break-word", // Ensure long words break properly
+                    margin: 0, // Remove extra margins that could cause gaps
+                    padding: 0, // Remove any extra padding
+                    width: "100%", // Ensure the width fits the container
+                    overflow: "hidden", // Prevent overflow
                   }}
                 >
                   {infoText}

@@ -9,8 +9,13 @@ export const animationSequence = async (
   staticDuration = 2000,
   flickerDuration = 1000,
   contentDelay = 500,
-  fullInfoText = "Anton Langbruttig\n\nFull Stack\nWeb Developer\n\nSpecializing in:\n- React\n- Node.js\n- TypeScript\n- NextJS",
-  totalImageLines = 50
+  fullInfoText = 
+  "Anton Langbruttig\n\n" +
+  "Innovating at the intersection of web development, machine learning, " +
+  "and automation. With a solid computer science foundation and a passion for discovery, " +
+  "I create solutions that address today’s challenges and inspire tomorrow’s possibilities.",
+
+totalImageLines = 50
 ) => {
   // Initial delay
   await new Promise(resolve => setTimeout(resolve, initialDelay));
