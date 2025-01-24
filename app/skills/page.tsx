@@ -33,28 +33,27 @@ const projects = [
 
 export default function HomePage() {
   return (
-    
-    <div>
-      {/* other pages content here  */}
-      <div
-        className={`sm:flex sm:flex-col wrap relative w-full md:h-full aspect-video rounded-lg overflow-hidden shadow-lg  sm:h-screen sm:overflow-y-scroll flex-wrap`}
-      >
-      {/* {animationState === "content" && ( */}
-          <div className="flex smflex-col h-full animate-fade-in flex-wrap ">
-            <div className="sm:w-screen md:w-1/2 p-3 flex items-center justify-center flex-shrink-0 ">
-              </div>
-            </div>
+<section id="skills" className="section">
+  <div className="container">
+    <h2 className="section-title">Skills</h2>
+    <div className="skills-content">
+      <div className="skills-category">
+        <h3>Use Often</h3>
+        <p>• Python • JavaScript • React.js • Django • Git/GitHub • PostgreSQL • HTML/CSS • Agile/Scrum</p>
+      </div>
+      <div className="skills-category">
+        <h3>Secondary Skills</h3>
+        <p>• NumPy • Pandas • TensorFlow • Docker • Jenkins • Automated Testing (Selenium) • Data Visualization</p>
+      </div>
+      <div className="skills-category">
+        <h3>Developing</h3>
+        <p>• Lua • Angular.js • AWS • Firebase • Probability & Statistics • Linear Algebra</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div className="sm:w-screen md:w-[100%] p-4 flex items-center sm:justify-center flex-shrink-0 mt-5">
-              
-            <span className=" text-red-50 md:text-xl sm:text-base block space-y-2 ml-4 sm:space-y-0">
-         Skills
-          </span>
-        </div>
-          </div>
-        {/* )} */}
-
-</div>
+  
   );
 }
 
