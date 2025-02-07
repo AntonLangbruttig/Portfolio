@@ -1,3 +1,5 @@
+let hasAnimationRun = false; // Flag to track if the animation has run
+
 export const animationSequence = async (
   setShowLine,
   setAnimationState,
@@ -10,13 +12,21 @@ export const animationSequence = async (
   flickerDuration = 1000,
   contentDelay = 500,
   fullInfoText = 
-  "Anton Langbruttig\n\n" +
-  "Innovating at the intersection of web development, machine learning, " +
-  "and automation. With a solid computer science foundation and a passion for discovery, " +
-  "I create solutions that address today’s challenges and inspire tomorrow’s possibilities.",
-
-totalImageLines = 50
+  "\n\n\n" +
+  "I'm passionate about building elegant, intuitive software that is visually stunning." + "\n\n\n           Anton Langbruttig",
+  totalImageLines = 50
 ) => {
+  // Check if the animation has already run
+  if (hasAnimationRun) {
+    // Set all final states as constants
+    setShowLine(true);
+    setAnimationState('content');
+    setShowBackground(true);
+    setInfoText(fullInfoText);
+    setImageLines(totalImageLines);
+    return;
+  }
+
   // Initial delay
   await new Promise(resolve => setTimeout(resolve, initialDelay));
 
@@ -58,4 +68,7 @@ totalImageLines = 50
       clearInterval(imageIntervalId);
     }
   }, 100);
+
+  // Set the flag to true after the animation completes
+  hasAnimationRun = true;
 };

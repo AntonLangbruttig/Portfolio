@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useAboutPageAnimation } from "@/components/utils/aboutAnimation"; // Import animation
 
 // Example data: Replace with your résumé/website skills
 const skills = {
@@ -8,14 +11,22 @@ const skills = {
 };
 
 const Skills = () => {
+  const { fadeIn } = useAboutPageAnimation(); // Use the same animation logic
+
   return (
     <section className="h-[calc(100vh-50px)] overflow-hidden">
       <div className="h-full overflow-y-scroll no-scrollbar py-6">
         {/* Main Header */}
-        <h2 className="font-bold text-cyan-200 text-4xl mb-8 underline px-14">Skills</h2>
+        <h2
+          className={`font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+        >
+          Skills
+        </h2>
 
         {/* Scrollable Content */}
-        <div className="px-[75px]">
+        <div
+          className={`px-[75px] transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+        >
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="mb-10">
               {/* Category Header */}
@@ -26,7 +37,7 @@ const Skills = () => {
                 {items.map((skill) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium"
+                    className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium transition-all duration-300 hover:bg-cyan-700 hover:text-white"
                   >
                     {skill}
                   </span>
