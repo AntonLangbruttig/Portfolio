@@ -1,43 +1,57 @@
-import { usePathname } from 'next/navigation';
-import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import { useState } from 'react';
-
+import { usePathname } from "next/navigation";
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import { useState } from "react";
 
 const MenuItem = ({ item }) => {
   const pathname = usePathname();
   const [subMenuOpen, setSubMenuOpen] = useState(false);
+
   const toggleSubMenu = () => {
     setSubMenuOpen(!subMenuOpen);
   };
 
+  // Function to determine if the current item or sub-item is active
+  const isActive = (itemPath) => {
+    return (
+      pathname === itemPath ||
+      (item.subMenuItems &&
+        item.subMenuItems.some((subItem) => subItem.path === pathname))
+    );
+  };
+
   return (
     <div className="w-full">
-      
       {item.submenu ? (
         <>
           <button
             onClick={toggleSubMenu}
-            className={`flex flex-row items-center p-4 rounded-lg hover:bg-white/50 w-full justify-between ${
-              pathname.includes(item.path) ? 'bg-white/50' : ''
+            className={`flex flex-row items-center p-4 rounded-lg transition-all duration-300 w-full justify-between group ${
+              isActive(item.path) ? "bg-white" : "hover:text-white"
             }`}
             aria-expanded={subMenuOpen}
             aria-controls={`submenu-${item.title}`}
           >
             <div className="flex flex-row space-x-4 items-center">
-              {item.icon}
+              {item.icon && (
+                <span
+                  style={{ color: isActive(item.path) ? "#00ffff" : "#33FFFF" }}
+                >
+                  {item.icon}
+                </span>
+              )}
               <span
-                className="font-semibold text-xl flex"
+                className="font-semibold text-xl flex transition-all duration-300 hover:text-white px-2 py-1  group-hover:text-white"
                 style={{
-                  color: '#33FFFF',
+                  color: isActive(item.path) ? "#00ffff" : "#33FFFF",
                   fontFamily: '"VT323", monospace',
-                  fontWeight: '400',
-                  letterSpacing: '0.05em',
-                  lineHeight: '1.6',
-                  whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-word',
-                  textAlign: 'left',
-                  fontSize: '1.5rem',
+                  fontWeight: "400",
+                  letterSpacing: "0.05em",
+                  lineHeight: "1.6",
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
+                  textAlign: "left",
+                  fontSize: "1.5rem",
                 }}
               >
                 {item.title}
@@ -45,7 +59,9 @@ const MenuItem = ({ item }) => {
             </div>
 
             <div
-              className={`${subMenuOpen ? 'rotate-180' : ''} flex transition-transform`}
+              className={`${
+                subMenuOpen ? "rotate-180" : ""
+              } flex transition-transform`}
             >
               <Icon icon="lucide:chevron-down" width="24" height="24" />
             </div>
@@ -55,39 +71,44 @@ const MenuItem = ({ item }) => {
             <div
               id={`submenu-${item.title}`}
               className="my-2 ml-12 flex flex-col space-y-4"
-              style={{
-                color: '#33FFFF',
-                fontFamily: '"VT323", monospace',
-                fontWeight: '400',
-                letterSpacing: '0.05em',
-                lineHeight: '1.6',
-                whiteSpace: 'pre-wrap',
-                wordBreak: 'break-word',
-                textAlign: 'left',
-                fontSize: '1.5rem',
-              }}
             >
               {item.subMenuItems?.map((subItem, idx) => {
+                const isSubItemActive = subItem.path === pathname;
                 return (
                   <Link
                     key={idx}
                     href={subItem.path}
-                    className={`${
-                      subItem.path === pathname ? 'font-bold' : ''
-                    } hover:underline`}
-                    style={{
-                      color: '#33FFFF',
-                      fontFamily: '"VT323", monospace',
-                      fontWeight: '400',
-                      letterSpacing: '0.05em',
-                      lineHeight: '1.6',
-                      whiteSpace: 'pre-wrap',
-                      wordBreak: 'break-word',
-                      textAlign: 'left',
-                      fontSize: '1.5rem',
-                    }}
+                    className="group transition-all duration-300"
                   >
-                    <span>{subItem.title}</span>
+                    <div
+                      className={`flex flex-row space-x-4 items-center px-3 py-2 rounded-none transition-all duration-300 group-hover:text-white ${
+                        pathname.includes(item.path)
+                          ? "font-bold text-[#00ffff]"
+                          : "hover:text-white"
+                      }`}
+                      style={{
+                        color: isSubItemActive ? "#00ffff" : "#33FFFF",
+                        fontFamily: '"VT323", monospace',
+                        fontWeight: "400",
+                        letterSpacing: "0.05em",
+                        lineHeight: "1.6",
+                        whiteSpace: "pre-wrap",
+                        wordBreak: "break-word",
+                        textAlign: "left",
+                        fontSize: "1.5rem",
+                      }}
+                    >
+                      {subItem.icon && (
+                        <span
+                          style={{
+                            color: isSubItemActive ? "#00ffff" : "#33FFFF",
+                          }}
+                        >
+                          {subItem.icon}
+                        </span>
+                      )}
+                      <span>{subItem.title}</span>
+                    </div>
                   </Link>
                 );
               })}
@@ -97,27 +118,31 @@ const MenuItem = ({ item }) => {
       ) : (
         <Link
           href={item.path}
-          className={`flex flex-row space-x-4 items-center p-4 rounded-lg ${
-            item.path === pathname ? '' : ''
-          }`}
+          className="group flex flex-row space-x-4 items-center p-4 rounded-none transition-all duration-300"
         >
-          {item.icon}
-          <span
-            className="font-semibold text-xl flex"
-            style={{
-              color: '#B19CD9',
-              fontFamily: '"VT323", monospace',
-              fontWeight: '400',
-              letterSpacing: '0.05em',
-              lineHeight: '1.6',
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-word',
-              textAlign: 'left',
-              fontSize: '1.5rem',
-            }}
-          >
-            {item.title}
-          </span>
+       <div
+        className={`flex flex-row space-x-4 items-center px-3 py-2 rounded-none group ${
+          isActive(item.path) ? "text-[#00ffff]" : "text-[#B19CD9] hover:text-white"
+        }`}
+      >
+        {item.icon && (
+          <span className={isActive(item.path) ? "text-[#00ffff]" : "group-hover:text-white"}>{item.icon}</span>
+        )}
+        <span
+          style={{
+            fontFamily: '"VT323", monospace',
+            fontWeight: "400",
+            letterSpacing: "0.05em",
+            lineHeight: "1.6",
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-word",
+            textAlign: "left",
+            fontSize: "1.5rem",
+          }}
+        >
+          {item.title}
+        </span>
+      </div>
         </Link>
       )}
     </div>

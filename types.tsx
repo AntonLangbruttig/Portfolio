@@ -10,3 +10,4 @@ export type SideNavItem = {
     item: SideNavItem;
     toggleOpen: () => void;
   }
+  

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useAboutPageAnimation } from "@/components/utils/aboutAnimation"; // Import animation
 
 const projects = [
   {
@@ -15,7 +16,6 @@ const projects = [
     description: "A brief description of project 2.",
     link: "/project2",
     image: "/images/background1.png",
-    width:"auto",
   },
   {
     title: "Project 3",
@@ -31,14 +31,16 @@ const projects = [
   },
 ];
 
-export default function HomePage() {
+export default function ProjectsPage() {
+  const { fadeIn } = useAboutPageAnimation(); // Use shared animation logic
+
   return (
-    <div className="p-0 h-screen flex flex-col w-screen ml-10">
+    <div className={`p-0 h-screen flex flex-col w-screen ml-10 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
       <div className="overflow-y-auto">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="bg-white mb-10 shadow-lg rounded-lg w-full max-w-md p-4 mt-10"
+            className="bg-white mb-10 shadow-lg rounded-lg w-full max-w-md p-4 mt-10 transition-all duration-500 transform hover:scale-105"
           >
             <a href={project.link}>
               <Image
@@ -49,7 +51,7 @@ export default function HomePage() {
                 className="rounded-lg"
               />
             </a>
-            <h3 className="mt-4 text-lg font-bold">{project.title}</h3>
+            <h3 className="mt-4 text-lg font-bold text-gray-900">{project.title}</h3>
             <p className="text-sm text-gray-600">{project.description}</p>
           </div>
         ))}

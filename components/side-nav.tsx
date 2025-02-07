@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { animationSequence } from "./animation";
-import { SIDENAV_ITEMS } from "@/constants";
-import "/styles/globals.css";
+import { SIDENAV_ITEMS } from "@/constants"; // Ensure this path is correct
+import "@/styles/globals.css"; // Use @ alias
 import MenuItem from "./Menu-Item";
 
 export default function ViewWindow() {
@@ -13,7 +13,7 @@ export default function ViewWindow() {
   const [showBackground, setShowBackground] = useState(false);
   const [showLine, setShowLine] = useState(false);
   const [showNav, setShowNav] = useState(false);
-  const [navOpacity, setNavOpacity] = useState(0); // Add this state
+  const [navOpacity, setNavOpacity] = useState(0);
 
   useEffect(() => {
     animationSequence(
@@ -22,41 +22,38 @@ export default function ViewWindow() {
       setShowBackground,
       setInfoText,
       setImageLines,
-      500, // initialDelay
-      2000, // lineAnimationDuration
-      1000, // staticDuration
-      500, // flickerDuration
-      200 // contentDelay
+      500,
+      2000,
+      1000,
+      500,
+      200
     );
 
-    // Delay the nav display by 5 seconds
     const navTimeout = setTimeout(() => {
       setShowNav(true);
-      // Animate nav opacity
+      let opacity = 0;
       const opacityInterval = setInterval(() => {
-        setNavOpacity((prevOpacity) => {
-          if (prevOpacity < 1) {
-            return Math.min(prevOpacity + 0.1, 1);
-          }
+        opacity += 0.1;
+        setNavOpacity((prev) => Math.min(prev + 0.1, 1));
+        if (opacity >= 1) {
           clearInterval(opacityInterval);
-          return prevOpacity;
-        });
-      }, 100); // 0.1 opacity every 100ms
-    }, 5000); // 5 seconds
+        }
+      }, 100);
+    }, 5000);
 
     return () => {
-      clearTimeout(navTimeout); // Cleanup timeout
+      clearTimeout(navTimeout);
     };
   }, []);
 
   return (
-    <div className="bg-transparent h-screen ml-12 hidden lg:block ">
+    <div className="bg-transparent h-screen ml-12 hidden lg:block">
       <div
-        className={`relative w-full h-full  aspect-video rounded-lg overflow-hidden shadow-lg 
-          ${showBackground ? "old-tv-background" : ""}
-          ${animationState === "static" ? "tv-static" : ""}
-          ${animationState === "screenOn" ? "tv-flicker" : ""}
-          ${animationState === "content" ? "screen-on" : ""}
+        className={`relative w-full h-full aspect-video rounded-lg overflow-hidden shadow-lg
+            ${showBackground ? "old-tv-background" : ""}
+            ${animationState === "static" ? "tv-static" : ""}
+            ${animationState === "screenOn" ? "tv-flicker" : ""}
+            ${animationState === "content" ? "screen-on" : ""}
         `}
         style={{
           boxShadow: showBackground
@@ -92,22 +89,20 @@ export default function ViewWindow() {
             />
           </svg>
         )}
-        <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0  before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%] before:bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_30%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))]"></div>
 
-
+        <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%] before:bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_30%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))]"></div>
 
         {showNav && (
           <div
-            className={`absolute inset-0 flex items-center justify-center ${
-              showNav ? "visible" : "invisible"
-            }`}
+            className={`absolute inset-0 flex items-center justify-center ${showNav ? "visible" : "invisible"
+              }`}
             style={{
               opacity: navOpacity,
               pointerEvents: navOpacity === 1 ? "auto" : "none",
               transition: "opacity 0.5s ease-out",
               zIndex: 2,
             }}
-          >  
+          >
             <nav
               className="flex flex-col mt-4 z-10"
               style={{ marginTop: "-300px" }}
@@ -116,7 +111,6 @@ export default function ViewWindow() {
                 <MenuItem key={idx} item={item} />
               ))}
             </nav>
-            
           </div>
         )}
 
