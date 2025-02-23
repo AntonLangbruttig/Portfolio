@@ -12,14 +12,14 @@ export default function HomePage() {
       <div className="h-full overflow-y-scroll no-scrollbar py-6">
         {/* Main Header */}
         <h2 
-          className={`font-bold text-cyan-200 hover:text-white text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+          className={`font-bold text-cyan-200  text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
         >
           About
         </h2>
 
         {/* Scrollable Content */}
         <div 
-          className={`px-[75px] text-gray-300 text-base transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+          className={`px-[75px] text-gray-300 text-xl transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
         >
           I’m a tech enthusiast with a knack for unraveling how things work. My journey began with a degree in Computer Science from the University of Wisconsin-Milwaukee, where I delved into topics like artificial intelligence and large language models, graduating in 2022.
 
