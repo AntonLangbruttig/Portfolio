@@ -11,7 +11,7 @@ body {
 }
 
 .animate-blink {
-    animation: blink 0.7s infinite;
+    animation: blink 1.4s infinite;
 }
 @keyframes blink {
     0%, 100% { opacity: 1; }

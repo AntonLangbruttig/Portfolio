@@ -30,7 +30,7 @@ export const animationSequence = async (
   // Initial delay
   await new Promise(resolve => setTimeout(resolve, initialDelay));
 
-  // Show and animate line
+  // Show and  line
   setShowLine(true);
   setAnimationState('line');
   await new Promise(resolve => setTimeout(resolve, lineAnimationDuration));

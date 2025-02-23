@@ -17,8 +17,7 @@ const Skills = () => {
     <section className="h-[calc(100vh-50px)] overflow-hidden">
       <div className="h-full overflow-y-scroll no-scrollbar py-6">
         {/* Main Header */}
-        <h2
-          className={`font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+        <h2 className={`font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
         >
           Skills
         </h2>
@@ -37,7 +36,7 @@ const Skills = () => {
                 {items.map((skill) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium transition-all duration-300 hover:bg-cyan-700 hover:text-white"
+                    className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium transition-all duration-300"
                   >
                     {skill}
                   </span>
