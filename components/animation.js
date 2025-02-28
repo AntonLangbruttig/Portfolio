@@ -11,14 +11,11 @@ export const animationSequence = async (
   staticDuration = 2000,
   flickerDuration = 1000,
   contentDelay = 500,
-  fullInfoText = 
-  "\n\n\n" +
-  "I'm passionate about building elegant, intuitive software that is visually stunning." + "\n\n\n           Anton Langbruttig",
+  fullInfoText = "I'm passionate about building elegant, intuitive software that is visually stunning." + "\n\n\n           Anton Langbruttig",
   totalImageLines = 50
 ) => {
   // Check if the animation has already run
   if (hasAnimationRun) {
-    // Set all final states as constants
     setShowLine(true);
     setAnimationState('content');
     setShowBackground(true);
@@ -30,7 +27,7 @@ export const animationSequence = async (
   // Initial delay
   await new Promise(resolve => setTimeout(resolve, initialDelay));
 
-  // Show and  line
+  // Show and animate line
   setShowLine(true);
   setAnimationState('line');
   await new Promise(resolve => setTimeout(resolve, lineAnimationDuration));
