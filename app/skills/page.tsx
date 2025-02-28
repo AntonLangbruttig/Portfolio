@@ -17,7 +17,7 @@ const Skills = () => {
     <section className="h-[calc(100vh-50px)] overflow-hidden">
       <div className="h-full overflow-y-scroll no-scrollbar py-6">
         {/* Main Header */}
-        <h2 className={`font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+        <h2 className={`md:block sm:hidden font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
         >
           Skills
         </h2>

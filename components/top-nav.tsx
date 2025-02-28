@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
-import { animationSequence } from './animation'
-import '../styles/globals.css'
-import MenuItem from './Menu-Item'
-import { SIDENAV_ITEMS } from '@/constants'
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { animationSequence } from "./animation";
+import "../styles/globals.css";
+import MenuItem from "./Menu-Item";
+import { SIDENAV_ITEMS } from "@/constants";
 
 export default function ViewWindow() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [infoText, setInfoText] = useState('')
-  const [imageLines, setImageLines] = useState(0)
-  const [animationState, setAnimationState] = useState('initial')
-  const [showBackground, setShowBackground] = useState(false)
-  const [showLine, setShowLine] = useState(false)
-  const [showNav, setShowNav] = useState(false)
-  const [navOpacity, setNavOpacity] = useState(0)
+  const [isOpen, setIsOpen] = useState(false);
+  const [infoText, setInfoText] = useState("");
+  const [imageLines, setImageLines] = useState(0);
+  const [animationState, setAnimationState] = useState("initial");
+  const [showBackground, setShowBackground] = useState(false);
+  const [showLine, setShowLine] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+  const [navOpacity, setNavOpacity] = useState(0);
 
-  const pathname = usePathname() // Get the current route
+  const pathname = usePathname(); // Get the current route
 
   useEffect(() => {
     animationSequence(
@@ -32,38 +32,43 @@ export default function ViewWindow() {
       1000,
       500,
       200
-    )
+    );
 
     const navTimeout = setTimeout(() => {
-      setShowNav(true)
-      let opacity = 0
+      setShowNav(true);
+      let opacity = 0;
       const opacityInterval = setInterval(() => {
-        opacity += 0.1
-        setNavOpacity((prev) => Math.min(prev + 0.1, 1))
+        opacity += 0.1;
+        setNavOpacity((prev) => Math.min(prev + 0.1, 1));
         if (opacity >= 1) {
-          clearInterval(opacityInterval)
+          clearInterval(opacityInterval);
         }
-      }, 100)
-    }, 5000)
+      }, 100);
+    }, 5000);
 
     return () => {
-      clearTimeout(navTimeout)
-    }
-  }, [])
+      clearTimeout(navTimeout);
+    };
+  }, []);
+
+  // Derive page title from pathname
+  const pageTitle = pathname === "/" ? "Home" : pathname.split("/").pop();
 
   return (
     <div className="bg-transparent relative w-full flex-row items-center justify-center max-lg:block hidden">
       <div
         className={`relative w-full md:h-20 sm:h-16 aspect-v ${
-          showBackground ? 'old-tv-background' : ''
-        } ${animationState === 'static' ? 'tv-static' : ''} ${
-          animationState === 'screenOn' ? 'tv-flicker' : ''
-        } ${animationState === 'content' ? 'screen-on' : ''}`}
+          showBackground ? "old-tv-background" : ""
+        } ${animationState === "static" ? "tv-static" : ""} ${
+          animationState === "screenOn" ? "tv-flicker" : ""
+        } ${animationState === "content" ? "screen-on" : ""}`}
         style={{
-          boxShadow: showBackground ? '0 0 20px #00ffff, 0 0 40px #00ffff' : 'none',
-          transition: 'all 0.5s ease-out',
-          borderRadius: '0px',
-          position: 'relative',
+          boxShadow: showBackground
+            ? "0 0 20px #00ffff, 0 0 40px #00ffff"
+            : "none",
+          transition: "all 0.5s ease-out",
+          borderRadius: "0px",
+          position: "relative",
           zIndex: 1,
         }}
       >
@@ -72,7 +77,7 @@ export default function ViewWindow() {
             className="absolute inset-0 w-full h-20 md:mt-0 sm:-mt-3"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
-            style={{ pointerEvents: 'none' }}
+            style={{ pointerEvents: "none" }}
           >
             <rect
               className="animate-draw"
@@ -88,47 +93,61 @@ export default function ViewWindow() {
         )}
         {showNav && (
           <div
-            className={`absolute inset-x-0 top-0 flex justify-left ${showNav ? 'visible' : 'invisible'}`}
+            className={`absolute inset-x-0 top-0 flex justify-left ${
+              showNav ? "visible" : "invisible"
+            }`}
             style={{
               opacity: navOpacity,
-              pointerEvents: navOpacity === 1 ? 'auto' : 'none',
-              transition: 'opacity 0.5s ease-out',
+              pointerEvents: navOpacity === 1 ? "auto" : "none",
+              transition: "opacity 0.5s ease-out",
               zIndex: 2,
             }}
           >
             <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%]"></div>
 
             <div className="relative z-0 flex">
-              <Link href="/" className="text-2xl font-bold text-[#00ffff] mr-3 ml-0">
-                <img src="/images/AL.png" alt="AL Logo" className="md:w-[77px] md:h-[77px] md:mt-[1px] sm:w-[50px] sm:h-[50px] sm:mt-2" />
+              <Link
+                href="/"
+                className="text-2xl font-bold text-[#00ffff] mr-3 ml-0"
+              >
+                <img
+                  src="/images/AL.png"
+                  alt="AL Logo"
+                  className="md:w-[77px] md:h-[77px] md:mt-[1px] sm:w-[50px] sm:h-[50px] sm:mt-2"
+                />
               </Link>
+              <h2
+                className="md:hidden text-[#ab91dd] transition-all duration-300 py-6 text-3xl text-bold capitalize"
+              >
+                {pageTitle}
+              </h2>{" "}
               <nav className="flex container py-10 px-0">
                 <div className="hidden md:flex space-x-8">
                   {SIDENAV_ITEMS.map((item) => {
-                    const isActive = pathname === item.path // Check if link is active
+                    const isActive = pathname === item.path; // Check if link is active
                     return (
                       <Link
                         key={item.path}
                         href={item.path}
                         className={`text-2xl transition-all duration-300 ${
                           isActive
-                            ? 'text-[#00ffff] font-bold border-b-2 border-[#00ffff]'
-                            : 'text-[#B19CD9] hover:text-white'
+                            ? "text-[#00ffff] font-bold border-b-2 border-[#00ffff]"
+                            : "text-[#B19CD9] hover:text-white"
                         }`}
                         style={{
                           fontFamily: '"VT323", monospace',
-                          fontWeight: '400',
-                          letterSpacing: '0.05em',
-                          lineHeight: '1.6',
-                          whiteSpace: 'pre-wrap',
-                          wordBreak: 'break-word',
-                          textAlign: 'left',
-                          fontSize: '1.5rem',
+                          fontWeight: "400",
+                          letterSpacing: "0.05em",
+                          lineHeight: "1.6",
+                          whiteSpace: "pre-wrap",
+                          wordBreak: "break-word",
+                          textAlign: "left",
+                          fontSize: "1.5rem",
                         }}
                       >
                         {item.title}
                       </Link>
-                    )
+                    );
                   })}
                 </div>
               </nav>
@@ -136,10 +155,13 @@ export default function ViewWindow() {
           </div>
         )}
 
-        {animationState !== 'initial' && animationState !== 'line' && (
-          <div className="crt-effect absolute inset-0" style={{ pointerEvents: 'none' }}></div>
+        {animationState !== "initial" && animationState !== "line" && (
+          <div
+            className="crt-effect absolute inset-0"
+            style={{ pointerEvents: "none" }}
+          ></div>
         )}
       </div>
     </div>
-  )
+  );
 }

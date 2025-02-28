@@ -12,7 +12,7 @@ export default function HomePage() {
       <div className="h-full overflow-y-scroll no-scrollbar py-6">
         {/* Main Header */}
         <h2 
-          className={`font-bold text-cyan-200  text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+          className={`font-bold text-cyan-200  text-4xl mb-8 underline px-14 transition-opacity duration-1000 sm:hidden md:block ${fadeIn ? "opacity-100" : "opacity-0"}`}
         >
           About
         </h2>
