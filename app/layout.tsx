@@ -8,6 +8,7 @@ import HeaderMobile from "@/components/header-mobile";
 import Navbar from '@/components/top-nav'
 
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -31,11 +32,7 @@ export default function RootLayout({
                 <div className="lg:w-72 md:w-20 sm:w-20 flex-shrink-0">
                   <SideNav />
                 </div>
-                {/* <div className="lg:w-[900px] lg:flex-shrink-0 md:w-[900px] md:flex-shrink-0 sm:w-full "> */}
                   <div className="lg:w-[975px] lg:flex-shrink-0 md:w-[975px] md:flex-shrink-0 sm:w-full">
-                  {/* <div className="lg:w-[975px] lg:flex-shrink-0 md:w-full md:flex-shrink-0 sm:w-full "> */}
-              
-
                   <ViewWindow>
                     <main>{children}</main>
                   </ViewWindow>

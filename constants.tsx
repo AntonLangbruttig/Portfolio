@@ -1,6 +1,5 @@
 
 import { Icon } from '@iconify/react';
-
 import { SideNavItem } from './types';
 
 export const SIDENAV_ITEMS: SideNavItem[] = [
@@ -18,6 +17,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     title: 'Projects',
     path: '/projects',
     icon: <Icon icon="lucide:folder" width="24" height="24" />,
+    submenu: false,
+    subMenuItems: [
+      { title: 'All', path: '/projects/luxAbout' },
+      { title: 'Web Design', path: '/projects/portfolioAbout' },
+    ],
   },
   {
     title: 'Skills',
@@ -33,15 +37,3 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
 
 
 
-//example of item with submenu
-
-// {
-//   title: 'Projects',
-//   path: '/projects',
-//   icon: <Icon icon="lucide:folder" width="24" height="24" color="#22d3ee"/>,
-//   submenu: true,
-//   subMenuItems: [
-//     { title: 'All', path: '/projects' },
-//     { title: 'Web Design', path: '/projects/web-design' },
-//   ],
-// },

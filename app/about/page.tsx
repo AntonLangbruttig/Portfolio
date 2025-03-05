@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
-import { useAboutPageAnimation } from "@/components/utils/aboutAnimation"; // Import animation
+import { useAboutPageAnimation } from "@/components/animation"; // Import animation
+
 import Image from "next/image";
 
 export default function HomePage() {
-  const { fadeIn, isFirstLoad } = useAboutPageAnimation();
-
+  const { fadeIn, isFirstLoad } = useAboutPageAnimation(); // Keeps the animation logic
+  // const { hasAboutAnimationRun } = useAnimationContext(); // Checks global flag
+  
   return (
     <section className="h-[calc(100vh-50px)] overflow-hidden">
       <div className="h-full overflow-y-scroll no-scrollbar py-6">

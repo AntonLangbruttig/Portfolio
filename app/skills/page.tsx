@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAboutPageAnimation } from "@/components/utils/aboutAnimation"; // Import animation
+import { useAboutPageAnimation } from "@/components/animation"; // Import animation
 
 // Example data: Replace with your résumé/website skills
 const skills = {

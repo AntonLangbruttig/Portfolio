@@ -70,7 +70,9 @@ const HeaderMobile = () => {
               stroke="#00ffff"
               strokeLinecap="round"
               initial={{ d: "M 2 2.5 L 20 2.5" }}
-              animate={isOpen ? { d: "M 3 16.5 L 17 2.5" } : { d: "M 2 2.5 L 20 2.5" }}
+              animate={
+                isOpen ? { d: "M 3 16.5 L 17 2.5" } : { d: "M 2 2.5 L 20 2.5" }
+              }
               transition={{ duration: 0.3 }}
             />
             <motion.path
@@ -79,7 +81,11 @@ const HeaderMobile = () => {
               stroke="#00ffff"
               strokeLinecap="round"
               initial={{ d: "M 2 9.423 L 20 9.423", opacity: 0 }}
-              animate={isOpen ? { d: "M 2 9.423 L 20 9.423", opacity: 0 } : { d: "M 2 9.423 L 20 9.423", opacity: 1 }}
+              animate={
+                isOpen
+                  ? { d: "M 2 9.423 L 20 9.423", opacity: 0 }
+                  : { d: "M 2 9.423 L 20 9.423", opacity: 1 }
+              }
               transition={{ duration: 0.3 }}
             />
             <motion.path
@@ -88,7 +94,11 @@ const HeaderMobile = () => {
               stroke="#00ffff"
               strokeLinecap="round"
               initial={{ d: "M 2 16.346 L 20 16.346" }}
-              animate={isOpen ? { d: "M 3 2.5 L 17 16.346" } : { d: "M 2 16.346 L 20 16.346" }}
+              animate={
+                isOpen
+                  ? { d: "M 3 2.5 L 17 16.346" }
+                  : { d: "M 2 16.346 L 20 16.346" }
+              }
               transition={{ duration: 0.3 }}
             />
           </motion.svg>
@@ -99,7 +109,9 @@ const HeaderMobile = () => {
         initial={false}
         animate={isOpen ? "open" : "closed"}
         custom={height}
-        className={`fixed inset-x-0 top-[68px] z-50 w-full md:hidden ${isOpen ? "" : "pointer-events-none"}`}
+        className={`fixed inset-x-0 top-[68px] z-50 w-full md:hidden ${
+          isOpen ? "" : "pointer-events-none"
+        }`}
         ref={containerRef}
       >
         <motion.div
@@ -133,7 +145,13 @@ const HeaderMobile = () => {
                     href={item.path}
                     onClick={() => toggleOpen()}
                     className={`flex w-full text-2xl ${
-                      item.path === pathname ? "font-bold text-[#00ffff]" : "hover:text-white"
+                      item.path === "/"
+                        ? pathname === "/" // Highlight Home only when exactly on "/"
+                          ? "font-bold text-[#00ffff]"
+                          : "hover:text-white"
+                        : pathname.startsWith(item.path) // Otherwise, highlight parents
+                        ? "font-bold text-[#00ffff]"
+                        : "hover:text-white"
                     }`}
                   >
                     {item.title}
@@ -194,7 +212,9 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
           <div className="flex flex-row justify-between w-full items-center">
             <span
               className={`${
-                pathname.includes(item.path) ? "font-bold text-[#00ffff]" : "hover:text-white"
+                pathname.includes(item.path)
+                  ? "font-bold text-[#00ffff]"
+                  : "hover:text-white"
               }`}
             >
               {item.title}
@@ -213,7 +233,9 @@ const MenuItemWithSubMenu: React.FC<MenuItemWithSubMenuProps> = ({
                 href={subItem.path}
                 onClick={() => toggleOpen()}
                 className={`${
-                  subItem.path === pathname ? "font-bold text-[#00ffff]" : "hover:text-white"
+                  subItem.path === pathname
+                    ? "font-bold text-[#00ffff]"
+                    : "hover:text-white"
                 }`}
               >
                 {subItem.title}

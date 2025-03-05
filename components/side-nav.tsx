@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { animationSequence } from "./animation";
-import { SIDENAV_ITEMS } from "@/constants"; // Ensure this path is correct
-import "@/styles/globals.css"; // Use @ alias
+import { SIDENAV_ITEMS } from "@/constants"; 
+import "@/styles/globals.css"; 
 import MenuItem from "./Menu-Item";
 
 export default function ViewWindow() {

@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+
+
 let hasAnimationRun = false; // Flag to track if the animation has run
 
 export const animationSequence = async (
@@ -68,4 +71,25 @@ export const animationSequence = async (
 
   // Set the flag to true after the animation completes
   hasAnimationRun = true;
+};
+
+export const useAboutPageAnimation = () => {
+  const [fadeIn, setFadeIn] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(!hasAnimationRun);
+
+  useEffect(() => {
+    if (!hasAnimationRun) {
+      // Delay fade-in animation only on first load
+      const timeout = setTimeout(() => {
+        setFadeIn(true);
+        hasAnimationRun = true; // Mark animation as completed
+      }, 5000);
+
+      return () => clearTimeout(timeout);
+    } else {
+      setFadeIn(true); // Instantly show content if animation has already run
+    }
+  }, []);
+
+  return { fadeIn, isFirstLoad };
 };
