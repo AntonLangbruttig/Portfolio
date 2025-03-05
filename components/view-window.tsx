@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, ReactNode } from "react";
 import { animationSequence } from "@/components/animation";
 import "../styles/globals.css";
-// import "/components/view-window.css";
+import Link from "next/link";
 
 
 export default function HomePage({ children }: { children: ReactNode }) {
@@ -63,7 +63,6 @@ export default function HomePage({ children }: { children: ReactNode }) {
           `}
             style={{
                 backgroundAttachment: "fixed",
-              // backgroundColor: showBackground ? "#000" : "transparent",
               boxShadow: showBackground
                 ? "0 0 20px #00ffff, 0 0 40px #00ffff"
                 : "none",
@@ -76,7 +75,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
             {animationState !== "initial" && animationState !== "line" && (
               <div className="crt-effect"></div>)}
             {showLine && (
-              <svg className="md:absolute md:pt-0 inset-0 w-full h-full sm:fixed sm:pt-[63px]" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <svg className="md:absolute md:pt-0 inset-0 w-full h-full sm:fixed sm:pt-[63px] " viewBox="0 0 100 100" preserveAspectRatio="none">
                 <rect className="animate-draw" x="0" y="0" width="100" height="100" fill="none" stroke="#00ffff" strokeWidth="1.2"/>
                 <rect className="animate-draw-clockwise" x="0" y="0" width="100" height="100" fill="none" stroke="#00ffff" strokeWidth="1.2"/>
               </svg>
@@ -90,9 +89,12 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 </div>
               </div>
               {showNav && (
-              <div className="absolute bottom-2 right-0 hidden lg:block">
-                <Image src="/images/AL.png" alt="AL" width={100} height={100}/>
-              </div>
+              <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto z-0">
+                <Link
+                  href="/">
+                 <Image src="/images/AL.png" alt="AL" width={100} height={100}/>
+                 </Link>
+                </div>
               )}
           </div>
          </div>

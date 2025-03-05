@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useAboutPageAnimation } from "@/components/utils/aboutAnimation";
+import { useAboutPageAnimation } from "@/components/animation"; // Import animation
 
 export default function ContactPage() {
   const { fadeIn } = useAboutPageAnimation();

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { animationSequence } from "@/components/animation";
 
+
 export default function HomePage() {
   const [infoText, setInfoText] = useState(""); // For md+ screens
   const [infoText2, setInfoText2] = useState(""); // For sm screens
@@ -62,7 +63,7 @@ export default function HomePage() {
     <div>
       {/* other pages content here  */}
       <div
-        className={`sm:flex sm:flex-col wrap relative w-full md:h-full aspect-video rounded-lg overflow-hidden shadow-lg sm:h-screen sm:overflow-y-scroll flex-wrap`}
+        className={`sm:flex sm:flex-col  md:overflow-hidden  wrap relative w-full md:h-full aspect-video rounded-lg sm:overflow-hidden shadow-lg sm:h-screen sm:overflow-y-scroll flex-wrap`}
       >
         {animationState === "content" && (
           <div className="flex h-full animate-fade-in flex-wrap w-full">
@@ -82,7 +83,6 @@ export default function HomePage() {
                 />
               </div>
             </div>
-
             <div className="sm:w-screen md:w-[50%] md:p-4 flex items-center md:justify-center sm:justify-center flex-shrink-0 md:mt-32 md:-ml-6 sm:-mt-28">
               <div className="md:w-[101vh] sm:full h-full p-4 rounded-lg items-top md:justify-left sm:justify-center md:block md:mb-0 sm:pt-7 md:max-w-none sm:max-w-[400px] ">
                 <pre
