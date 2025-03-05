@@ -117,15 +117,19 @@ export default function ViewWindow() {
                 />
               </Link>
               <h2 className="md:hidden text-[#ab91dd] transition-all duration-300 py-6 text-3xl text-bold capitalize">
-                {pageTitle}
-              </h2>{" "}
+                {pageTitle === "portfolioAbout"
+                  ? "Portfolio Website"
+                  : pageTitle === "luxAbout"
+                  ? "Let's Face It Website"
+                  : pageTitle}
+              </h2>
               <nav className="flex container py-10 px-0">
                 <div className="hidden md:flex space-x-8">
                   {SIDENAV_ITEMS.map((item) => {
-                          const isActive =
-                          item.path === "/"
-                            ? pathname === "/" // Only highlight Home when exactly on "/"
-                            : pathname.startsWith(item.path); // Otherwise, highlight parents
+                    const isActive =
+                      item.path === "/"
+                        ? pathname === "/" // Only highlight Home when exactly on "/"
+                        : pathname.startsWith(item.path); // Otherwise, highlight parents
                     return (
                       <Link
                         key={item.path}

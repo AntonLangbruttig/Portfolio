@@ -54,7 +54,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                     lg:items-center lg:-mt-11 overflow-visible md:-mt-[2px] sm:-mt-2 ">
       <div className="w-full lg:ml-2 sm:ml-0 sm:-mr-1 h-[85vh] lg:h-[70vh] lg:mt-[90px] sm:h-[9vh] overflow-visible ">
         <div className="relative w-full flex-row items-center justify-center bg-fixed">
-          <div className={`relative md:w-full sm:w-[99vw]  aspect-video rounded-none overscroll-none  
+          <div className={`relative md:w-full sm:w-[99vw]   aspect-video rounded-none overscroll-none  
                            shadow-lg h-screen bottom-2 sm:top-0  md:h-full lg:h-full   sm:-mt-1     
               ${showBackground ? "old-tv-background" : ""}
               ${animationState === "static" ? "tv-static" : ""}
@@ -67,7 +67,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 ? "0 0 20px #00ffff, 0 0 40px #00ffff"
                 : "none",
               transition:
-                "background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out",
+                "background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out ",
               borderRadius: "2px",
             }}
           >
@@ -89,7 +89,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 </div>
               </div>
               {showNav && (
-              <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto z-0">
+              <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto ">
                 <Link
                   href="/">
                  <Image src="/images/AL.png" alt="AL" width={100} height={100}/>
