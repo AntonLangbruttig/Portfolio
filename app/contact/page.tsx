@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useAboutPageAnimation } from "@/components/animation"; // Import animation
+import { pageAnimation } from "@/components/utils/animation"; // Import animation
 
 export default function ContactPage() {
-  const { fadeIn } = useAboutPageAnimation();
+  const { fadeIn } = pageAnimation();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
@@ -21,6 +21,13 @@ export default function ContactPage() {
     e.preventDefault();
     setLoading(true);
     setStatus("");
+
+    // Ensure all fields are filled
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("Please fill out all fields.");
+      setLoading(false);
+      return;
+    }
 
     console.log("Submitting:", formData);
 
@@ -51,7 +58,7 @@ export default function ContactPage() {
     <div className={`overflow-y-scroll justify-center transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
       <div className="min-h-screen overflow-y-none text-white p-8 pt-5">
         <div className="h-full sm:h-screen space-y-1">
-          <span className="font-bold text-cyan-200 text-4xl block mb-0 md:block sm:hidden">Contact</span>
+          <span className="font-bold text-cyan-200 text-4xl block mb-2 md:block sm:hidden underline">Contact</span>
 
           {/* Fixed-height container for inquiry text, form, and status */}
           <div className="space-y-2 pb-4 md:min-h-[43vh] flex flex-col justify-start">
@@ -96,7 +103,7 @@ export default function ContactPage() {
                   <div className="flex justify-center">
                     <button
                       type="submit"
-                      className="w-[96%] bg-[#059ec9] text-white border-none rounded-none py-2 px-4 text-lg transition-transform transform hover:bg-cyan-700"
+                      className="w-[96%] bg-[#059ec9] text-white border-none rounded-none py-2 px-4 text-lg transition-transform transform hover:bg-cyan-700 disabled:cursor-not-allowed"
                       disabled={loading}
                     >
                       {loading ? "Sending..." : "Send Message"}

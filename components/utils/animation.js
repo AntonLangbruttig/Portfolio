@@ -73,7 +73,7 @@ export const animationSequence = async (
   hasAnimationRun = true;
 };
 
-export const useAboutPageAnimation = () => {
+export const pageAnimation = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(!hasAnimationRun);
 
