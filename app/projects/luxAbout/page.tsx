@@ -2,11 +2,11 @@
 
 import React from "react";
 import Link from "next/link"; // Import Link from Next.js
-import { useAboutPageAnimation } from "@/components/animation"; // Import animation
+import { pageAnimation } from "@/components/utils/animation"; // Import animation
 import { Icon } from '@iconify/react';
 
 const LuxAbout = () => {
-  const { fadeIn } = useAboutPageAnimation(); // Use the same animation logic
+  const { fadeIn } = pageAnimation(); // Use the same animation logic
 
   // List of technologies used
   const technologies = [

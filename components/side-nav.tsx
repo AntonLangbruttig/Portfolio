@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { animationSequence } from "./animation";
+import { animationSequence } from "./utils/animation";
 import { SIDENAV_ITEMS } from "@/constants"; 
 import "@/styles/globals.css"; 
-import MenuItem from "./Menu-Item";
+import MenuItem from "./utils/menu-item";
 
 export default function ViewWindow() {
   const [infoText, setInfoText] = useState("");
@@ -47,7 +47,7 @@ export default function ViewWindow() {
   }, []);
 
   return (
-    <div className="bg-transparent h-screen ml-12 hidden lg:block">
+    <div className="bg-transparent h-screen ml-11 hidden lg:block">
       <div
         className={`relative w-full h-full aspect-video rounded-lg overflow-hidden shadow-lg
             ${showBackground ? "old-tv-background" : ""}

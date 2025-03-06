@@ -7,7 +7,7 @@ export default function PageWrapper({ children }: { children: ReactNode }) {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
     backgroundAttachment: 'fixed',
-    filter: 'brightness(70%)', // Add tint by adjusting brightness
+    filter: 'brightness(70%)', 
   };
 
   return (

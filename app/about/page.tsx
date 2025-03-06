@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { useAboutPageAnimation } from "@/components/animation"; // Import animation
+import { pageAnimation } from "@/components/utils/animation"; // Import animation
 
 import Image from "next/image";
 
 export default function HomePage() {
-  const { fadeIn, isFirstLoad } = useAboutPageAnimation(); // Keeps the animation logic
+  const { fadeIn, isFirstLoad } = pageAnimation(); // Keeps the animation logic
   // const { hasAboutAnimationRun } = useAnimationContext(); // Checks global flag
   
   return (

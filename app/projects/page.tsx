@@ -3,14 +3,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link"; // Import Link from next/link
-import { useAboutPageAnimation } from "@/components/animation";
+import "/styles/globals.css";
+import { pageAnimation } from "@/components/utils/animation";
 
 const projects = [
   {
     title: "Portfolio Website",
     description: "A brief description of project 1.",
     link: "/projects/portfolioAbout/",
-    image: "/images/portfolio_1.png",
+    image: "/images/PortfolioLG.png",
     mobileImage: "/images/HomeSM.png",
     moreInfoLink: "/projects/portfolioAbout/",
     goto: "/",
@@ -19,14 +20,14 @@ const projects = [
     title: "Lets Face it Website",
     description: "A brief description of project 2.",
     link: "/projects/luxAbout/",
-    image: "/images/LetsFaceIt1.jpg",
-    mobileImage: "/images/luxSM.png",
+    image: "/images/LetsFaceItLG.jpg",
+    mobileImage: "/images/LetsFaceItSM.png",
     moreInfoLink: "/projects/luxAbout/",
   },
 ];
 
 export default function ProjectsPage() {
-  const { fadeIn } = useAboutPageAnimation();
+  const { fadeIn } = pageAnimation();
 
   return (
     <div
@@ -103,15 +104,6 @@ export default function ProjectsPage() {
           ))}
         </div>
       </div>
-      <style jsx>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </div>
   );
 }

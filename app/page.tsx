@@ -3,7 +3,7 @@
 import ViewWindow from "@/components/view-window";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { animationSequence } from "@/components/animation";
+import { animationSequence } from "@/components/utils/animation";
 
 
 export default function HomePage() {
@@ -62,13 +62,11 @@ export default function HomePage() {
   return (
     <div>
       {/* other pages content here  */}
-      <div
-        className={`sm:flex sm:flex-col  md:overflow-hidden  wrap relative w-full md:h-full aspect-video rounded-lg sm:overflow-hidden shadow-lg sm:h-screen sm:overflow-y-scroll flex-wrap`}
-      >
+      <div className={`sm:flex sm:flex-col  md:overflow-hidden  wrap relative w-full md:h-full aspect-video rounded-lg sm:overflow-hidden shadow-lg sm:h-screen sm:overflow-y-scroll flex-wrap`}>
         {animationState === "content" && (
           <div className="flex h-full animate-fade-in flex-wrap w-full">
             <div className="flex items-center p-3 sm:h-[50%] sm:p-3  sm:w-screen md:h-auto md:w-1/2 md:mb-12 md:-ml-8 lg:mb-12 lg:-ml-8">
-              <div className="relative w-full h-full sm:mt-4 md:h-[507px] sm:mr-1 md:mr-0 md:ml-7 md:mt-1">
+              <div className="relative w-full h-full sm:mt-4 md:h-[507px] sm:mr-1 md:mr-0 md:ml-4 md:mt-1">
                 <Image
                   src="/images/me.png"
                   alt="Anton Langbruttig"
@@ -83,7 +81,7 @@ export default function HomePage() {
                 />
               </div>
             </div>
-            <div className="sm:w-screen md:w-[50%] md:p-4 flex items-center md:justify-center sm:justify-center flex-shrink-0 md:mt-32 md:-ml-6 sm:-mt-28">
+            <div className="sm:w-screen md:w-[50%] md:p-4 flex items-center md:justify-center sm:justify-center flex-shrink-0 md:mt-32 md:-ml-0 sm:-mt-28">
               <div className="md:w-[101vh] sm:full h-full p-4 rounded-lg items-top md:justify-left sm:justify-center md:block md:mb-0 sm:pt-7 md:max-w-none sm:max-w-[400px] ">
                 <pre
                   className="text-xl sm:hidden md:block"
@@ -103,7 +101,7 @@ export default function HomePage() {
                     overflow: "hidden",
                   }}
                 >
-                  {infoText} {/* Text for sm screens */}
+                  {infoText} {/* Text for md and lg screens */}
                   <span className="animate-blink -ml-2">_</span>
                 </pre>
                 <pre
