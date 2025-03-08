@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { pageAnimation } from "@/components/utils/animation"; // Import animation
+import { PageAnimation } from "@/components/utils/animation"; // Import animation
 
 export default function ContactPage() {
-  const { fadeIn } = pageAnimation();
+  const { fadeIn } = PageAnimation();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
@@ -25,6 +25,14 @@ export default function ContactPage() {
     // Ensure all fields are filled
     if (!formData.name || !formData.email || !formData.message) {
       setStatus("Please fill out all fields.");
+      setLoading(false);
+      return;
+    }
+
+    // ✅ Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus("Please enter a valid email.");
       setLoading(false);
       return;
     }
@@ -77,6 +85,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-[96%] p-2 bg-slate-300 text-black font-bold text-md rounded-none"
                       disabled={loading}
+                      autoComplete="given-name" // ✅ Added
                     />
                   </div>
                   <div className="flex justify-center">
@@ -88,6 +97,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-[96%] p-2 bg-slate-300 text-black text-md font-bold rounded-none"
                       disabled={loading}
+                      autoComplete="email" // ✅ Added
                     />
                   </div>
                   <div className="flex justify-center">
@@ -98,6 +108,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-[96%] p-2 bg-slate-300 text-black text-md font-bold rounded-none resize-none lg:h-[15vh] md:h-[20vh] sm:h-[30vh]"
                       disabled={loading}
+                      autoComplete="off" // ✅ Prevents autofill in message field
                     ></textarea>
                   </div>
                   <div className="flex justify-center">
@@ -137,7 +148,7 @@ export default function ContactPage() {
             <a
               href="https://www.linkedin.com/in/anton-langbruttig-75375688/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer" // ✅ Added for security
               className="text-blue-400 hover:scale-[1.3]"
             >
               <Image src="/images/linkedin.png" alt="LinkedIn" width={32} height={32} />

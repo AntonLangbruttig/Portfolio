@@ -2,17 +2,17 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link"; // Import Link from next/link
+import Link from "next/link"; 
 import "/styles/globals.css";
-import { pageAnimation } from "@/components/utils/animation";
+import { PageAnimation } from "@/components/utils/animation";
 
 const projects = [
   {
     title: "Portfolio Website",
     description: "A brief description of project 1.",
     link: "/projects/portfolioAbout/",
-    image: "/images/PortfolioLG.png",
-    mobileImage: "/images/HomeSM.png",
+    image: "/images/portfolioLG.png",
+    mobileImage: "/images/portfolioSM.png",
     moreInfoLink: "/projects/portfolioAbout/",
     goto: "/",
   },
@@ -20,14 +20,14 @@ const projects = [
     title: "Lets Face it Website",
     description: "A brief description of project 2.",
     link: "/projects/luxAbout/",
-    image: "/images/LetsFaceItLG.jpg",
-    mobileImage: "/images/LetsFaceItSM.png",
+    image: "/images/letsFaceItLG.jpg",
+    mobileImage: "/images/letsFaceItSM.png",
     moreInfoLink: "/projects/luxAbout/",
   },
 ];
 
 export default function ProjectsPage() {
-  const { fadeIn } = pageAnimation();
+  const { fadeIn } = PageAnimation();
 
   return (
     <div

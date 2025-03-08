@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useState, useEffect, ReactNode } from "react";
 import { animationSequence } from "@/components/utils/animation";
 import "../styles/globals.css";

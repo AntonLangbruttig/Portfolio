@@ -1,17 +1,8 @@
 import { ReactNode } from 'react';
 
 export default function PageWrapper({ children }: { children: ReactNode }) {
-  const divStyle = {
-    backgroundImage: `url('/images/background.jpg')`,
-    backgroundSize: "cover",
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    backgroundAttachment: 'fixed',
-    filter: 'brightness(70%)', 
-  };
-
   return (
-    <div className="fixed inset-0 z-[-1] " style={divStyle}>
+    <div className="fixed inset-0 -z-10 bg-[url('/images/background.jpg')] bg-cover bg-no-repeat bg-center bg-fixed brightness-75">
       {children}
     </div>
   );
