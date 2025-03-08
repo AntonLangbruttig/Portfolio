@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { animationSequence } from "./utils/animation";
@@ -33,19 +34,26 @@ export default function ViewWindow() {
       500,
       200
     );
-
+  
     const navTimeout = setTimeout(() => {
       setShowNav(true);
-      let opacity = 0;
-      const opacityInterval = setInterval(() => {
-        opacity += 0.1;
-        setNavOpacity((prev) => Math.min(prev + 0.1, 1));
-        if (opacity >= 1) {
-          clearInterval(opacityInterval);
+  
+      let startTime: number | null = null;
+      const duration = 1000; // 1 second
+      const animateOpacity = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const newOpacity = Math.min(progress / duration, 1);
+        setNavOpacity(newOpacity);
+  
+        if (progress < duration) {
+          requestAnimationFrame(animateOpacity);
         }
-      }, 100);
+      };
+  
+      requestAnimationFrame(animateOpacity);
     }, 5000);
-
+  
     return () => {
       clearTimeout(navTimeout);
     };
@@ -110,9 +118,11 @@ export default function ViewWindow() {
                 href="/"
                 className="text-2xl font-bold text-[#00ffff] mr-3 ml-0 hover:opacity-60"
               >
-                <img
+                <Image
                   src="/images/AL.png"
                   alt="AL Logo"
+                  width={77} // Set fixed width
+                  height={77} // Set fixed height
                   className="md:w-[77px] md:h-[77px] md:mt-[1px] sm:w-[50px] sm:h-[50px] sm:mt-2"
                 />
               </Link>

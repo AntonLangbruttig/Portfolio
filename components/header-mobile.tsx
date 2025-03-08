@@ -36,18 +36,24 @@ const HeaderMobile = () => {
     // Delay the nav display by 5 seconds
     const navTimeout = setTimeout(() => {
       setShowNav(true);
-      // Animate nav opacity
-      const opacityInterval = setInterval(() => {
-        setNavOpacity((prevOpacity) => {
-          if (prevOpacity < 1) {
-            return Math.min(prevOpacity + 0.1, 1);
-          }
-          clearInterval(opacityInterval);
-          return prevOpacity;
-        });
-      }, 100); // 0.1 opacity every 100ms
+  
+      // Animate nav opacity using requestAnimationFrame
+      let startTime: number | null = null;
+      const duration = 1000; // 1 second
+      const animateOpacity = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const newOpacity = Math.min(progress / duration, 1);
+        setNavOpacity(newOpacity);
+  
+        if (progress < duration) {
+          requestAnimationFrame(animateOpacity);
+        }
+      };
+  
+      requestAnimationFrame(animateOpacity);
     }, 5000); // 5 seconds
-
+  
     return () => {
       clearTimeout(navTimeout); // Cleanup timeout
     };

@@ -1,7 +1,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 body {
     background-color: #000;
@@ -80,7 +79,7 @@ body {
 @media (max-width: 979px) {
     .screen-on::after {
         background: linear-gradient(45deg, rgba(212, 0, 255, 0.29), rgba(0, 191, 255, 0.3));
-        bottom:73px; /* fix for top to work make the top its own class */
+        bottom:73px; 
     }
     .old-tv-background {
         background: #0000009c;
@@ -112,22 +111,21 @@ body {
 .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
 }
-/* test stuf here  */
 
 
 .animate-draw-clockwise {
     animation: draw-clockwise 3s linear infinite;
     stroke-dasharray: 400;
-    stroke-dashoffset: -400; /* Start fully hidden with negative offset */
-    transform-origin: center; /* Ensure correct rotation origin */
+    stroke-dashoffset: -400;
+    transform-origin: center; 
 }
 
 @keyframes draw-clockwise {
     0% {
-        stroke-dashoffset: -400; /* Start fully hidden at the top */
+        stroke-dashoffset: -400; 
     }
     100% {
-        stroke-dashoffset: 0; /* Fully drawn */
+        stroke-dashoffset: 0;
     }
 }
 

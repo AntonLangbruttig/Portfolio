@@ -2,11 +2,11 @@
 
 import React from "react";
 import Link from "next/link"; // Import Link from Next.js
-import { pageAnimation } from "@/components/utils/animation"; // Import animation
+import { PageAnimation } from "@/components/utils/animation"; // Import animation
 import { Icon } from '@iconify/react';
 
 const LuxAbout = () => {
-  const { fadeIn } = pageAnimation(); // Use the same animation logic
+  const { fadeIn } = PageAnimation(); // Use the same animation logic
 
   // List of technologies used
   const technologies = [
@@ -20,8 +20,9 @@ const LuxAbout = () => {
        
         {/* Main Header */}
         <h2 className={`md:block sm:hidden font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
-          Let's Face It Website
+            Let&apos;s Face It Website
         </h2>
+
         
         {/* Description */}
         <div className={`px-[75px] transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>

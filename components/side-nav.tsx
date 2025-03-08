@@ -28,19 +28,26 @@ export default function ViewWindow() {
       500,
       200
     );
-
+  
     const navTimeout = setTimeout(() => {
       setShowNav(true);
-      let opacity = 0;
-      const opacityInterval = setInterval(() => {
-        opacity += 0.1;
-        setNavOpacity((prev) => Math.min(prev + 0.1, 1));
-        if (opacity >= 1) {
-          clearInterval(opacityInterval);
+  
+      let startTime: number | null = null;
+      const duration = 1000; // 1 second
+      const animateOpacity = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const newOpacity = Math.min(progress / duration, 1);
+        setNavOpacity(newOpacity);
+  
+        if (progress < duration) {
+          requestAnimationFrame(animateOpacity);
         }
-      }, 100);
+      };
+  
+      requestAnimationFrame(animateOpacity);
     }, 5000);
-
+  
     return () => {
       clearTimeout(navTimeout);
     };

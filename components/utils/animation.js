@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-
-let hasAnimationRun = false; // Flag to track if the animation has run
+// Track if animation has already run
+let hasAnimationRun = false;
 
 export const animationSequence = async (
   setShowLine,
@@ -17,10 +17,9 @@ export const animationSequence = async (
   fullInfoText = "I'm passionate about building elegant, intuitive software that is visually stunning." + "\n\n\n           Anton Langbruttig",
   totalImageLines = 50
 ) => {
-  // Check if the animation has already run
   if (hasAnimationRun) {
     setShowLine(true);
-    setAnimationState('content');
+    setAnimationState("content");
     setShowBackground(true);
     setInfoText(fullInfoText);
     setImageLines(totalImageLines);
@@ -32,20 +31,20 @@ export const animationSequence = async (
 
   // Show and animate line
   setShowLine(true);
-  setAnimationState('line');
+  setAnimationState("line");
   await new Promise(resolve => setTimeout(resolve, lineAnimationDuration));
 
   // Show background and static
   setShowBackground(true);
-  setAnimationState('static');
+  setAnimationState("static");
   await new Promise(resolve => setTimeout(resolve, staticDuration));
 
   // Screen on and flicker
-  setAnimationState('screenOn');
+  setAnimationState("screenOn");
   await new Promise(resolve => setTimeout(resolve, flickerDuration));
 
   // Content
-  setAnimationState('content');
+  setAnimationState("content");
   await new Promise(resolve => setTimeout(resolve, contentDelay));
 
   let infoIndex = 0;
@@ -73,13 +72,13 @@ export const animationSequence = async (
   hasAnimationRun = true;
 };
 
-export const pageAnimation = () => {
+// ✅ Convert `PageAnimation` to a React Hook
+export const PageAnimation = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(!hasAnimationRun);
 
   useEffect(() => {
     if (!hasAnimationRun) {
-      // Delay fade-in animation only on first load
       const timeout = setTimeout(() => {
         setFadeIn(true);
         hasAnimationRun = true; // Mark animation as completed
@@ -87,9 +86,22 @@ export const pageAnimation = () => {
 
       return () => clearTimeout(timeout);
     } else {
-      setFadeIn(true); // Instantly show content if animation has already run
+      setFadeIn(true);
     }
   }, []);
 
   return { fadeIn, isFirstLoad };
 };
+
+// ✅ Usage inside a React Component
+const AnimatedComponent = () => {
+  const { fadeIn, isFirstLoad } = PageAnimation();
+
+  return (
+    <div className={`transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
+      {isFirstLoad ? "Loading animation..." : "Welcome back!"}
+    </div>
+  );
+};
+
+export default AnimatedComponent;

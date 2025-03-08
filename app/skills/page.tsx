@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { pageAnimation } from "@/components/utils/animation"; 
+import { PageAnimation } from "@/components/utils/animation"; 
 
 const skills = {
   "Used Often": ["JavaScript", "React", "CSS", "HTML", "Tailwind CSS", "Node.js"],
@@ -10,7 +10,7 @@ const skills = {
 };
 
 const Skills = () => {
-  const { fadeIn } = pageAnimation(); 
+  const { fadeIn } = PageAnimation(); 
   return (
     <section className="h-[calc(100vh-50px)] overflow-hidden">
       <div className="h-full overflow-y-scroll no-scrollbar py-6"> 
