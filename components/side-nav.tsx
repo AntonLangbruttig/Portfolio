@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { animationSequence } from "./utils/animation";
+import { animationSequence } from "../utils/animation";
 import { SIDENAV_ITEMS } from "@/constants"; 
 import "@/styles/globals.css"; 
-import MenuItem from "./utils/menu-item";
+import MenuItem from "../utils/menu-item";
 
 export default function ViewWindow() {
   const [infoText, setInfoText] = useState("");
@@ -111,11 +111,12 @@ export default function ViewWindow() {
             }}
           >
             <nav
-              className="flex flex-col mt-4 z-10"
+              className="flex flex-col mt-4 z-10 ml-0"
               style={{ marginTop: "-300px" }}
             >
               {SIDENAV_ITEMS.map((item, idx) => (
-                <MenuItem key={idx} item={item} />
+                <MenuItem key={idx} 
+                item={item} />
               ))}
             </nav>
           </div>

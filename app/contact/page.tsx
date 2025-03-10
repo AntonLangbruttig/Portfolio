@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { PageAnimation } from "@/components/utils/animation"; // Import animation
+import { PageAnimation } from "@/utils/animation"; // Import animation
 
 export default function ContactPage() {
   const { fadeIn } = PageAnimation();
@@ -30,7 +30,7 @@ export default function ContactPage() {
     }
 
     // ✅ Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus("Please enter a valid email.");
       setLoading(false);
@@ -67,8 +67,6 @@ export default function ContactPage() {
       <div className="min-h-screen overflow-y-none text-white p-8 pt-5">
         <div className="h-full sm:h-screen space-y-1">
           <span className="font-bold text-cyan-200 text-4xl block mb-2 md:block sm:hidden underline">Contact</span>
-
-          {/* Fixed-height container for inquiry text, form, and status */}
           <div className="space-y-2 pb-4 md:min-h-[43vh] flex flex-col justify-start">
             {!status.includes("success") && (
               <>
@@ -85,7 +83,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-[96%] p-2 bg-slate-300 text-black font-bold text-md rounded-none"
                       disabled={loading}
-                      autoComplete="given-name" // ✅ Added
+                      autoComplete="given-name" 
                     />
                   </div>
                   <div className="flex justify-center">
@@ -97,7 +95,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-[96%] p-2 bg-slate-300 text-black text-md font-bold rounded-none"
                       disabled={loading}
-                      autoComplete="email" // ✅ Added
+                      autoComplete="email" 
                     />
                   </div>
                   <div className="flex justify-center">
@@ -108,7 +106,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-[96%] p-2 bg-slate-300 text-black text-md font-bold rounded-none resize-none lg:h-[15vh] md:h-[20vh] sm:h-[30vh]"
                       disabled={loading}
-                      autoComplete="off" // ✅ Prevents autofill in message field
+                      autoComplete="off" 
                     ></textarea>
                   </div>
                   <div className="flex justify-center">
@@ -123,8 +121,6 @@ export default function ContactPage() {
                 </form>
               </>
             )}
-
-            {/* Display status message, centered vertically when success */}
             {status && (
               <div
                 className={`flex flex-col justify-center items-center flex-grow ${
@@ -133,7 +129,7 @@ export default function ContactPage() {
               >
                 <p
                   className={`text-center text-4xl ${
-                    status.includes("success") ? "text-green-300" : "text-red-500"
+                    status.includes("success") ? "text-green-300" : "lg:text-xl lg:-mt-7 text-xl md:-mb-6 text-red-500"
                   }`}
                 >
                   {status}
@@ -142,16 +138,21 @@ export default function ContactPage() {
             )}
           </div>
 
-          {/* LinkedIn section with fixed positioning on small screens */}
-          <div className="md:mt-0 fixed bottom-4 left-0 right-0 md:static flex items-baseline justify-left md:ml-1 sm:ml-8 space-x-2 p-4 md:p-0 bg-transparent">
+          <div className="fixed md:bottom-2 lg:pb-10 sm:bottom-4 left-0 right-0 md:static flex items-baseline justify-left md:ml-1 sm:ml-8 space-x-2 p-4 md:p-0 bg-transparent">
             <span className="text-lg lg:text-2xl">Connect with me on LinkedIn</span>
             <a
               href="https://www.linkedin.com/in/anton-langbruttig-75375688/"
               target="_blank"
-              rel="noopener noreferrer" // ✅ Added for security
+              rel="noopener noreferrer" 
               className="text-blue-400 hover:scale-[1.3]"
             >
-              <Image src="/images/linkedin.png" alt="LinkedIn" width={32} height={32} />
+              <Image 
+                src="/images/linkedin.png" 
+                alt="LinkedIn" 
+                width={32} 
+                height={32}  
+                style={{ width: "100%", height: "auto", maxWidth: "32px", maxHeight: "32px" }} 
+              />
             </a>
           </div>
         </div>

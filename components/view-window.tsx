@@ -2,7 +2,7 @@
 
 import Image from "next/legacy/image";
 import { useState, useEffect, ReactNode } from "react";
-import { animationSequence } from "@/components/utils/animation";
+import { animationSequence } from "@/utils/animation";
 import "../styles/globals.css";
 import Link from "next/link";
 
@@ -120,7 +120,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 </div>
               </div>
               {showNav && (
-                <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto ">
+                <div className="absolute bottom-0 right-0 hidden lg:block pointer-events-auto ">
                   <Link href="/">
                     <Image
                       src="/images/AL.png"
