@@ -4,9 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { animationSequence } from "./utils/animation";
+import { animationSequence } from "../utils/animation";
 import "../styles/globals.css";
-import MenuItem from "./utils/menu-item";
+import MenuItem from "../utils/menu-item";
 import { SIDENAV_ITEMS } from "@/constants";
 
 export default function ViewWindow() {

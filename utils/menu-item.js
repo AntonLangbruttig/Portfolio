@@ -63,7 +63,7 @@ const MenuItem = ({ item }) => {
                 subMenuOpen ? "rotate-180" : ""
               } flex transition-transform`}
             >
-              <Icon icon="lucide:chevron-down" width="24" height="24" />
+              <Icon icon="lucide:chevron-down" width="24" height="24"/>
             </div>
           </button>
 

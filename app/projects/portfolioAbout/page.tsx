@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link"; // Import Link from Next.js
-import { PageAnimation } from "@/components/utils/animation"; // Import animation
+import { PageAnimation } from "@/utils/animation"; // Import animation
 import { Icon } from '@iconify/react';
 
 const PortfolioAbout = () => {

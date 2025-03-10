@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { PageAnimation } from "@/components/utils/animation"; 
+import { PageAnimation } from "@/utils/animation"; 
 
 const skills = {
   "Used Often": ["JavaScript", "React", "CSS", "HTML", "Tailwind CSS", "Node.js"],

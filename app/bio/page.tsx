@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { PageAnimation } from "@/components/utils/animation"; // Import animation
+import { PageAnimation } from "@/utils/animation"; // Import animation
 import Image from "next/legacy/image";
 
-export default function HomePage() {
+export default function Bio() {
   const { fadeIn, isFirstLoad } = PageAnimation(); // Keeps the animation logic
   // const { hasAboutAnimationRun } = useAnimationContext(); // Checks global flag
   
@@ -15,7 +15,7 @@ export default function HomePage() {
         <h2 
           className={`font-bold text-cyan-200  text-4xl mb-8 underline px-14 transition-opacity duration-1000 sm:hidden md:block ${fadeIn ? "opacity-100" : "opacity-0"}`}
         >
-          About
+          Bio
         </h2>
 
         {/* Scrollable Content */}
