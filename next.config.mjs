@@ -8,7 +8,7 @@ const nextConfig = {
           {
             key: 'Conxtent-Security-Policy',
             value:
-              "script-src 'self'; report-uri /api/csp-violation-report;",
+              "script-src 'self'",
           },
         ],
       },

@@ -128,9 +128,9 @@ export default function ViewWindow() {
               </Link>
               <h2 className="md:hidden text-[#ab91dd] transition-all duration-300 py-6 text-3xl text-bold capitalize">
                 {pageTitle === "portfolioAbout"
-                  ? "Portfolio Website"
+                  ? "Portfolio"
                   : pageTitle === "luxAbout"
-                  ? "Let's Face It Website"
+                  ? "Let's Face It"
                   : pageTitle}
               </h2>
               <nav className="flex container py-10 px-0">
