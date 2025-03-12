@@ -9,8 +9,8 @@ export default function Bio() {
   // const { hasAboutAnimationRun } = useAnimationContext(); // Checks global flag
 
   return (
-    <section className="h-[calc(100vh-50px)] overflow-hidden">
-      <div className="h-full overflow-y-scroll no-scrollbar py-6 md:mt-0 sm:mt-7">
+    <section className="h-[calc(100vh-40px)] overflow-hidden md:mt-0 sm:-mt-7">
+      <div className="h-[95%] overflow-y-scroll no-scrollbar py-6 md:mt-0 sm:mt-7">
         {/* Main Header */}
         <h2
           className={`font-bold text-cyan-200  text-4xl lg:mb-5 md:mb-7 underline px-14 transition-opacity duration-1000 sm:hidden md:block ${
@@ -43,7 +43,7 @@ export default function Bio() {
             problem-solvers.
           </p>
 
-          <p className="md:mt-6 sm:mt-10">
+          <p className="md:mt-7 sm:mt-10">
             Outside of coding, I’m always exploring—whether reading, playing
             music, or getting lost in nature. If you’re passionate about
             building elegant, user-friendly software, let’s connect and create

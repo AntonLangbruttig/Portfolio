@@ -10,21 +10,13 @@ const LuxAbout = () => {
 
   // List of technologies used
   const technologies = [
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "Framer Motion",
-    "TypeScript",
-    "Node.js",
-    "FastAPI",
-    "PostgreSQL",
-    "AWS",
-    "Vercel",
+    "React", "Next.js", "Tailwind CSS", "Framer Motion", "TypeScript",
+     "AWS SES", "Yarn","JavaScript","HTML"
   ];
 
   return (
     <section className="h-[calc(100vh-50px)] overflow-hidden">
-      <div className="h-full overflow-y-scroll no-scrollbar py-6">
+      <div className="h-[96.5%] overflow-y-scroll no-scrollbar py-6 ">
         {/* Main Header */}
         <h2
           className={`md:block sm:hidden font-bold text-cyan-200 text-4xl lg:mb-5 md:mb-7 underline px-14 transition-opacity duration-1000 ${
@@ -75,7 +67,7 @@ const LuxAbout = () => {
               ))}
             </div>
           </div>
-          <div className="w-5 -mt-7">
+          <div className="w-5 lg:-mt-7 md:-mt-9 ">
           <Link href="/projects">
             <div className="cursor-pointer w-20 h-80 md:relative md:justify-end md:-bottom-2 md:items-end md:-ml-[85px] sm:fixed sm:-bottom-[230px] sm:-ml-[85px] text-[#0ccbed] duration-300 hover:opacity-50">
               <Icon icon="lucide:chevron-left" width="80" height="80" />

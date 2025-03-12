@@ -4,16 +4,18 @@ import React from "react";
 import { PageAnimation } from "@/utils/animation"; 
 
 const skills = {
-  "Used Often": ["React", "CSS", "HTML", "Tailwind CSS", "Node.js",],
-  "Secondary Skills": ["Python", "Django", "Java", "C", "JavaScript"],
-  "Developing": [ "Numpy", "Pandas", "Matplotlib","TensorFlow","Lua", ],
+  "Used Often": ["React", "CSS", "HTML", "Tailwind CSS", "Next.js",],
+  "Secondary Skills": ["Python", "Django", "Java", "C", "JavaScript", "Framer Motion", "AWS"],
+  "Developing": [ "Numpy", "Pandas", "Matplotlib","TensorFlow","Lua"],
+    
+
 };
 
 const Skills = () => {
   const { fadeIn } = PageAnimation(); 
   return (
     <section className="h-[calc(100vh-50px)] overflow-hidden">
-      <div className="h-full overflow-y-scroll no-scrollbar py-6"> 
+      <div className="h-[96.5%] overflow-y-scroll no-scrollbar py-6"> 
         {/* Main Header */}
         <h2 className={`md:block sm:hidden font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
           Skills
