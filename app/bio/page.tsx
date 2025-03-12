@@ -7,28 +7,50 @@ import Image from "next/legacy/image";
 export default function Bio() {
   const { fadeIn, isFirstLoad } = PageAnimation(); // Keeps the animation logic
   // const { hasAboutAnimationRun } = useAnimationContext(); // Checks global flag
-  
+
   return (
     <section className="h-[calc(100vh-50px)] overflow-hidden">
-      <div className="h-full overflow-y-scroll no-scrollbar py-6">
+      <div className="h-full overflow-y-scroll no-scrollbar py-6 md:mt-0 sm:mt-7">
         {/* Main Header */}
-        <h2 
-          className={`font-bold text-cyan-200  text-4xl mb-8 underline px-14 transition-opacity duration-1000 sm:hidden md:block ${fadeIn ? "opacity-100" : "opacity-0"}`}
+        <h2
+          className={`font-bold text-cyan-200  text-4xl lg:mb-5 md:mb-7 underline px-14 transition-opacity duration-1000 sm:hidden md:block ${
+            fadeIn ? "opacity-100" : "opacity-0"
+          }`}
         >
           Bio
         </h2>
 
         {/* Scrollable Content */}
-        <div 
-          className={`px-[75px] text-gray-300 text-xl transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+        <div
+          className={`px-[75px] text-gray-300 text-xl transition-opacity duration-1000 ${
+            fadeIn ? "opacity-100" : "opacity-0"
+          }`}
         >
-          I’m a tech enthusiast with a knack for unraveling how things work. My journey began with a degree in Computer Science from the University of Wisconsin-Milwaukee, where I delved into topics like artificial intelligence and large language models, graduating in 2022.
+          <p>
+            From concept to launch, I transform ideas into intuitive and
+            visually striking digital experiences. I’m Anton Langbruttig, a
+            software developer passionate about creative problem-solving and
+            user-centered design. To me, great design should feel
+            effortless—seamlessly blending aesthetics and functionality.
+          </p>
 
-          I launched my career at Infosys, mastering automated testing and deepening my knowledge in machine learning and data science. While industry-wide layoffs presented a hurdle, I’ve used the opportunity to refocus and grow.
+          <p className="md:mt-6 sm:mt-10">
+            I’ve worked with clients and companies to craft custom solutions
+            that are as elegant as they are effective. Currently, I’m developing
+            a custom makeup platform where users can book appointments and
+            explore products. Beyond development, I mentor young learners in
+            computer science, helping foster the next generation of
+            problem-solvers.
+          </p>
 
-          Now, I’m channeling my skills into building impactful solutions. I’ve developed this portfolio site, taken on freelance web development projects, and kept up with the latest tech trends. I’m driven by a passion for problem-solving and eager to take on new challenges that make a difference.
-
+          <p className="md:mt-6 sm:mt-10">
+            Outside of coding, I’m always exploring—whether reading, playing
+            music, or getting lost in nature. If you’re passionate about
+            building elegant, user-friendly software, let’s connect and create
+            something remarkable together.
           <span className="animate-blink">_</span>
+
+          </p>
         </div>
       </div>
     </section>
