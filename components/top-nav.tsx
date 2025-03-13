@@ -119,7 +119,7 @@ export default function ViewWindow() {
                 className="text-2xl font-bold text-[#00ffff] mr-3 ml-0 hover:opacity-60"
               >
                 <Image
-                  src="/images/AL.png"
+                  src="/images/al.png"
                   alt="AL Logo"
                   width={77} // Set fixed width
                   height={77} // Set fixed height
