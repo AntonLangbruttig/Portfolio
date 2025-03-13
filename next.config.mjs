@@ -1,19 +1,23 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+export default {
   async headers() {
     return [
       {
-        source: '/(.*)', // Apply to all routes
+        source: "/(.*)",
         headers: [
           {
-            key: 'Conxtent-Security-Policy',
-            value:
-              "script-src 'self'",
+            key: "Content-Security-Policy",
+            value: `
+              default-src 'self';
+              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://api.iconify.design;
+              style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+              font-src 'self' https://fonts.gstatic.com;
+              img-src 'self' data: https://api.iconify.design;
+              connect-src 'self' https://api.iconify.design;
+              frame-src 'none';
+            `.replace(/\s{2,}/g, " "),
           },
         ],
       },
     ];
   },
 };
-
-export default nextConfig;
