@@ -120,7 +120,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 </div>
               </div>
               {showNav && (
-                <div className="absolute bottom-0 right-0 hidden lg:block pointer-events-auto ">
+                <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto pr-1">
                   <Link href="/">
                     <Image
                       src="/images/al.png"
