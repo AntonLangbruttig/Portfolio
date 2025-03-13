@@ -7,7 +7,6 @@ import { SIDENAV_ITEMS } from "../constants";
 import { MenuItemWithSubMenuProps, SideNavItem } from "../types";
 import { Icon } from "@iconify/react";
 import { motion, useCycle } from "framer-motion";
-import { animationSequence } from "../utils/animation";
 
 const sidebarVariants = {
   open: {

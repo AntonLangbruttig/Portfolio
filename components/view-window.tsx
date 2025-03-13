@@ -123,7 +123,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 <div className="absolute bottom-0 right-0 hidden lg:block pointer-events-auto ">
                   <Link href="/">
                     <Image
-                      src="/images/AL.png"
+                      src="/images/al.png"
                       alt="AL"
                       width={100}
                       height={100}
