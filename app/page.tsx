@@ -66,7 +66,7 @@ export default function HomePage() {
         {animationState === "content" && (
           <div className="flex h-full animate-fade-in flex-wrap w-full">
             <div className="flex items-center p-3 sm:h-[50%] sm:p-3  sm:w-screen md:h-auto md:w-1/2 md:mb-12 md:-ml-8 lg:mb-12 lg:-ml-8">
-              <div className="relative w-full h-full sm:mt-4 md:h-[507px] sm:mr-1 md:mr-0 md:ml-4 md:mt-1">
+              <div className="relative w-full h-full sm:mt-4 md:h-[507px] sm:mr-1 md:mr-0 md:ml-2 md:mt-0">
                 <Image
                   src="/images/me.png"
                   alt="Anton Langbruttig"

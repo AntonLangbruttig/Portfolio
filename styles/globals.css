@@ -146,3 +146,13 @@ body {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+    .nav-container {
+        opacity: var(--nav-opacity, 0);
+        transition: opacity 0.5s ease-out;
+        pointer-events: none;
+      }
+      
+      .nav-container.visible {
+        pointer-events: auto;
+      }
+    
