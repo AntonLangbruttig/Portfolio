@@ -102,6 +102,7 @@ export default function ProjectsPage() {
                     alt={project.title}
                     width={350}
                     height={250}
+                    priority={true} 
                     className="hidden sm:hidden md:block rounded-none lg:object-center w-full h-full object-center min-h-[150px]"
                   />
                   <Image
@@ -109,6 +110,7 @@ export default function ProjectsPage() {
                     alt={project.title}
                     width={350}
                     height={100}
+                    priority={true} 
                     className="hidden sm:block md:hidden lg:hidden rounded-none w-full h-[470px] object-contain"
                   />
                 </Link>

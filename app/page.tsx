@@ -72,6 +72,7 @@ export default function HomePage() {
                   alt="Anton Langbruttig"
                   layout="fill"
                   objectFit="contain"
+                  priority={true} 
                   style={{
                     clipPath: `inset(0 0 ${100 - imageLines * 3}% 0)`,
                     transition: "clip-path 0.2s ease-out",
