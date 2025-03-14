@@ -138,7 +138,7 @@ export default function ContactPage() {
             )}
           </div>
 
-          <div className="fixed sm:bottom-0 left-0 right-0 md:static  flex items-baseline justify-left md:ml-1 sm:ml-8 space-x-1 p-4 md:p-[9px] lg:p-2 bg-transparent">
+          <div className="fixed sm:bottom-0 left-0 right-0 md:static  flex items-baseline justify-left md:ml-1 sm:ml-8 space-x-1 p-4 md:p-[9px] lg:p-0 bg-transparent">
             <span className="text-lg lg:text-2xl">Connect with me on LinkedIn</span>
             <a
               href="https://www.linkedin.com/in/anton-langbruttig-75375688/"
