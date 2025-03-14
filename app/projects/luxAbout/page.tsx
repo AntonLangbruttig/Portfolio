@@ -76,7 +76,7 @@ const LuxAbout = () => {
           </Link>
           </div>
         </div>
-        <div className="sm:block hidden h-5 w-full"></div>
+        <div className="sm:block hidden h-8 w-full"></div>
 
       </div>
     </section>
