@@ -49,8 +49,8 @@ export default function Bio() {
             building elegant, user-friendly software, let’s connect and create
             something remarkable together.
           <span className="animate-blink">_</span>
-
           </p>
+          <div className="sm:block hidden h-5 w-full"></div>
         </div>
       </div>
     </section>
