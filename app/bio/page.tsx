@@ -22,7 +22,7 @@ export default function Bio() {
 
         {/* Scrollable Content */}
         <div
-          className={`px-[75px] text-gray-300 text-xl transition-opacity duration-1000 ${
+          className={`md:px-[75px] sm:px-[18px] text-gray-300 text-xl transition-opacity duration-1000 ${
             fadeIn ? "opacity-100" : "opacity-0"
           }`}
         >

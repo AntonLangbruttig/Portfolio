@@ -56,7 +56,7 @@ const PortfolioAbout = () => {
           </Link>
           </div>
         </div>
-        <div className="sm:block hidden h-8 w-full"></div>
+        <div className="sm:block hidden h-11 w-full"></div>
       </div>
     </section>
   );
