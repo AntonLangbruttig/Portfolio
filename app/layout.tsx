@@ -12,7 +12,7 @@ import Navbar from '@/components/top-nav'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Home - Anton Langbruttig",
+  title: "Anton Langbruttig",
   description: "",
   icons: {
     icon: { url: "/images/favicon.ico", type: "image/x-icon" },
