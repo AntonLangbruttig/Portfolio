@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { PageAnimation } from "@/utils/animation"; // Import animation
-import Image from "next/legacy/image";
+import { PageAnimation } from "@/utils/animation"; 
+
+
 
 export default function Bio() {
-  const { fadeIn, isFirstLoad } = PageAnimation(); // Keeps the animation logic
-  // const { hasAboutAnimationRun } = useAnimationContext(); // Checks global flag
+  const { fadeIn, isFirstLoad } = PageAnimation(); 
 
   return (
     <section className="h-[calc(100vh-40px)] overflow-hidden md:mt-0 sm:-mt-7">
