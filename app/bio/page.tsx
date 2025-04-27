@@ -31,7 +31,7 @@ export default function Bio() {
             visually striking digital experiences. I’m Anton Langbruttig, a
             software developer passionate about creative problem-solving and
             user-centered design. To me, great design should feel
-            effortless—seamlessly blending aesthetics and functionality. 
+            effortless—seamlessly blending aesthetics and functionality.
           </p>
 
           <p className="md:mt-6 sm:mt-10">
