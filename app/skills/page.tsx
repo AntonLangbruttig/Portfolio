@@ -4,7 +4,7 @@ import React from "react";
 import { PageAnimation } from "@/utils/animation"; 
 
 const skills = {
-  "Used Often": ["React", "CSS", "HTML", "Tailwind", "Next.js"],
+  "Used Often": ["React", "CSS", "HTML","Tailwind", "Next.js"],
   "Secondary Skills": ["Python", "Django", "Java", "C", "JavaScript", "Framer Motion", "AWS"],
   "Developing": [ "Numpy", "Pandas", "Matplotlib","TensorFlow","Lua"],
     
