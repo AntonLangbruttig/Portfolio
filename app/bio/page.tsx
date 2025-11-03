@@ -27,11 +27,10 @@ export default function Bio() {
           }`}
         >
           <p>
-            From concept to launch, I transform ideas into intuitive and
-            visually striking digital experiences. I’m Anton Langbruttig, a
-            software developer passionate about creative problem-solving and
-            user-centered design. To me, great design should feel
-            effortless—seamlessly blending aesthetics and functionality.
+            From concept to launch, I transform ideas into intuitive, visually striking digital 
+            experiences that balance creativity with precision. I’m Anton Langbruttig a software 
+            developer driven by curiosity, design, and the pursuit of seamless user experiences. To me, 
+            great design should feel effortless where aesthetics and functionality become one.
           </p>
 
           <p className="md:mt-6 sm:mt-10">
