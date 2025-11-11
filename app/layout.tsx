@@ -8,14 +8,42 @@ import HeaderMobile from "@/components/header-mobile";
 import Navbar from '@/components/top-nav'
 
 
-
 const inter = Inter({ subsets: ["latin"] });
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://main.d2l6i0f7oy0lzy.amplifyapp.com";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Anton Langbruttig",
-  description: "",
+  description:
+    "Portfolio showcasing Anton Langbruttig's software engineering projects, skills, and contact information.",
   icons: {
     icon: { url: "/images/favicon.ico", type: "image/x-icon" },
+  },
+  openGraph: {
+    title: "Anton Langbruttig | Portfolio",
+    description:
+      "Portfolio showcasing Anton Langbruttig's software engineering projects, skills, and contact information.",
+    url: siteUrl,
+    siteName: "Anton Langbruttig",
+    images: [
+      {
+        url: "/images/portfoliolg.webp",
+        width: 1200,
+        height: 630,
+        alt: "Preview of Anton Langbruttig's portfolio website",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anton Langbruttig | Portfolio",
+    description:
+      "Portfolio showcasing Anton Langbruttig's software engineering projects, skills, and contact information.",
+    images: ["/images/portfoliolg.webp"],
   },
 };
 
@@ -46,7 +74,6 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
     </html>
   );
 }
-
 
 
 
