@@ -9,9 +9,9 @@ import Navbar from '@/components/top-nav'
 
 
 const inter = Inter({ subsets: ["latin"] });
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://main.d2l6i0f7oy0lzy.amplifyapp.com";
+const defaultSiteUrl = "https://antonlangbruttig.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || defaultSiteUrl;
+const previewImage = `${siteUrl.replace(/\/$/, "")}/images/portfoliolg.webp`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Anton Langbruttig",
     images: [
       {
-        url: "/images/portfoliolg.webp",
+        url: previewImage,
         width: 1200,
         height: 630,
         alt: "Preview of Anton Langbruttig's portfolio website",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "Anton Langbruttig | Portfolio",
     description:
       "Portfolio showcasing Anton Langbruttig's software engineering projects, skills, and contact information.",
-    images: ["/images/portfoliolg.webp"],
+    images: [previewImage],
   },
 };
 
@@ -74,6 +74,5 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
     </html>
   );
 }
-
 
 
