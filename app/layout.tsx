@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Anton Langbruttig",
   description:
-    "Portfolio showcasing Anton Langbruttig's software engineering projects, skills, and contact information.",
+    "Anton Langbruttig's personal website.",
   icons: {
     icon: { url: "/images/favicon.ico", type: "image/x-icon" },
   },
