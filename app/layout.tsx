@@ -12,6 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 const defaultSiteUrl = "https://antonlangbruttig.com";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || defaultSiteUrl;
 const previewImage = `${siteUrl.replace(/\/$/, "")}/images/portfoliolg.webp`;
+const facebookAppId = process.env.NEXT_PUBLIC_FB_APP_ID;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -45,6 +46,11 @@ export const metadata: Metadata = {
       "Portfolio showcasing Anton Langbruttig's software engineering projects, skills, and contact information.",
     images: [previewImage],
   },
+  ...(facebookAppId && {
+    other: {
+      "fb:app_id": facebookAppId,
+    },
+  }),
 };
 
 export default function RootLayout({children,}: {children: React.ReactNode;}) {
@@ -74,5 +80,4 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
     </html>
   );
 }
-
 
