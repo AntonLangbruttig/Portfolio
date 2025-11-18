@@ -8,6 +8,7 @@ import HeaderMobile from "@/components/header-mobile";
 import Navbar from '@/components/top-nav'
 
 
+
 const inter = Inter({ subsets: ["latin"] });
 const defaultSiteUrl = "https://antonlangbruttig.com";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || defaultSiteUrl;
