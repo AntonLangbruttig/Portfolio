@@ -87,16 +87,16 @@ export default function Bio() {
           </h2>
 
           <p className="lg:-mt-1 md:-mt-2 text-[22px] md:text-xl mt-6">
-            I'm Anton Langbruttig, a software developer who transforms ideas into intuitive, 
-            visually striking digital experiences. I build solutions where aesthetics and functionality 
-            work seamlessly together—from full-stack platforms with serverless backends to interactive 
+            I&apos;m Anton Langbruttig, a software developer who transforms ideas into intuitive,
+            visually striking digital experiences. I build solutions where aesthetics and functionality
+            work seamlessly together—from full-stack platforms with serverless backends to interactive
             dashboards and bespoke web applications.
           </p>
 
           <p className="mt-5 md:mt-4 text-[23px] md:text-xl">
-            Currently, I'm developing a luxury custom makeup platform 
-            where clients can explore services and request personalized 
-            consultations. The platform features a serverless architecture 
+            Currently, I&apos;m developing a luxury custom makeup platform
+            where clients can explore services and request personalized
+            consultations. The platform features a serverless architecture
             using AWS Lambda, API Gateway, and SES for seamless client communication.
           </p>
 
@@ -106,12 +106,12 @@ export default function Bio() {
             I believe great design should feel effortless, and I bring that philosophy to every project I take on.
           </p>
 
-          <p 
+          <p
             ref={lastParagraphRef}
             className="mt-5 md:mt-4 text-[23px] md:text-xl lg:max-w-[800px]"
           >
-            I'm always open to new opportunities and collaborations. 
-            If you're building something that demands both creativity and precision, let's connect. 
+            I&apos;m always open to new opportunities and collaborations.
+            If you&apos;re building something that demands both creativity and precision, let&apos;s connect.
             <span className="animate-blink">&nbsp;__</span>
           </p>
 
