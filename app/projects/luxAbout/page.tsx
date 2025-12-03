@@ -68,9 +68,10 @@ const LuxAbout = () => {
             </div>
           </div>
 
-          <div className="w-5 lg:-mt-7 md:-mt-9 ">
+          <div className="w-5 lg:-mt-7 md:-mt-9 block md:hidden">
           <Link href="/projects">
-            <div className="cursor-pointer w-20 h-80 md:relative md:justify-end md:-bottom-2 md:items-end md:-ml-[85px] sm:fixed sm:-bottom-[230px] sm:-ml-[85px] text-[#0ccbed] duration-300 hover:opacity-50">
+            <div className="cursor-pointer w-20 h-80 md:relative md:justify-end md:-bottom-2
+             md:items-end md:-ml-[85px] sm:fixed sm:-bottom-[230px] sm:-ml-[85px] text-[#0ccbed] duration-300 hover:opacity-50">
               <Icon icon="lucide:chevron-left" width="80" height="80" />
             </div>
           </Link>
