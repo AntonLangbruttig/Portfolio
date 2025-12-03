@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useState, useEffect, ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { animationSequence } from "@/utils/animation";
 import "../styles/globals.css";
 import Link from "next/link";
+import { Icon } from '@iconify/react';
 
 export default function HomePage({ children }: { children: ReactNode }) {
   const [infoText, setInfoText] = useState("");
@@ -14,6 +16,9 @@ export default function HomePage({ children }: { children: ReactNode }) {
   const [showLine, setShowLine] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
+  
+  const pathname = usePathname();
+  const isProjectPage = pathname?.startsWith("/projects/") && pathname !== "/projects";
 
   useEffect(() => {
     animationSequence(
@@ -123,6 +128,18 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto pr-1">
                   <Link href="/">
                   <Image src="/images/al.png" alt="AL" width={100} height={100} priority />
+                  </Link>
+                </div>
+              )}
+              {/* Back Chevron for project pages */}
+              {showNav && isProjectPage && (
+                <div className="absolute bottom-0 left-0 hidden md:block pointer-events-auto z-50">
+                  <Link href="/projects">
+                    <div className="cursor-pointer text-[#0aadc9] duration-300 hover:opacity-50 relative">
+                      <Icon icon="lucide:chevron-left" width="80" height="80" />
+                      {/* CRT scanline overlay */}
+                      <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-[length:100%_2px,3px_100%] before:bg-[linear-gradient(rgba(18,16,16,0)_70%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))]"></div>
+                    </div>
                   </Link>
                 </div>
               )}

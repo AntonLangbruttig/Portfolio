@@ -12,7 +12,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
       screens: {
-        sm: '0px',   
+        sm: '0px', 
         md: '980px',   
         lg: '1267px',  
         xl: '1354px',

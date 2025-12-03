@@ -1,14 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { PageAnimation } from "@/utils/animation"; // Import animation
+import { PageAnimation } from "@/utils/animation";
 
 export default function ContactPage() {
   const { fadeIn } = PageAnimation();
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [isOverlapping, setIsOverlapping] = useState(false);
+  const [isShortScreen, setIsShortScreen] = useState(false);
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkOverlap = () => {
+      if (!contentRef.current || !logoRef.current) return;
+
+      const textRect = contentRef.current.getBoundingClientRect();
+      const logoRect = logoRef.current.getBoundingClientRect();
+
+      const overlap = !(
+        textRect.right < logoRect.left ||
+        textRect.left > logoRect.right ||
+        textRect.bottom < logoRect.top ||
+        textRect.top > logoRect.bottom
+      );
+
+      setIsOverlapping(overlap);
+    };
+
+    const checkHeight = () => {
+      setIsShortScreen(window.innerHeight < 677);
+    };
+
+    const handleResizeAndScroll = () => {
+      checkOverlap();
+      checkHeight();
+    };
+
+    checkOverlap();
+    checkHeight();
+
+    window.addEventListener("resize", handleResizeAndScroll);
+    scrollContainerRef.current?.addEventListener("scroll", checkOverlap);
+
+    return () => {
+      window.removeEventListener("resize", handleResizeAndScroll);
+      scrollContainerRef.current?.removeEventListener("scroll", checkOverlap);
+    };
+  }, [fadeIn]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prevData) => ({
@@ -22,14 +66,12 @@ export default function ContactPage() {
     setLoading(true);
     setStatus("");
 
-    // Ensure all fields are filled
     if (!formData.name || !formData.email || !formData.message) {
       setStatus("Please fill out all fields.");
       setLoading(false);
       return;
     }
 
-    // ✅ Email format validation
     const emailRegex = /^[^\s@]+@[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setStatus("Please enter a valid email.");
@@ -63,14 +105,17 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={`overflow-y-scroll justify-center transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
+    <div 
+      ref={scrollContainerRef}
+      className={`h-screen overflow-y-auto justify-center transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+    >
       <div className="min-h-screen overflow-y-none text-white p-8 pt-5">
         <div className="h-full sm:h-screen space-y-1">
-          <span className="font-bold text-cyan-200 text-4xl block mb-2 md:block sm:hidden underline">Contact</span>
-          <div className="space-y-2 pb-4 md:min-h-[43vh] flex flex-col justify-start">
+          <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
+          <div ref={contentRef} className="space-y-2 pb-4 flex flex-col justify-start">
             {!status.includes("success") && (
               <>
-                <span className="text-red-50 md:text-xl block space-y-2 ml-4 sm:space-y-0 sm:text-xl sm:ml-3 sm:mb-2">
+                <span className="text-red-50 md:text-xl block space-y-2 ml-4 pt-4 md:pt-2 sm:space-y-0 sm:text-xl sm:ml-3 sm:mb-4">
                   For all inquiries please contact me below.
                 </span>
                 <form className="space-y-3" onSubmit={handleSubmit}>
@@ -104,7 +149,7 @@ export default function ContactPage() {
                       placeholder="Your Message"
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-[96%] p-2 bg-slate-300 text-black text-md font-bold rounded-none resize-none lg:h-[15vh] md:h-[20vh] sm:h-[30vh]"
+                      className="w-[96%] p-2 bg-slate-300 text-black text-md font-bold rounded-none resize-none  h-[33vh] md:h-[140px]"
                       disabled={loading}
                       autoComplete="off" 
                     ></textarea>
@@ -112,7 +157,8 @@ export default function ContactPage() {
                   <div className="flex justify-center">
                     <button
                       type="submit"
-                      className="w-[96%] bg-[#059ec9] text-white border-none rounded-none py-2 px-4 text-lg transition-transform transform hover:bg-cyan-700 disabled:cursor-not-allowed"
+                      className="w-[96%] bg-[#059ec9] text-white border-none rounded-none py-2 px-4 text-lg transition-transform 
+                      transform hover:bg-cyan-700 disabled:cursor-not-allowed"
                       disabled={loading}
                     >
                       {loading ? "Sending..." : "Send Message"}
@@ -138,8 +184,32 @@ export default function ContactPage() {
             )}
           </div>
 
-          <div className="fixed sm:bottom-0 left-0 right-0 md:static  flex items-baseline justify-left md:ml-1 sm:ml-8 space-x-1 p-4 md:p-[9px] lg:p-0 bg-transparent">
-            <span className="text-lg lg:text-2xl">Connect with me on LinkedIn</span>
+          {/* Desktop version - static in flow */}
+          <div className="hidden md:flex items-baseline pt-[50px] ml-4 space-x-2 bg-transparent">
+            <span className="text-2xl">Connect with me on LinkedIn</span>
+            <a
+              href="https://www.linkedin.com/in/anton-langbruttig/"
+              target="_blank"
+              rel="noopener noreferrer" 
+              className="text-blue-400 hover:scale-[1.3]"
+            >
+              <Image 
+                src="/images/linkedin.png" 
+                alt="LinkedIn" 
+                width={32} 
+                height={32}  
+                style={{ width: "100%", height: "auto", maxWidth: "32px", maxHeight: "32px" }} 
+              />
+            </a>
+          </div>
+
+          {/* Mobile version - fixed at bottom when tall, scrolls when short */}
+          <div 
+            className={`flex md:hidden items-baseline space-x-2  bg-transparent ${
+              isShortScreen ? "pt-7 pb-9" : "fixed bottom-4 left-4 right-4"
+            }`}
+          >
+            <span className="text-xl">Connect with me on LinkedIn</span>
             <a
               href="https://www.linkedin.com/in/anton-langbruttig/"
               target="_blank"
@@ -156,6 +226,20 @@ export default function ContactPage() {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* AL Logo Watermark - Same as Skills page */}
+      <div
+        ref={logoRef}
+        className={`fixed bottom-4 right-4 hidden min-[500px]:block md:hidden transition-opacity duration-300 ${
+          fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
+        } pointer-events-none`}
+      >
+        <img
+          src="/images/AL.png"
+          alt="AL Logo"
+          className="w-28 h-auto min-[870px]:w-36"
+        />
       </div>
     </div>
   );
