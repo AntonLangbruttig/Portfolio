@@ -71,11 +71,14 @@ export default function ViewWindow() {
         <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%] before:bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_30%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))]"></div>
 
         {showNav && (
-          <div className={`absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-0 nav-container
+          <div className={`absolute inset-0 flex items-start justify-center z-0 nav-container
             ${showNav ? "visible" : ""}`}
-          style={{ "--nav-opacity": navOpacity } as React.CSSProperties}
-        >
-            <nav className="flex flex-col -mt-[284px] z-10 ml-0 ">
+            style={{ 
+              "--nav-opacity": navOpacity,
+              paddingTop: "max(8.2rem, calc(50% - 300px))"
+            } as React.CSSProperties}
+          >
+            <nav className="flex flex-col z-10 ml-0">
               {SIDENAV_ITEMS.map((item, idx) => (
                 <MenuItem key={idx} item={item} />
               ))}
