@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link"; 
+import Link from "next/link";
 import "/styles/globals.css";
 import { PageAnimation } from "@/utils/animation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -12,6 +12,7 @@ const projects = [
     title: "Lets Face it Website",
     link: "/projects/luxAbout/",
     video: "/images/Lets_face_rec.mov",
+    mobileVideo: "/images/Lets_face_rec_long.mov",
     moreInfoLink: "/projects/luxAbout/",
     goto: "https://letsfaceitcosmetics.com/",
   },
@@ -22,7 +23,7 @@ const projects = [
     mobileImage: "/images/portfoliosm.webp",
     moreInfoLink: "/projects/portfolioAbout/",
     goto: "/",
-    github: "https://github.com/yourusername/portfolio", // ← optional
+    github: "https://github.com/yourusername/portfolio",
   },
 ];
 
@@ -64,48 +65,55 @@ export default function ProjectsPage() {
 
   return (
     <div
-      className={`h-screen flex flex-col md:w-[1000px] sm:justify-center sm:items-center md:[align-items:unset] 
+      className={`h-screen flex flex-col md:w-[1000px] sm:justify-start sm:items-start md:[align-items:unset] sm:pl-6
         sm:w-full md:h-max md:pl-[15px] md:pr-10 mr-64 transition-opacity duration-1000 ${
         fadeIn ? "opacity-100" : "opacity-0"
       }`}
     >
-      <h2
-        className={`sm:hidden md:block font-bold text-cyan-200 pt-5 text-4xl underline pl-6 
-          transition-opacity sm:overflow-y-scroll duration-1000 ${
-          fadeIn ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        Projects
-      </h2>
+      <h2 className={`font-bold text-cyan-200 sm:mt-4 md:-mt-[9.5px] md:pt-5 text-4xl underline  md:pl-6 
+          transition-opacity sm:overflow-y-scroll duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+      >Projects</h2>
       <div className="relative w-full group">
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="hide-scrollbar sm:-mt-[90px] md:mt-auto overflow-x-auto lg:py-8 md:py-10 flex sm:max-h-[calc(100vh-58px)] 
+          className="hide-scrollbar sm:mt-[7px] md:mt-auto overflow-x-auto md:py-5 flex sm:max-h-[calc(100vh-58px)] 
           items-center justify-center md:justify-start sm:justify-center sm:items-center sm:w-auto md:-ml-3"
         >
           <div
-            className="group flex md:pl-7 sm:flex-col sm:items-center sm:justify-start mt-10 sm:mt-0 sm:my-auto sm:w-[327px] md:md:[width:unset] 
-                        sm:space-x-0 md:flex-row md:space-x-6 md:space-y-0 px-6"
+            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-[60px] md:gap-0 mt-10 sm:mt-0 sm:my-auto 
+            sm:w-[95vw] md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6 md:space-y-0 px-6"
           >
             {projects.map((project, index) => (
               <div
                 key={index}
                 className="relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
                 rounded-none w-[600px] transition-transform duration-500 transform cursor-pointer
-                hover:outline-[#2bbfec] sm:mt-10 sm:w-[95%] sm:max-w-80 sm:h-[505px]
-                md:mt-0 md:w-[600px] md:max-w-none md:h-[350px] lg:h-80 md:mb-0 "
+                hover:outline-[#2bbfec] sm:mt-10 sm:w-[320px]  sm:max-w-80 sm:h-[620px]
+                md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[345px] md:mb-0"
               >
                 <Link href={project.link} className="block mb-4 md:h-full sm:h-[600px]">
                   {project.video ? (
-                    <video
-                      src={project.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="rounded-none w-full h-full object-contain min-h-[150px]"
-                    />
+                    <>
+                      {/* Desktop Video */}
+                      <video
+                        src={project.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="hidden md:block rounded-none w-full h-full object-contain min-h-[150px] -translate-y-4"
+                      />
+                      {/* Mobile Video */}
+                      <video
+                        src={project.mobileVideo || project.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="block md:hidden rounded-none w-full h-full -translate-y-2 object-contain min-h-[150px]"
+                      />
+                    </>
                   ) : (
                     <>
                       <Image
@@ -128,7 +136,7 @@ export default function ProjectsPage() {
                   )}
                 </Link>
                 <div
-                  className={`absolute bottom-0 left-0 right-0 bg-black bg-opacity-90 p-2 sm:pt-1 md:h-[60px] ${
+                  className={`absolute bottom-0 left-0 right-0 bg-black bg-opacity-90 p-2 sm:pt-1 md:h-[50px] ${
                     project.title === "Portfolio Website"
                       ? "sm:h-[105px]"
                       : project.title === "Lets Face it Website"
@@ -136,37 +144,38 @@ export default function ProjectsPage() {
                       : "sm:h-[72px]"
                   }`}
                 >
-                  <h3 className="md:text-3xl sm:text-xl font-bold text-white md:mt-3">
+                  <h3 className="md:text-3xl sm:text-xl font-bold text-white md:mt-1">
                     {project.title}
                   </h3>
-                  <div className="md:absolute bottom-3 right-2 flex md:space-x-2 sm:ml-[1px] sm:justify-center md:flex-row sm:flex-col">
-
+                  <div className="md:absolute bottom-3 right-2 flex md:space-x-2 sm:ml-[1px] sm:justify-center
+                   md:flex-row sm:flex-row sm:flex-wrap sm:gap-1 md:flex-nowrap">
                     {/* Go to Website Button */}
-                    {(project.title === "Portfolio Website" || project.title === "Lets Face it Website") && (
+                    {(project.title === "Portfolio Website" ||
+                      project.title === "Lets Face it Website") && (
                       <a
                         href={project.goto}
-                        target="_blank"                  
-                        rel="noopener noreferrer"        
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="bg-[#059ec9] text-white text-sm font-medium py-[6px] md:px-3 
-                        sm:mr-1 sm:px-[20px] sm:py-1 md:mt-0 sm:mt-1 rounded-none hover:bg-cyan-700 
-                        transition sm:text-center md:w-auto sm:w-[250px]"
+                        sm:mr-0 sm:px-[10px] sm:py-1 md:mt-0 sm:mt-1 rounded-none hover:bg-cyan-700 
+                        transition sm:text-center md:w-auto sm:w-[calc(50%-2px)]"
                       >
                         Go to Website
                       </a>
                     )}
 
-                    {/* GITHUB BUTTON - SAME EXACT STYLE */}
+                    {/* GitHub Button */}
                     {project.github && (
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-[#059ec9] text-white text-sm font-medium py-[6px] md:px-3 
-                        sm:mr-1 sm:px-[20px] sm:py-1 md:mt-0 sm:mt-1 rounded-none hover:bg-cyan-700 
-                        transition sm:text-center md:w-auto sm:w-[250px] flex items-center justify-center gap-1"
+                        sm:mr-0 sm:px-[10px] sm:py-1 md:mt-0 sm:mt-1 rounded-none hover:bg-cyan-700 
+                        transition sm:text-center md:w-auto sm:w-[calc(50%-2px)] flex items-center justify-center gap-1"
                       >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
                         GitHub
                       </a>
@@ -176,12 +185,11 @@ export default function ProjectsPage() {
                     <Link
                       href={project.moreInfoLink}
                       className="bg-[#059ec9] text-white text-sm font-medium py-[6px] 
-                      md:px-3 sm:mr-1 sm:px-[20px] sm:mt-1 md:mt-0 sm:py-1 rounded-none hover:bg-cyan-700 
-                      transition sm:text-center md:w-auto sm:w-[250px]"
+                      md:px-3 sm:mr-0 sm:px-[10px] sm:mt-1 md:mt-0 sm:py-1 rounded-none hover:bg-cyan-700 
+                      transition sm:text-center md:w-auto sm:w-[calc(50%-2px)]"
                     >
                       More Info
                     </Link>
-
                   </div>
                 </div>
               </div>
@@ -192,9 +200,9 @@ export default function ProjectsPage() {
         {/* Left Arrow */}
         <button
           onClick={scrollToLeft}
-          className={`hidden md:block lg:block absolute left-0 top-1/2 transform -translate-y-1/2  text-white text-opacity-0 p-3 -ml-7
+          className={`hidden md:block lg:block absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-opacity-0 p-3 -ml-7
                      group-hover:text-opacity-100 transition-all duration-300 z-10 text-2xl
-                     ${showLeftArrow ? 'group-hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
+                     ${showLeftArrow ? "group-hover:opacity-100" : "opacity-0 pointer-events-none"}`}
         >
           <ChevronLeft className="w-14 h-14" />
         </button>
@@ -202,9 +210,9 @@ export default function ProjectsPage() {
         {/* Right Arrow */}
         <button
           onClick={scrollToRight}
-          className={`hidden md:block lg:block absolute right-0 top-1/2 transform -translate-y-1/2  text-white text-opacity-0 p-3 -mr-4
+          className={`hidden md:block lg:block absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-opacity-0 p-3 -mr-4
                      group-hover:text-opacity-100 transition-all duration-300 z-10 text-2xl
-                     ${showRightArrow ? 'group-hover:opacity-100' : 'opacity-0 pointer-events-none'}`}
+                     ${showRightArrow ? "group-hover:opacity-100" : "opacity-0 pointer-events-none"}`}
         >
           <ChevronRight className="w-14 h-14" />
         </button>

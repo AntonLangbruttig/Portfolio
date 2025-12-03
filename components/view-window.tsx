@@ -125,7 +125,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                 </div>
               </div>
               {showNav && (
-                <div className="absolute bottom-2 right-0 hidden lg:block pointer-events-auto pr-1">
+                <div className="absolute bottom-2 right-0 hidden md:block pointer-events-auto pr-1">
                   <Link href="/">
                   <Image src="/images/al.png" alt="AL" width={100} height={100} priority />
                   </Link>

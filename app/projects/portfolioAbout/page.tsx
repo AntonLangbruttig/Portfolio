@@ -77,7 +77,7 @@ const PortfolioAbout = () => {
       <div 
         ref={scrollContainerRef}
         style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
-        className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-11 lg:ml-0 scrollbar-hide"
+        className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper that's always taller than container to enable scroll */}
         <div className="md:h-[calc(100%+120px)]">
