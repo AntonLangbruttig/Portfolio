@@ -133,8 +133,21 @@ const PortfolioAbout = () => {
                       ))}
                   </div>
               </div>
+
+              {/* Chevron - now inside the content like Lux */}
+              <div className="w-5 lg:-mt-7 md:-mt-9 block md:hidden">
+                <Link href="/projects">
+                  <div className="cursor-pointer w-20 h-80 md:relative md:justify-end md:-bottom-2
+                   md:items-end md:-ml-[85px] sm:fixed sm:-bottom-[230px] sm:-ml-[85px] text-[#0ccbed] duration-300 hover:opacity-50"
+                   style={{ marginLeft: isSmallScreen ? '-63px' : undefined }}>
+                    <Icon icon="lucide:chevron-left" width="80" height="80" />
+                  </div>
+                </Link>
+              </div>
           </div>
         </div>
+        {/* Spacer for mobile scroll like Lux */}
+        <div className="sm:block hidden h-8 w-full"></div>
       </div>
 
       {/* Logo watermark - hidden below 630px and on md+ */}
@@ -149,15 +162,6 @@ const PortfolioAbout = () => {
           alt="AL Logo" 
           className="w-28 h-auto min-[870px]:w-36"
         />
-      </div>
-
-      {/* Fixed Chevron */}
-      <div className={`block md:hidden -ml-[18px] z-50 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}>
-        <Link href="/projects">
-          <div className="cursor-pointer text-[#0ccbed] duration-300 hover:opacity-50 -mt-[109px]">
-            <Icon icon="lucide:chevron-left" width="80" height="80" />
-          </div>
-        </Link>
       </div>
     </section>
   );
