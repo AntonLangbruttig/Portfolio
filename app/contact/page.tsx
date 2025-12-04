@@ -110,7 +110,7 @@ export default function ContactPage() {
       className={`h-screen overflow-y-auto justify-center transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
     >
       <div className="min-h-screen overflow-y-none text-white p-8 pt-5">
-        <div className="h-full sm:h-screen space-y-1">
+        <div className="h-full space-y-1">
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
           <div ref={contentRef} className="space-y-2 pb-4 flex flex-col justify-start">
             {!status.includes("success") && (
