@@ -114,9 +114,9 @@ export default function ContactPage() {
       <div
         className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[100vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-16" : "pb-8"} md:pb-8`}
       >
-        <div className="space-y-1">
+        <div className={isShortScreen ? "space-y-0" : "space-y-1"}>
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
-          <div ref={contentRef} className="space-y-2 pb-4 flex flex-col justify-start">
+          <div ref={contentRef} className={`space-y-2 flex flex-col justify-start ${isShortScreen ? "pb-0" : "pb-4"}`}>
             {!status.includes("success") && (
               <>
                 <span className="text-red-50 md:text-xl block space-y-2 ml-4 pt-4 md:pt-2 sm:space-y-0 sm:text-xl sm:ml-3 sm:mb-4">
@@ -189,7 +189,7 @@ export default function ContactPage() {
           </div>
 
           {/* Desktop version - static in flow */}
-          <div className="hidden md:flex items-baseline pt-4 ml-4 space-x-2 bg-transparent ">
+          <div className="hidden md:flex items-baseline pt-2 ml-4 space-x-2 bg-transparent ">
             <span className="text-2xl">Connect with me on LinkedIn</span>
             <a
               href="https://www.linkedin.com/in/anton-langbruttig/"
@@ -206,36 +206,35 @@ export default function ContactPage() {
               />
             </a>
           </div>
+        {/* Mobile version - hides "LinkedIn" text below 382px when scrolling, below 346px when fixed */}
+        <div
+          className={`md:hidden flex items-baseline space-x-2 bg-transparent ${
+            isShortScreen ? "-mt-36" : "fixed bottom-0  pb-4"
+          }`}
+        >
+          <span className="text-xl ">
+            Connect with me on
+            {/* Hide "LinkedIn" at different breakpoints depending on scroll mode */}
+            <span className={isShortScreen ? "hidden min-[383px]:inline" : "hidden min-[347px]:inline"}>
+              {" "}LinkedIn
+            </span>
+          </span>
 
-{/* Mobile version - hides "LinkedIn" text below 382px when scrolling, below 346px when fixed */}
-<div
-  className={`md:hidden flex items-baseline space-x-2 bg-transparent ${
-    isShortScreen ? "pt-0" : "fixed bottom-0  pb-4"
-  }`}
->
-  <span className="text-xl ">
-    Connect with me on
-    {/* Hide "LinkedIn" at different breakpoints depending on scroll mode */}
-    <span className={isShortScreen ? "hidden min-[383px]:inline" : "hidden min-[347px]:inline"}>
-      {" "}LinkedIn
-    </span>
-  </span>
-
-  <a
-    href="https://www.linkedin.com/in/anton-langbruttig/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-blue-400 hover:scale-[1.3] transition-transform flex-shrink-0"
-  >
-    <Image 
-      src="/images/linkedin.png" 
-      alt="LinkedIn" 
-      width={32} 
-      height={32}
-      className="w-8 h-8"
-    />
-  </a>
-</div>
+          <a
+            href="https://www.linkedin.com/in/anton-langbruttig/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 hover:scale-[1.3] transition-transform flex-shrink-0"
+          >
+            <Image 
+              src="/images/linkedin.png" 
+              alt="LinkedIn" 
+              width={32} 
+              height={32}
+              className="w-8 h-8"
+            />
+          </a>
+        </div>
         </div>
       </div>
 
