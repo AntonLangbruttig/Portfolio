@@ -112,7 +112,7 @@ export default function ContactPage() {
       className={`h-[89.3vh] md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[110vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-40" : "pb-8"} md:pb-8`}
+        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[110vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-35" : "pb-8"} md:pb-8`}
       >
         <div className={isShortScreen ? "space-y-0" : "space-y-1"}>
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
