@@ -93,7 +93,7 @@ const PortfolioAbout = () => {
         className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
-        <div className="min-h-[calc(100%+180px)] md:min-h-[calc(100%+120px)]">
+        <div className="min-h-[calc(100%+20px)] md:min-h-[calc(100%+120px)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ 
