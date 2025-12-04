@@ -216,7 +216,7 @@ export default function ContactPage() {
   <span className="text-xl ">
     Connect with me on
     {/* Hide "LinkedIn" at different breakpoints depending on scroll mode */}
-    <span className={isShortScreen ? "inline min-[383px]:inline hidden" : "inline min-[347px]:inline hidden"}>
+    <span className={isShortScreen ? "hidden min-[383px]:inline" : "hidden min-[347px]:inline"}>
       {" "}LinkedIn
     </span>
   </span>
