@@ -112,11 +112,11 @@ export default function ContactPage() {
       className={`h-[89.3vh] md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[110vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-[10px]" : "pb-8"} md:pb-8`}
+        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[112vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-[10px]" : "pb-8"} md:pb-8`}
       >
         <div className={isShortScreen ? "space-y-0" : "space-y-1"}>
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
-          <div ref={contentRef} className={`space-y-2 flex flex-col justify-start ${isShortScreen ? "pb-0" : "pb-4"}`}>
+          <div ref={contentRef} className={`space-y-2 flex flex-col justify-start ${isShortScreen ? "pb-6" : "pb-4"}`}>
             {!status.includes("success") && (
               <>
                 <span className="text-red-50 md:text-xl block space-y-2 ml-4 pt-4 md:pt-2 sm:space-y-0 sm:text-xl sm:ml-3 sm:mb-4">
