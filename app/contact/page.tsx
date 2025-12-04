@@ -208,29 +208,36 @@ export default function ContactPage() {
             </a>
           </div>
 
-          {/* Mobile version - fixed at bottom when tall, scrolls when short */}
-          <div 
-            className={`flex md:hidden items-baseline space-x-2 bg-transparent ${
-              isShortScreen ? "pt-7 pb-9" : "fixed bottom-4 left-4 right-4"
-            }`}
-            style={{ paddingBottom: isVeryShortScreen ? '80px' : undefined }}
-          >
-            <span className="text-xl">Connect with me on LinkedIn</span>
-            <a
-              href="https://www.linkedin.com/in/anton-langbruttig/"
-              target="_blank"
-              rel="noopener noreferrer" 
-              className="text-blue-400 hover:scale-[1.3]"
-            >
-              <Image 
-                src="/images/linkedin.png" 
-                alt="LinkedIn" 
-                width={32} 
-                height={32}  
-                style={{ width: "100%", height: "auto", maxWidth: "32px", maxHeight: "32px" }} 
-              />
-            </a>
-          </div>
+{/* Mobile version - hides "LinkedIn" text below 346px */}
+<div 
+  className={`md:hidden flex items-baseline space-x-2 bg-transparent ${
+    isShortScreen ? "pt-7 pb-9" : "fixed bottom-4 left-4 right-4"
+  }`}
+  style={{ paddingBottom: isVeryShortScreen ? '80px' : undefined }}
+>
+  <span className="text-xl">
+    Connect with me on
+    {/* This span is visible by default, hidden only on very narrow screens */}
+    <span className="inline min-[347px]:inline hidden">
+      {" "}LinkedIn
+    </span>
+  </span>
+
+  <a
+    href="https://www.linkedin.com/in/anton-langbruttig/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-400 hover:scale-[1.3] transition-transform flex-shrink-0"
+  >
+    <Image 
+      src="/images/linkedin.png" 
+      alt="LinkedIn" 
+      width={32} 
+      height={32}
+      className="w-8 h-8"
+    />
+  </a>
+</div>
         </div>
       </div>
 
