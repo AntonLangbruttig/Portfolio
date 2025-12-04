@@ -162,8 +162,8 @@ const PortfolioAbout = () => {
         </div>
         
         {/* INCREASED spacer for mobile scroll - this ensures content can scroll fully */}
-        <div className="block md:hidden h-3 w-full"></div>
-        <div className="hidden sm:block md:hidden h-16 w-full"></div>
+      
+        <div className="hidden sm:block md:hidden h-8 w-full"></div>
       </div>
 
       {/* Logo watermark - hidden below 630px and on md+ */}
