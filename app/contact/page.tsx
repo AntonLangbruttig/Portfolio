@@ -11,6 +11,7 @@ export default function ContactPage() {
   const [status, setStatus] = useState("");
   const [isOverlapping, setIsOverlapping] = useState(false);
   const [isShortScreen, setIsShortScreen] = useState(false);
+  const [isVeryShortScreen, setIsVeryShortScreen] = useState(false);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -35,6 +36,7 @@ export default function ContactPage() {
 
     const checkHeight = () => {
       setIsShortScreen(window.innerHeight < 677);
+      setIsVeryShortScreen(window.innerHeight < 700);
     };
 
     const handleResizeAndScroll = () => {
@@ -109,7 +111,10 @@ export default function ContactPage() {
       ref={scrollContainerRef}
       className={`h-screen overflow-y-auto justify-center transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
     >
-      <div className="min-h-screen overflow-y-none text-white p-8 pt-5">
+      <div 
+        className="min-h-screen overflow-y-none text-white p-8 pt-5"
+        style={{ paddingBottom: isVeryShortScreen ? '150px' : undefined }}
+      >
         <div className="h-full space-y-1">
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
           <div ref={contentRef} className="space-y-2 pb-4 flex flex-col justify-start">
@@ -205,9 +210,10 @@ export default function ContactPage() {
 
           {/* Mobile version - fixed at bottom when tall, scrolls when short */}
           <div 
-            className={`flex md:hidden items-baseline space-x-2  bg-transparent ${
+            className={`flex md:hidden items-baseline space-x-2 bg-transparent ${
               isShortScreen ? "pt-7 pb-9" : "fixed bottom-4 left-4 right-4"
             }`}
+            style={{ paddingBottom: isVeryShortScreen ? '80px' : undefined }}
           >
             <span className="text-xl">Connect with me on LinkedIn</span>
             <a
