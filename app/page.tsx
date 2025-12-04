@@ -8,11 +8,17 @@ import { animationSequence } from "@/utils/animation";
 
 export default function HomePage() {
   const [infoText, setInfoText] = useState(""); // For md+ screens
-  const [infoText2, setInfoText2] = useState(""); // For sm screens
-  const [infoText3, setInfoText3] = useState(""); // For xs screens (385px and below)
+  const [infoText2, setInfoText2] = useState(""); // For sm screens (default small)
+  const [infoText3, setInfoText3] = useState(""); // For xs screens (377px-453px)
   const [infoText4, setInfoText4] = useState(""); // For mid screens (630px-768px)
+  const [infoText5, setInfoText5] = useState(""); // For small-mid screens (454px-629px)
+  const [infoText6, setInfoText6] = useState(""); // For xs2 screens (337px-376px)
+  const [infoText7, setInfoText7] = useState(""); // For xs3 screens (336px and below)
   const [isXsScreen, setIsXsScreen] = useState(false);
+  const [isXs2Screen, setIsXs2Screen] = useState(false);
+  const [isXs3Screen, setIsXs3Screen] = useState(false);
   const [isMidScreen, setIsMidScreen] = useState(false);
+  const [isSmallMidScreen, setIsSmallMidScreen] = useState(false);
   const [imageLines, setImageLines] = useState(0);
   const [animationState, setAnimationState] = useState("initial");
   const [showBackground, setShowBackground] = useState(false);
@@ -29,7 +35,10 @@ export default function HomePage() {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth;
-      setIsXsScreen(width <= 453);
+      setIsXs3Screen(width <= 336);
+      setIsXs2Screen(width >= 337 && width <= 376);
+      setIsXsScreen(width >= 377 && width <= 453);
+      setIsSmallMidScreen(width >= 454 && width <= 629);
       setIsMidScreen(width >= 630 && width < 768);
     };
 
@@ -76,14 +85,27 @@ export default function HomePage() {
     const textForSm =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
       "\n\n           Anton Langbruttig";
-    // Text for xs screens (385px and below) - fewer spaces
-    const textForXs =
-      "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\nAnton Langbruttig";
     // Text for mid screens (630px-768px) - right aligned name
     const textForMid =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
       "\n\n           Anton Langbruttig";
+    // Text for small-mid screens (454px-629px)
+    const textForSmallMid =
+      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "\n\n       Anton Langbruttig";
+    // Text for xs screens (377px-453px)
+    const textForXs =
+      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "\n\n     Anton Langbruttig";
+    // Text for xs2 screens (337px-376px)
+    const textForXs2 =
+      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "\n\n  Anton Langbruttig";
+    // Text for xs3 screens (336px and below)
+    const textForXs3 =
+      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "\n\nAnton Langbruttig";
+
 
     // Run animation for md+ text
     animationSequence(
@@ -148,7 +170,65 @@ export default function HomePage() {
       textForXs,
       50
     );
+
+    // Run animation for small-mid text (454px-629px)
+    animationSequence(
+      setShowLine,
+      setAnimationState,
+      setShowBackground,
+      setInfoText5,
+      setImageLines,
+      500,
+      2000,
+      1000,
+      500,
+      200,
+      textForSmallMid,
+      50
+    );
+
+    // Run animation for xs2 text (337px-376px)
+    animationSequence(
+      setShowLine,
+      setAnimationState,
+      setShowBackground,
+      setInfoText6,
+      setImageLines,
+      500,
+      2000,
+      1000,
+      500,
+      200,
+      textForXs2,
+      50
+    );
+
+    // Run animation for xs3 text (336px and below)
+    animationSequence(
+      setShowLine,
+      setAnimationState,
+      setShowBackground,
+      setInfoText7,
+      setImageLines,
+      500,
+      2000,
+      1000,
+      500,
+      200,
+      textForXs3,
+      50
+    );
   }, []);
+
+  // Helper function to get the correct text for current screen size
+  const getResponsiveText = () => {
+    if (isMidScreen) return infoText4;
+    if (isSmallMidScreen) return infoText5;
+    if (isXsScreen) return infoText3;
+    if (isXs2Screen) return infoText6;
+    if (isXs3Screen) return infoText7;
+    return infoText2;
+  };
 
   return (
     <div>
@@ -218,7 +298,7 @@ export default function HomePage() {
                     width: "100%",
                     overflow: "hidden",
                   }}
-                >{isMidScreen ? infoText4 : (isXsScreen ? infoText3 : infoText2)}<span className="animate-blink ml-1">_</span></pre>
+                >{getResponsiveText()}<span className="animate-blink ml-1">_</span></pre>
               </div>
             </div>
           </div>
