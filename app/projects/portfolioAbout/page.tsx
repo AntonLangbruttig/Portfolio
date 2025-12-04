@@ -14,20 +14,32 @@ const PortfolioAbout = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
 
-  // Dynamic height calculation to stop at border
+  // Dynamic height calculation - FIXED for real mobile browsers
   useEffect(() => {
     const calculateHeight = () => {
-      const viewportHeight = window.innerHeight;
+      // Use visualViewport API if available (more accurate on mobile)
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
       const headerHeight = 42;
+      // Increased bottom offset to account for mobile browser chrome
       const borderBottomOffset = 14;
       
-      setContainerHeight(viewportHeight - headerHeight - borderBottomOffset);
+      // On mobile, be more conservative with height to ensure scrollability
+      const isMobile = window.innerWidth <= 768;
+      const mobileExtraBuffer = isMobile ? 60 : 0; // Extra buffer for mobile browser UI
+      
+      setContainerHeight(viewportHeight - headerHeight - borderBottomOffset - mobileExtraBuffer);
     };
 
     calculateHeight();
-    window.addEventListener('resize', calculateHeight);
     
-    return () => window.removeEventListener('resize', calculateHeight);
+    // Listen to both resize and visualViewport resize (for mobile keyboard, etc.)
+    window.addEventListener('resize', calculateHeight);
+    window.visualViewport?.addEventListener('resize', calculateHeight);
+    
+    return () => {
+      window.removeEventListener('resize', calculateHeight);
+      window.visualViewport?.removeEventListener('resize', calculateHeight);
+    };
   }, []);
 
   useEffect(() => {
@@ -72,15 +84,16 @@ const PortfolioAbout = () => {
   ];
 
   return (
-    <section className="h-[calc(100vh-43px)] overflow-hidden md:mt-0 flex flex-col relative">
+    // Changed from 100vh to 100dvh for better mobile support
+    <section className="h-[100dvh] max-h-[calc(100vh-43px)] overflow-hidden md:mt-0 flex flex-col relative">
       {/* Scrollable Content */}
       <div 
         ref={scrollContainerRef}
         style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
         className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
-        {/* Inner wrapper that's always taller than container to enable scroll */}
-        <div className="md:h-[calc(100%+120px)]">
+        {/* Inner wrapper - increased height multiplier for more scroll room */}
+        <div className="min-h-[calc(100%+180px)] md:min-h-[calc(100%+120px)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ 
@@ -146,8 +159,10 @@ const PortfolioAbout = () => {
               </div>
           </div>
         </div>
-        {/* Spacer for mobile scroll like Lux */}
-        <div className="sm:block hidden h-8 w-full"></div>
+        
+        {/* INCREASED spacer for mobile scroll - this ensures content can scroll fully */}
+        <div className="block md:hidden h-32 w-full"></div>
+        <div className="hidden sm:block md:hidden h-16 w-full"></div>
       </div>
 
       {/* Logo watermark - hidden below 630px and on md+ */}
