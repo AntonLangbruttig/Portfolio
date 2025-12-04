@@ -152,7 +152,7 @@ export default function ProjectsPage() {
                         width={350}
                         height={100}
                         priority={true}
-                        className="hidden sm:block md:hidden lg:hidden rounded-none w-full h-[470px] object-contain"
+                        className="hidden sm:block md:hidden lg:hidden rounded-none w-full h-[400px] object-cover object-top"
                       />
                     </>
                   )}
