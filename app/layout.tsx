@@ -5,7 +5,8 @@ import Background from "@/components/background";
 import SideNav from "@/components/side-nav";
 import ViewWindow from "@/components/view-window";
 import HeaderMobile from "@/components/header-mobile";
-import Navbar from '@/components/top-nav'
+import Navbar from '@/components/top-nav';
+import { MobileMenuProvider } from "@/contexts/MobileMenuContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const defaultSiteUrl = "https://antonlangbruttig.com";
@@ -57,24 +58,26 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Background>
-          <Navbar/>
-          <div className="flex justify-center items-center min-h-screen">
-            <main className="flex flex-col items-center  w-full max-w-[1200px] transition-all duration-300 ease-in-out xl:mr-44 lg:mr-34 mr-[88px]">
-              <div className="flex w-full justify-center">
-                <div className="lg:w-72 md:w-20 sm:w-20 flex-shrink-0">
-                  <SideNav />
+        <MobileMenuProvider>
+          <Background>
+            <Navbar/>
+            <div className="flex justify-center items-center min-h-screen">
+              <main className="flex flex-col items-center  w-full max-w-[1200px] transition-all duration-300 ease-in-out xl:mr-44 lg:mr-34 mr-[88px]">
+                <div className="flex w-full justify-center">
+                  <div className="lg:w-72 md:w-20 sm:w-20 flex-shrink-0">
+                    <SideNav />
+                  </div>
+                    <div className="lg:w-[975px] lg:flex-shrink-0 md:w-[975px] md:flex-shrink-0 sm:w-full">
+                    <ViewWindow>
+                      <main>{children}</main>
+                    </ViewWindow>
+                  </div>
                 </div>
-                  <div className="lg:w-[975px] lg:flex-shrink-0 md:w-[975px] md:flex-shrink-0 sm:w-full">
-                  <ViewWindow>
-                    <main>{children}</main>
-                  </ViewWindow>
-                </div>
-              </div>
-              <HeaderMobile/>
-            </main>
-          </div>
-        </Background>
+                <HeaderMobile/>
+              </main>
+            </div>
+          </Background>
+        </MobileMenuProvider>
       </body>
     </html>
   );

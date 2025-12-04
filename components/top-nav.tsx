@@ -6,11 +6,10 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { animationSequence } from "../utils/animation";
 import "../styles/globals.css";
-import MenuItem from "../utils/menu-item";
 import { SIDENAV_ITEMS } from "@/constants";
+import { useMobileMenu } from "@/contexts/MobileMenuContext";
 
 export default function ViewWindow() {
-  const [isOpen, setIsOpen] = useState(false);
   const [infoText, setInfoText] = useState("");
   const [imageLines, setImageLines] = useState(0);
   const [animationState, setAnimationState] = useState("initial");
@@ -18,6 +17,7 @@ export default function ViewWindow() {
   const [showLine, setShowLine] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
+  const { closeMenu } = useMobileMenu();
 
   const pathname = usePathname(); // Get the current route
 
@@ -116,6 +116,7 @@ export default function ViewWindow() {
             <div className="relative z-0 flex">
               <Link
                 href="/"
+                onClick={closeMenu}
                 className="text-2xl font-bold text-[#00ffff] mr-3 ml-0 hover:opacity-60"
               >
                 <Image

@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { SIDENAV_ITEMS } from "../constants";
 import { MenuItemWithSubMenuProps, SideNavItem } from "../types";
 import { Icon } from "@iconify/react";
-import { motion, useCycle } from "framer-motion";
+import { motion } from "framer-motion";
+import { useMobileMenu } from "@/contexts/MobileMenuContext";
 
 const sidebarVariants = {
   open: {
@@ -27,7 +28,7 @@ const HeaderMobile = () => {
   const pathname = usePathname();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { height } = useDimensions(containerRef);
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  const { isOpen, toggleOpen } = useMobileMenu();
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
 

@@ -111,7 +111,7 @@ export default function ProjectsPage() {
                 key={index}
                 className="relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
                 rounded-none w-[600px] transition-transform duration-500 transform cursor-pointer
-                hover:outline-[#2bbfec] sm:-mt-7 sm:w-[320px]  sm:max-w-80 sm:h-[620px]
+                hover:outline-[#2bbfec] sm:-mt-7 sm:w-[275px]  sm:max-w-80 sm:h-[450px]
                 md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[345px] md:mb-0"
               >
                 <Link href={project.link} className="block mb-4 md:h-full sm:h-[500px]">
