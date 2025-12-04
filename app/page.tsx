@@ -71,19 +71,19 @@ export default function HomePage() {
     // Text for md+ screens (more spacing)
     const textForMd =
       "I'm passionate about building elegant, intuitive software\nthat is visually stunning." +
-      "\n\n          Anton Langbruttig";
+      "\n\n            Anton Langbruttig";
     // Text for sm screens (less spacing)
     const textForSm =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n                  Anton Langbruttig";
+      "\n\n        Anton Langbruttig";
     // Text for xs screens (385px and below) - fewer spaces
     const textForXs =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n  Anton Langbruttig";
-    // Text for mid screens (630px-768px) - left aligned name, no weird spacing
+      "\n\n        Anton Langbruttig";
+    // Text for mid screens (630px-768px) - right aligned name
     const textForMid =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\nAnton Langbruttig";
+      "\n\n           Anton Langbruttig";
 
     // Run animation for md+ text
     animationSequence(
@@ -161,7 +161,8 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
             {/* Image Container */}
             <div className="flex items-center justify-center w-full md:w-1/2 pt-8 min-[630px]:pt-12 md:pt-0 md:p-3 md:-ml-4 lg:-ml-4">
-              <div className="relative w-full max-w-[400px] min-[630px]:max-w-[520px] md:max-w-none h-[350px] min-[630px]:h-[480px] md:h-[507px] md:ml-2 md:mt-[14px]">
+              <div className="relative w-full max-w-[400px] min-[630px]:max-w-[520px] md:max-w-none h-[350px] min-[630px]:h-[480px] md:h-[507px] 
+              md:ml-2 md:mt-[14px]">
                 <Image
                   src="/images/me.webp"
                   alt="Anton Langbruttig"
@@ -178,10 +179,11 @@ export default function HomePage() {
               </div>
             </div>
             {/* Text Container */}
-            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 min-[630px]:mt-8 md:mt-32 md:ml-4 pb-40 min-[630px]:pb-24 md:pb-30">
-              <div className="w-full max-w-[500px] min-[630px]:max-w-[550px] md:max-w-none p-4">
+            <div className=" md:w-1/2 flex items-center justify-center md:justify-start mt-10 min-[630px]:mt-18 
+            md:mt-32 md:ml-4 pb-40 min-[630px]:pb-24 md:pb-30">
+              <div className="w-full max-w-[400px] min-[630px]:max-w-[400px] md:max-w-none p-4 min-[630px]:p-0 md:p-4">
                 <pre
-                  className="text-xl sm:hidden md:block"
+                  className="text-l sm:hidden md:block"
                   style={{
                     fontSize: "22px",
                     color: "#ffffff",
@@ -202,7 +204,7 @@ export default function HomePage() {
                   ref={textRef}
                   className="text-l md:hidden pt-9 min-[630px]:pt-4"
                   style={{
-                    fontSize: isMidScreen ? "24px" : "20px",
+                    fontSize: isMidScreen ? "22px" : "22px",
                     color: "#ffffff",
                     fontFamily: '"VT323", monospace',
                     fontWeight: "400",
@@ -226,7 +228,7 @@ export default function HomePage() {
         {animationState === "content" && (
           <div
             ref={logoRef}
-            className={`fixed bottom-4 right-4 hidden min-[630px]:block md:hidden transition-opacity duration-300 ${
+            className={`fixed bottom-4 right-4 block md:hidden transition-opacity duration-300 ${
               !isOverlapping ? "opacity-70" : "opacity-0"
             }`}
           >
