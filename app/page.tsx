@@ -36,10 +36,10 @@ export default function HomePage() {
     const checkScreenSize = () => {
       const width = window.innerWidth;
       setIsXs3Screen(width <= 336);
-      setIsXs2Screen(width >= 337 && width <= 376);
-      setIsXsScreen(width >= 377 && width <= 453);
+      setIsXs2Screen(width >= 337 && width <= 417);
+      setIsXsScreen(width >= 417 && width <= 453);
       setIsSmallMidScreen(width >= 454 && width <= 629);
-      setIsMidScreen(width >= 630 && width < 768);
+      setIsMidScreen(width >= 630 && width < 979);
     };
 
     checkScreenSize();
@@ -91,19 +91,19 @@ export default function HomePage() {
       "\n\n           Anton Langbruttig";
     // Text for small-mid screens (454px-629px)
     const textForSmallMid =
-      "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n       Anton Langbruttig";
+      "I'm passionate about building\nelegant, intuitive software\nthat is visually stunning." +
+      "\n\n          Anton Langbruttig";
     // Text for xs screens (377px-453px)
     const textForXs =
-      "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n     Anton Langbruttig";
-    // Text for xs2 screens (337px-376px)
+      "I'm passionate about building\nelegant, intuitive software\nthat is visually stunning." +
+      "\n\n          Anton Langbruttig";
+    // Text for xs2 screens (337px-417px)
     const textForXs2 =
-      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "I'm passionate about\nbuilding elegant,\n intuitive software\n that is visually\n stunning." +
       "\n\n  Anton Langbruttig";
     // Text for xs3 screens (336px and below)
     const textForXs3 =
-      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "   I'm passionate\n  about building\n  elegant, intuitive\n   software that is\n  visually stunning." +
       "\n\nAnton Langbruttig";
 
 
@@ -265,7 +265,7 @@ export default function HomePage() {
                 <pre
                   className="text-l sm:hidden md:block"
                   style={{
-                    fontSize: "22px",
+                    fontSize: "23px",
                     color: "#ffffff",
                     fontFamily: '"VT323", monospace',
                     fontWeight: "400",
@@ -282,9 +282,9 @@ export default function HomePage() {
                 >{infoText}<span className="animate-blink ml-1">_</span></pre>
                 <pre
                   ref={textRef}
-                  className="text-l md:hidden pt-9 min-[630px]:pt-4"
+                  className="text-md md:hidden pt-9 min-[630px]:pt-4 "
                   style={{
-                    fontSize: isMidScreen ? "22px" : "22px",
+                    fontSize: isMidScreen ? "22px" : "20px",
                     color: "#ffffff",
                     fontFamily: '"VT323", monospace',
                     fontWeight: "400",
