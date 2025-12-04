@@ -133,7 +133,7 @@ export default function ProjectsPage() {
                         loop
                         muted
                         playsInline
-                        className="block md:hidden rounded-none w-full h-full  object-contain min-h-[150px]"
+                        className="block md:hidden rounded-none w-full h-[400px] object-cover object-top translate-y-0 min-h-[120px]"
                       />
                     </>
                   ) : (
