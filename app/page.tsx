@@ -10,7 +10,9 @@ export default function HomePage() {
   const [infoText, setInfoText] = useState(""); // For md+ screens
   const [infoText2, setInfoText2] = useState(""); // For sm screens
   const [infoText3, setInfoText3] = useState(""); // For xs screens (385px and below)
+  const [infoText4, setInfoText4] = useState(""); // For mid screens (630px-768px)
   const [isXsScreen, setIsXsScreen] = useState(false);
+  const [isMidScreen, setIsMidScreen] = useState(false);
   const [imageLines, setImageLines] = useState(0);
   const [animationState, setAnimationState] = useState("initial");
   const [showBackground, setShowBackground] = useState(false);
@@ -26,7 +28,9 @@ export default function HomePage() {
   // Check screen size
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsXsScreen(window.innerWidth <= 453);
+      const width = window.innerWidth;
+      setIsXsScreen(width <= 453);
+      setIsMidScreen(width >= 630 && width < 768);
     };
 
     checkScreenSize();
@@ -76,6 +80,10 @@ export default function HomePage() {
     const textForXs =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
       "\n\n  Anton Langbruttig";
+    // Text for mid screens (630px-768px) - left aligned name, no weird spacing
+    const textForMid =
+      "I'm passionate about building elegant, intuitive software that is visually stunning." +
+      "\n\nAnton Langbruttig";
 
     // Run animation for md+ text
     animationSequence(
@@ -109,6 +117,22 @@ export default function HomePage() {
       50
     );
 
+    // Run animation for mid text
+    animationSequence(
+      setShowLine,
+      setAnimationState,
+      setShowBackground,
+      setInfoText4,
+      setImageLines,
+      500,
+      2000,
+      1000,
+      500,
+      200,
+      textForMid,
+      50
+    );
+
     // Run animation for xs text
     animationSequence(
       setShowLine,
@@ -136,8 +160,8 @@ export default function HomePage() {
         {animationState === "content" && (
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
             {/* Image Container */}
-            <div className="flex items-center justify-center w-full md:w-1/2 pt-8 sm:pt-12 md:pt-0 md:p-3 md:-ml-4 lg:-ml-4">
-              <div className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-none h-[350px] sm:h-[420px] md:h-[507px] md:ml-2 md:mt-[14px]">
+            <div className="flex items-center justify-center w-full md:w-1/2 pt-8 min-[630px]:pt-12 md:pt-0 md:p-3 md:-ml-4 lg:-ml-4">
+              <div className="relative w-full max-w-[400px] min-[630px]:max-w-[520px] md:max-w-none h-[350px] min-[630px]:h-[480px] md:h-[507px] md:ml-2 md:mt-[14px]">
                 <Image
                   src="/images/me.webp"
                   alt="Anton Langbruttig"
@@ -154,8 +178,8 @@ export default function HomePage() {
               </div>
             </div>
             {/* Text Container */}
-            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 sm:mt-6 md:mt-32 md:ml-4 pb-40 sm:pb-32 md:pb-30">
-              <div className="w-full max-w-[500px] md:max-w-none p-4">
+            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 min-[630px]:mt-8 md:mt-32 md:ml-4 pb-40 min-[630px]:pb-24 md:pb-30">
+              <div className="w-full max-w-[500px] min-[630px]:max-w-[550px] md:max-w-none p-4">
                 <pre
                   className="text-xl sm:hidden md:block"
                   style={{
@@ -176,9 +200,9 @@ export default function HomePage() {
                 >{infoText}<span className="animate-blink ml-1">_</span></pre>
                 <pre
                   ref={textRef}
-                  className="text-l md:hidden pt-9 sm:pt-4"
+                  className="text-l md:hidden pt-9 min-[630px]:pt-4"
                   style={{
-                    fontSize: "20px",
+                    fontSize: isMidScreen ? "24px" : "20px",
                     color: "#ffffff",
                     fontFamily: '"VT323", monospace',
                     fontWeight: "400",
@@ -192,7 +216,7 @@ export default function HomePage() {
                     width: "100%",
                     overflow: "hidden",
                   }}
-                >{isXsScreen ? infoText3 : infoText2}<span className="animate-blink ml-1">_</span></pre>
+                >{isMidScreen ? infoText4 : (isXsScreen ? infoText3 : infoText2)}<span className="animate-blink ml-1">_</span></pre>
               </div>
             </div>
           </div>
