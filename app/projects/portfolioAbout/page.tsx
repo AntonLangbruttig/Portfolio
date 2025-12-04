@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { PageAnimation } from "@/utils/animation";
 import { Icon } from '@iconify/react';
@@ -167,16 +168,19 @@ const PortfolioAbout = () => {
       </div>
 
       {/* Logo watermark - hidden below 630px and on md+ */}
-      <div 
+      <div
         ref={logoRef}
         className={`fixed bottom-4 right-4 hidden min-[630px]:block md:hidden transition-opacity duration-300 ${
           fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
-        }`}
+        } pointer-events-none`}
       >
-        <img 
-          src="/images/AL.png" 
-          alt="AL Logo" 
+        <Image
+          src="/images/AL.png"
+          alt="AL Logo"
+          width={112}
+          height={112}
           className="w-28 h-auto min-[870px]:w-36"
+          priority
         />
       </div>
     </section>
