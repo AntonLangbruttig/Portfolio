@@ -2,7 +2,7 @@
 
 import ViewWindow from "@/components/view-window";
 import Image from "next/legacy/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { animationSequence } from "@/utils/animation";
 
 
@@ -17,17 +17,51 @@ export default function HomePage() {
   const [showLine, setShowLine] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
+  const [isOverlapping, setIsOverlapping] = useState(false);
+
+  const textRef = useRef<HTMLPreElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Check screen size
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsXsScreen(window.innerWidth <= 348);
+      setIsXsScreen(window.innerWidth <= 453);
     };
 
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
+
+  // Check overlap between text and logo
+  useEffect(() => {
+    const checkOverlap = () => {
+      if (!textRef.current || !logoRef.current) return;
+
+      const textRect = textRef.current.getBoundingClientRect();
+      const logoRect = logoRef.current.getBoundingClientRect();
+
+      const overlap = !(
+        textRect.right < logoRect.left ||
+        textRect.left > logoRect.right ||
+        textRect.bottom < logoRect.top ||
+        textRect.top > logoRect.bottom
+      );
+
+      setIsOverlapping(overlap);
+    };
+
+    checkOverlap();
+
+    window.addEventListener('resize', checkOverlap);
+    scrollContainerRef.current?.addEventListener('scroll', checkOverlap);
+
+    return () => {
+      window.removeEventListener('resize', checkOverlap);
+      scrollContainerRef.current?.removeEventListener('scroll', checkOverlap);
+    };
+  }, [animationState]);
 
   useEffect(() => {
     // Text for md+ screens (more spacing)
@@ -37,7 +71,7 @@ export default function HomePage() {
     // Text for sm screens (less spacing)
     const textForSm =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n              Anton Langbruttig";
+      "\n\n                  Anton Langbruttig";
     // Text for xs screens (385px and below) - fewer spaces
     const textForXs =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
@@ -95,7 +129,10 @@ export default function HomePage() {
   return (
     <div>
       {/* other pages content here  */}
-      <div className="overflow-y-auto md:overflow-hidden relative w-full h-screen md:h-full">
+      <div
+        ref={scrollContainerRef}
+        className="overflow-y-auto md:overflow-hidden relative w-full h-screen md:h-full"
+      >
         {animationState === "content" && (
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
             {/* Image Container */}
@@ -138,6 +175,7 @@ export default function HomePage() {
                   }}
                 >{infoText}<span className="animate-blink ml-1">_</span></pre>
                 <pre
+                  ref={textRef}
                   className="text-l md:hidden pt-9"
                   style={{
                     fontSize: "20px",
@@ -157,6 +195,22 @@ export default function HomePage() {
                 >{isXsScreen ? infoText3 : infoText2}<span className="animate-blink ml-1">_</span></pre>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* AL Logo Watermark - Same as Bio page */}
+        {animationState === "content" && (
+          <div
+            ref={logoRef}
+            className={`fixed bottom-4 right-4 hidden min-[630px]:block md:hidden transition-opacity duration-300 ${
+              !isOverlapping ? "opacity-70" : "opacity-0"
+            }`}
+          >
+            <img
+              src="/images/AL.png"
+              alt="AL Logo"
+              className="w-28 h-auto min-[870px]:w-36"
+            />
           </div>
         )}
       </div>
