@@ -313,7 +313,7 @@ export default function HomePage() {
             }`}
           >
             <img
-              src="/images/AL.png"
+              src="/images/al.png"
               alt="AL Logo"
               className="w-28 h-auto min-[870px]:w-36"
             />

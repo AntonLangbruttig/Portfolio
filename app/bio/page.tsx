@@ -128,7 +128,7 @@ export default function Bio() {
           } pointer-events-none`}
         >
           <Image
-            src="/images/AL.png"
+            src="/images/al.png"
             alt="AL Logo"
             width={112}
             height={112}
