@@ -12,6 +12,7 @@ export default function HomePage() {
   const [infoText3, setInfoText3] = useState(""); // For xs screens (385px and below)
   const [isXsScreen, setIsXsScreen] = useState(false);
   const [isShortScreen, setIsShortScreen] = useState(false);
+  const [isVeryShortScreen, setIsVeryShortScreen] = useState(false);
   const [imageLines, setImageLines] = useState(0);
   const [animationState, setAnimationState] = useState("initial");
   const [showBackground, setShowBackground] = useState(false);
@@ -25,6 +26,8 @@ export default function HomePage() {
       setIsXsScreen(window.innerWidth <= 385);
       // Short screen AND small width (sm breakpoint is below 768px)
       setIsShortScreen(window.innerHeight <= 711 && window.innerWidth < 768);
+      // Very short screen (less than 700px height)
+      setIsVeryShortScreen(window.innerHeight < 700 && window.innerWidth < 768);
     };
 
     checkScreenSize();
@@ -98,15 +101,30 @@ export default function HomePage() {
   return (
     <div>
       {/* other pages content here  */}
-      {/* FIX 1: Removed 'aspect-video' */}
-      <div className={`sm:flex sm:flex-col  md:overflow-hidden  wrap relative w-full md:h-full rounded-lg sm:overflow-hidden shadow-lg sm:h-screen sm:overflow-y-scroll flex-wrap`}>
+      <div 
+        className={`sm:flex sm:flex-col md:overflow-hidden wrap relative w-full md:h-full rounded-lg shadow-lg sm:overflow-y-auto flex-wrap`}
+        style={{ 
+          height: isVeryShortScreen ? 'auto' : undefined,
+          minHeight: isVeryShortScreen ? '100vh' : undefined
+        }}
+      >
         {animationState === "content" && (
-          <div className="flex h-full animate-fade-in flex-wrap w-full">
-            {/* FIX 4: Image Container - Reduced negative left margin from -ml-8 to -ml-4 to shift image right. Removed md:mb-12 to center vertically. */}
-            <div className="flex items-center p-3 sm:h-[50%] sm:p-3  sm:w-screen md:h-auto md:w-1/2 md:-ml-4 lg:-ml-4">
+          <div 
+            className="flex h-full animate-fade-in flex-wrap w-full"
+            style={{
+              minHeight: isVeryShortScreen ? '120vh' : undefined,
+              flexDirection: isVeryShortScreen ? 'column' : undefined
+            }}
+          >
+            {/* Image Container */}
+            <div className="flex items-center p-3 sm:h-[50%] sm:p-3 sm:w-screen md:h-auto md:w-1/2 md:-ml-4 lg:-ml-4">
               <div 
                 className="relative w-full h-full sm:mt-[40px] md:h-[507px] sm:mr-1 md:mr-0 md:ml-2 md:mt-[2px]"
-                style={{ marginTop: isShortScreen ? '20px' : undefined }}
+                style={{ 
+                  marginTop: isShortScreen ? '20px' : undefined,
+                  height: isVeryShortScreen ? '350px' : undefined,
+                  minHeight: isVeryShortScreen ? '350px' : undefined
+                }}
               >
                 <Image
                   src="/images/me.webp"
@@ -123,10 +141,15 @@ export default function HomePage() {
                 />
               </div>
             </div>
-            {/* FIX 2 (Adjusted): Changed 'md:ml-8' to 'md:ml-4' to balance the smaller negative margin on the image. */}
-            <div className="sm:w-screen md:w-[50%] md:p-4 flex items-center md:justify-center sm:justify-center flex-shrink-0 md:mt-32 md:ml-4 sm:-mt-28">
-              {/* FIX 3: Removed 'md:w-[101vh]' and replaced with 'w-full'. */}
-              <div className="w-full sm:full h-full p-4 rounded-lg items-top md:justify-left sm:justify-center md:block md:mb-0 sm:pt-7 md:max-w-none sm:max-w-[400px] ">
+            {/* Text Container */}
+            <div 
+              className="sm:w-screen md:w-[50%] md:p-4 flex items-center md:justify-center sm:justify-center flex-shrink-0 md:mt-32 md:ml-4 sm:-mt-28"
+              style={{
+                marginTop: isVeryShortScreen ? '0px' : undefined,
+                paddingBottom: isVeryShortScreen ? '100px' : undefined
+              }}
+            >
+              <div className="w-full sm:full h-full p-4 rounded-lg items-top md:justify-left sm:justify-center md:block md:mb-0 sm:pt-7 md:max-w-none sm:max-w-[400px]">
                 <pre
                   className="text-xl sm:hidden md:block"
                   style={{
@@ -144,10 +167,7 @@ export default function HomePage() {
                     width: "100%",
                     overflow: "hidden",
                   }}
-                >
-                  {infoText}
-                  <span className="animate-blink -ml-1">_</span>
-                </pre>
+                >{infoText}<span className="animate-blink -ml-1">_</span></pre>
                 <pre
                   className="text-l md:hidden pt-10"
                   style={{
@@ -165,10 +185,7 @@ export default function HomePage() {
                     width: "100%",
                     overflow: "hidden",
                   }}
-                >
-                  {isXsScreen ? infoText3 : infoText2} {/* Text for sm screens */}
-                  <span className="animate-blink -ml-1">_</span>
-                </pre>
+                >{isXsScreen ? infoText3 : infoText2}<span className="animate-blink -ml-1">_</span></pre>
               </div>
             </div>
           </div>
