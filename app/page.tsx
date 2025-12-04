@@ -154,7 +154,7 @@ export default function HomePage() {
               </div>
             </div>
             {/* Text Container */}
-            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 md:mt-32 md:ml-4 pb-20 md:pb-30">
+            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 md:mt-32 md:ml-4 pb-40 md:pb-30">
               <div className="w-full max-w-[500px] md:max-w-none p-4">
                 <pre
                   className="text-xl sm:hidden md:block"
