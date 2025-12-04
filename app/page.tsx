@@ -88,7 +88,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="sm:h-screen sm:overflow-y-auto md:h-auto md:overflow-visible">
+    <div className="sm:h-101vh sm:overflow-y-auto md:h-auto md:overflow-visible">
       <div className="sm:flex sm:flex-col md:overflow-hidden wrap relative w-full md:h-full rounded-lg shadow-lg flex-wrap">
         {animationState === "content" && (
           <div className="flex md:h-full animate-fade-in flex-wrap w-full sm:flex-col md:flex-row">
