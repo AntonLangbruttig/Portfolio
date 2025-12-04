@@ -235,7 +235,7 @@ export default function HomePage() {
       {/* other pages content here  */}
       <div
         ref={scrollContainerRef}
-        className="overflow-y-auto md:overflow-hidden relative w-full h-screen md:h-full"
+        className="overflow-y-auto md:overflow-hidden relative w-full h-[81dvh] md:h-full"
       >
         {animationState === "content" && (
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
@@ -315,7 +315,7 @@ export default function HomePage() {
             <img
               src="/images/al.png"
               alt="AL Logo"
-              className="w-28 h-auto min-[870px]:w-36"
+              className="w-28 h-auto max-[505px]:hidden min-[870px]:w-36"
             />
           </div>
         )}
