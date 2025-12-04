@@ -105,8 +105,8 @@ export default function HomePage() {
             {/* FIX 4: Image Container - Reduced negative left margin from -ml-8 to -ml-4 to shift image right. Removed md:mb-12 to center vertically. */}
             <div className="flex items-center p-3 sm:h-[50%] sm:p-3  sm:w-screen md:h-auto md:w-1/2 md:-ml-4 lg:-ml-4">
               <div 
-                className="relative w-full h-full sm:mt-14 md:h-[507px] sm:mr-1 md:mr-0 md:ml-2 md:mt-[2px]"
-                style={{ marginTop: isShortScreen ? '0' : undefined }}
+                className="relative w-full h-full sm:mt-[40px] md:h-[507px] sm:mr-1 md:mr-0 md:ml-2 md:mt-[2px]"
+                style={{ marginTop: isShortScreen ? '40px' : undefined }}
               >
                 <Image
                   src="/images/me.webp"
