@@ -245,10 +245,13 @@ export default function ContactPage() {
           fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
         } pointer-events-none`}
       >
-        <img
+        <Image
           src="/images/AL.png"
           alt="AL Logo"
+          width={112}
+          height={112}
           className="w-28 h-auto min-[870px]:w-36"
+          priority
         />
       </div>
     </div>
