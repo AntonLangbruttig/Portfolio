@@ -25,6 +25,22 @@ const projects = [
     goto: "/",
     github: "https://github.com/yourusername/portfolio",
   },
+    {
+    title: "Lets Face it Website",
+    link: "/projects/luxAbout/",
+    video: "/images/Lets_face_rec.mov",
+    mobileVideo: "/images/Lets_face_rec_long.mov",
+    moreInfoLink: "/projects/luxAbout/",
+    goto: "https://letsfaceitcosmetics.com/",
+  },
+    {
+    title: "Lets Face it Website",
+    link: "/projects/luxAbout/",
+    video: "/images/Lets_face_rec.mov",
+    mobileVideo: "/images/Lets_face_rec_long.mov",
+    moreInfoLink: "/projects/luxAbout/",
+    goto: "https://letsfaceitcosmetics.com/",
+  },
 ];
 
 export default function ProjectsPage() {
@@ -70,29 +86,35 @@ export default function ProjectsPage() {
         fadeIn ? "opacity-100" : "opacity-0"
       }`}
     >
-      <h2 className={`font-bold text-cyan-200 sm:mt-4 md:-mt-[9.5px] md:pt-5 text-4xl underline  md:pl-6 
-          transition-opacity sm:overflow-y-scroll duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+      {/* Fixed heading for md and lg screens */}
+      <h2 className={`hidden md:block font-bold text-cyan-200 md:-mt-[9.5px] md:pt-5 text-4xl underline md:pl-6
+          transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
       >Projects</h2>
+
       <div className="relative w-full group">
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="hide-scrollbar sm:mt-[7px] md:mt-auto overflow-x-auto md:py-5 flex sm:max-h-[calc(100vh-58px)] 
-          items-center justify-center md:justify-start sm:justify-center sm:items-center sm:w-auto md:-ml-3"
+          className="hide-scrollbar sm:mt-[7px] md:mt-auto overflow-x-auto md:py-5 flex sm:max-h-[calc(100vh)]
+          items-center justify-center md:justify-start sm:items-center sm:w-auto md:-ml-3"
         >
           <div
-            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-[60px] md:gap-0 mt-10 sm:mt-0 sm:my-auto 
-            sm:w-[95vw] md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6 md:space-y-0 px-6"
+            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-[60px] md:gap-0 mt-10 sm:mt-0 sm:my-auto
+            sm:w-full md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6 md:space-y-0 sm:px-0 md:px-6"
           >
+            {/* Scrollable heading for small screens */}
+            <h2 className={`md:hidden font-bold text-cyan-200 text-4xl underline sm:mt-4 sm:mb-2 w-full text-start
+                transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+            >Projects</h2>
             {projects.map((project, index) => (
               <div
                 key={index}
                 className="relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
                 rounded-none w-[600px] transition-transform duration-500 transform cursor-pointer
-                hover:outline-[#2bbfec] sm:mt-10 sm:w-[320px]  sm:max-w-80 sm:h-[620px]
+                hover:outline-[#2bbfec] sm:-mt-7 sm:w-[320px]  sm:max-w-80 sm:h-[620px]
                 md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[345px] md:mb-0"
               >
-                <Link href={project.link} className="block mb-4 md:h-full sm:h-[600px]">
+                <Link href={project.link} className="block mb-4 md:h-full sm:h-[500px]">
                   {project.video ? (
                     <>
                       {/* Desktop Video */}
@@ -111,7 +133,7 @@ export default function ProjectsPage() {
                         loop
                         muted
                         playsInline
-                        className="block md:hidden rounded-none w-full h-full -translate-y-2 object-contain min-h-[150px]"
+                        className="block md:hidden rounded-none w-full h-full  object-contain min-h-[150px]"
                       />
                     </>
                   ) : (
