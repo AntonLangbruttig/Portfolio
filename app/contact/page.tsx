@@ -107,15 +107,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div 
+    <div
       ref={scrollContainerRef}
-      className={`h-screen overflow-y-auto justify-center transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+      className={`h-[89.3vh] md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
     >
-      <div 
-        className="min-h-screen overflow-y-none text-white p-8 pt-5"
-        style={{ paddingBottom: isVeryShortScreen ? '150px' : undefined }}
+      <div
+        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[100vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-24" : "pb-8"} md:pb-8`}
       >
-        <div className="h-full space-y-1">
+        <div className="space-y-1">
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
           <div ref={contentRef} className="space-y-2 pb-4 flex flex-col justify-start">
             {!status.includes("success") && (
@@ -172,25 +171,25 @@ export default function ContactPage() {
                 </form>
               </>
             )}
-            {status && (
-              <div
-                className={`flex flex-col justify-center items-center flex-grow ${
-                  status.includes("success") ? "min-h-[41vh]" : ""
-                }`}
-              >
+            <div
+              className={`flex flex-col justify-center items-center ${
+                status && status.includes("success") ? "min-h-[41vh]" : "h-12 md:h-8"
+              }`}
+            >
+              {status && (
                 <p
                   className={`text-center text-4xl ${
-                    status.includes("success") ? "text-green-300" : "lg:text-xl lg:-mt-7 text-xl md:-mb-6 text-red-500"
+                    status.includes("success") ? "text-green-300" : "lg:text-xl text-xl text-red-500"
                   }`}
                 >
                   {status}
                 </p>
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
           {/* Desktop version - static in flow */}
-          <div className="hidden md:flex items-baseline pt-[50px] ml-4 space-x-2 bg-transparent">
+          <div className="hidden md:flex items-baseline pt-4 ml-4 space-x-2 bg-transparent ">
             <span className="text-2xl">Connect with me on LinkedIn</span>
             <a
               href="https://www.linkedin.com/in/anton-langbruttig/"
@@ -208,17 +207,16 @@ export default function ContactPage() {
             </a>
           </div>
 
-{/* Mobile version - hides "LinkedIn" text below 346px */}
-<div 
+{/* Mobile version - hides "LinkedIn" text below 382px when scrolling, below 346px when fixed */}
+<div
   className={`md:hidden flex items-baseline space-x-2 bg-transparent ${
-    isShortScreen ? "pt-7 pb-9" : "fixed bottom-4 left-4 right-4"
+    isShortScreen ? "pt-10" : "fixed bottom-0 left-4 right-4"
   }`}
-  style={{ paddingBottom: isVeryShortScreen ? '80px' : undefined }}
 >
-  <span className="text-xl">
+  <span className="text-xl ">
     Connect with me on
-    {/* This span is visible by default, hidden only on very narrow screens */}
-    <span className="inline min-[347px]:inline hidden">
+    {/* Hide "LinkedIn" at different breakpoints depending on scroll mode */}
+    <span className={isShortScreen ? "inline min-[383px]:inline hidden" : "inline min-[347px]:inline hidden"}>
       {" "}LinkedIn
     </span>
   </span>
