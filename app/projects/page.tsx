@@ -133,7 +133,7 @@ export default function ProjectsPage() {
                         loop
                         muted
                         playsInline
-                        className="block md:hidden rounded-none w-full h-[400px] object-cover object-top translate-y-0 min-h-[120px]"
+                        className="block md:hidden rounded-none w-full h-[430px] object-cover object-top translate-y-0 min-h-[120px]"
                       />
                     </>
                   ) : (
@@ -152,18 +152,18 @@ export default function ProjectsPage() {
                         width={350}
                         height={100}
                         priority={true}
-                        className="hidden sm:block md:hidden lg:hidden rounded-none w-full h-[400px] object-cover object-top"
+                        className="hidden sm:block md:hidden lg:hidden rounded-none w-full h-[430px] object-cover object-top"
                       />
                     </>
                   )}
                 </Link>
                 <div
-                  className={`absolute bottom-0 left-0 right-0 bg-black bg-opacity-90 p-2 sm:pt-1 md:h-[50px] ${
+                  className={`absolute -bottom-8 left-0 right-0 bg-black bg-opacity-90 p-2 sm:pt-1  md:h-[50px] ${
                     project.title === "Portfolio Website"
-                      ? "sm:h-[105px]"
+                      ? "sm:h-[110px]"
                       : project.title === "Lets Face it Website"
-                      ? "sm:h-[72px]"
-                      : "sm:h-[72px]"
+                      ? "sm:h-[110px]"
+                      : "sm:h-[110px]"
                   }`}
                 >
                   <h3 className="md:text-3xl sm:text-xl font-bold text-white md:mt-1">
