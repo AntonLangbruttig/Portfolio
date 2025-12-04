@@ -35,8 +35,8 @@ export default function HomePage() {
   useEffect(() => {
     const checkScreenSize = () => {
       const width = window.innerWidth;
-      setIsXs3Screen(width <= 336);
-      setIsXs2Screen(width >= 337 && width <= 417);
+      setIsXs3Screen(width <= 356);
+      setIsXs2Screen(width >= 357 && width <= 417);
       setIsXsScreen(width >= 417 && width <= 453);
       setIsSmallMidScreen(width >= 454 && width <= 629);
       setIsMidScreen(width >= 630 && width < 979);
@@ -99,12 +99,12 @@ export default function HomePage() {
       "\n\n          Anton Langbruttig";
     // Text for xs2 screens (337px-417px)
     const textForXs2 =
-      "I'm passionate about\nbuilding elegant,\n intuitive software\n that is visually\n stunning." +
-      "\n\n  Anton Langbruttig";
+      "   I'm passionate about\n   building elegant,\n   intuitive software\n   that is visually\n   stunning." +
+      "\n\n    Anton Langbruttig";
     // Text for xs3 screens (336px and below)
     const textForXs3 =
-      "   I'm passionate\n  about building\n  elegant, intuitive\n   software that is\n  visually stunning." +
-      "\n\nAnton Langbruttig";
+      "  I'm passionate\n  about building\n  elegant, intuitive\n  software that is\n  visually stunning." +
+      "\n\n   Anton Langbruttig";
 
 
     // Run animation for md+ text
