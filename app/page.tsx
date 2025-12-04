@@ -75,11 +75,11 @@ export default function HomePage() {
     // Text for sm screens (less spacing)
     const textForSm =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n        Anton Langbruttig";
+      "\n\n           Anton Langbruttig";
     // Text for xs screens (385px and below) - fewer spaces
     const textForXs =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
-      "\n\n        Anton Langbruttig";
+      "\n\nAnton Langbruttig";
     // Text for mid screens (630px-768px) - right aligned name
     const textForMid =
       "I'm passionate about building elegant, intuitive software that is visually stunning." +
