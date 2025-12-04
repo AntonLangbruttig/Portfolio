@@ -210,7 +210,7 @@ export default function ContactPage() {
 {/* Mobile version - hides "LinkedIn" text below 382px when scrolling, below 346px when fixed */}
 <div
   className={`md:hidden flex items-baseline space-x-2 bg-transparent ${
-    isShortScreen ? "pt-5" : "fixed bottom-0 left-4 right-4 pb-4"
+    isShortScreen ? "pt-0" : "fixed bottom-0  pb-4"
   }`}
 >
   <span className="text-xl ">
