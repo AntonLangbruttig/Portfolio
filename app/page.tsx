@@ -136,8 +136,8 @@ export default function HomePage() {
         {animationState === "content" && (
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
             {/* Image Container */}
-            <div className="flex items-center justify-center w-full md:w-1/2 pt-8 md:pt-0 md:p-3 md:-ml-4 lg:-ml-4">
-              <div className="relative w-full max-w-[400px] md:max-w-none h-[350px] md:h-[507px] md:ml-2 md:mt-[14px]">
+            <div className="flex items-center justify-center w-full md:w-1/2 pt-8 sm:pt-12 md:pt-0 md:p-3 md:-ml-4 lg:-ml-4">
+              <div className="relative w-full max-w-[400px] sm:max-w-[450px] md:max-w-none h-[350px] sm:h-[420px] md:h-[507px] md:ml-2 md:mt-[14px]">
                 <Image
                   src="/images/me.webp"
                   alt="Anton Langbruttig"
@@ -154,7 +154,7 @@ export default function HomePage() {
               </div>
             </div>
             {/* Text Container */}
-            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 md:mt-32 md:ml-4 pb-40 md:pb-30">
+            <div className="w-full md:w-1/2 flex items-center justify-center md:justify-start mt-10 sm:mt-6 md:mt-32 md:ml-4 pb-40 sm:pb-32 md:pb-30">
               <div className="w-full max-w-[500px] md:max-w-none p-4">
                 <pre
                   className="text-xl sm:hidden md:block"
@@ -176,7 +176,7 @@ export default function HomePage() {
                 >{infoText}<span className="animate-blink ml-1">_</span></pre>
                 <pre
                   ref={textRef}
-                  className="text-l md:hidden pt-9"
+                  className="text-l md:hidden pt-9 sm:pt-4"
                   style={{
                     fontSize: "20px",
                     color: "#ffffff",

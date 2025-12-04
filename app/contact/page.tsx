@@ -112,7 +112,7 @@ export default function ContactPage() {
       className={`h-[89.3vh] md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[100vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-24" : "pb-8"} md:pb-8`}
+        className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[100vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-16" : "pb-8"} md:pb-8`}
       >
         <div className="space-y-1">
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
@@ -210,7 +210,7 @@ export default function ContactPage() {
 {/* Mobile version - hides "LinkedIn" text below 382px when scrolling, below 346px when fixed */}
 <div
   className={`md:hidden flex items-baseline space-x-2 bg-transparent ${
-    isShortScreen ? "pt-10" : "fixed bottom-0 left-4 right-4"
+    isShortScreen ? "pt-5" : "fixed bottom-0 left-4 right-4 pb-4"
   }`}
 >
   <span className="text-xl ">
