@@ -11,7 +11,6 @@ const skills = {
 
 const Skills = () => {
   const { fadeIn } = PageAnimation();
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isOverlapping, setIsOverlapping] = useState(false);
 
   const lastSkillItemRef = useRef<HTMLSpanElement>(null);
@@ -19,10 +18,6 @@ const Skills = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth <= 721);
-    };
-
     const checkOverlap = () => {
       if (!lastSkillItemRef.current || !logoRef.current) return;
 
@@ -39,19 +34,13 @@ const Skills = () => {
       setIsOverlapping(overlap);
     };
 
-    const handleResizeAndScroll = () => {
-      checkScreenSize();
-      checkOverlap();
-    };
-
-    checkScreenSize();
     checkOverlap();
 
-    window.addEventListener("resize", handleResizeAndScroll);
+    window.addEventListener("resize", checkOverlap);
     scrollContainerRef.current?.addEventListener("scroll", checkOverlap);
 
     return () => {
-      window.removeEventListener("resize", handleResizeAndScroll);
+      window.removeEventListener("resize", checkOverlap);
       scrollContainerRef.current?.removeEventListener("scroll", checkOverlap);
     };
   }, [fadeIn]);
@@ -64,26 +53,18 @@ const Skills = () => {
       >
         {/* Main Header */}
         <h2
-          className={`font-bold text-cyan-200 text-4xl mb-8 underline px-14 transition-opacity duration-1000 ${
+          className={`font-bold text-cyan-200 text-4xl mb-8 underline px-4 md:px-14 transition-opacity duration-1000 ${
             fadeIn ? "opacity-100" : "opacity-0"
           }`}
-          style={{
-            paddingLeft: isSmallScreen ? "16px" : undefined,
-            paddingRight: isSmallScreen ? "16px" : undefined,
-          }}
         >
           Skills
         </h2>
 
         {/* Scrollable Content */}
         <div
-          className={`transition-opacity duration-1000 ${
+          className={`px-5 md:px-[75px] max-w-[685px] md:max-w-none mx-auto md:mx-0 transition-opacity duration-1000 ${
             fadeIn ? "opacity-100" : "opacity-0"
           }`}
-          style={{
-            paddingLeft: isSmallScreen ? "20px" : "75px",
-            paddingRight: isSmallScreen ? "20px" : "75px",
-          }}
         >
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="mb-10">
@@ -109,6 +90,9 @@ const Skills = () => {
               </div>
             </div>
           ))}
+
+          {/* Bottom spacer for mobile */}
+          <div className="h-[60px] md:hidden"></div>
         </div>
       </div>
 
