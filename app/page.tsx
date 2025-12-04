@@ -167,7 +167,7 @@ export default function HomePage() {
                   }}
                 >
                   {isXsScreen ? infoText3 : infoText2} {/* Text for sm screens */}
-                  <span className="animate-blink -ml-2"> _</span>
+                  <span className="animate-blink -ml-2">_</span>
                 </pre>
               </div>
             </div>

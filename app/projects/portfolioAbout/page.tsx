@@ -25,7 +25,7 @@ const PortfolioAbout = () => {
       
       // On mobile, be more conservative with height to ensure scrollability
       const isMobile = window.innerWidth <= 768;
-      const mobileExtraBuffer = isMobile ? 60 : 0; // Extra buffer for mobile browser UI
+      const mobileExtraBuffer = isMobile ? 0 : 0; // Extra buffer for mobile browser UI
       
       setContainerHeight(viewportHeight - headerHeight - borderBottomOffset - mobileExtraBuffer);
     };
@@ -93,9 +93,10 @@ const PortfolioAbout = () => {
         className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
-        <div className="min-h-[calc(100%+8px)] md:min-h-[calc(100%+120px)]">
+        <div className="min-h-fit md:min-h-[calc(100%+120px)]">
           <h2 
-            className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+            className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
+              duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ 
             marginTop: isSmallScreen ? '-10px' : undefined,
             marginLeft: isSmallScreen ? '-31px': undefined,
@@ -161,7 +162,7 @@ const PortfolioAbout = () => {
         </div>
         
         {/* INCREASED spacer for mobile scroll - this ensures content can scroll fully */}
-        <div className="block md:hidden h-32 w-full"></div>
+        <div className="block md:hidden h-3 w-full"></div>
         <div className="hidden sm:block md:hidden h-16 w-full"></div>
       </div>
 
