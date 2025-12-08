@@ -54,10 +54,10 @@ export default function ProjectsPage() {
     const viewportHeight = window.innerHeight;
 
     // Define your desired heights at specific viewport sizes
-    const smallViewport = 568;  // Viewport height at small screen
-    const smallHeight = 496;    // Container height you want at 568px viewport
+    const smallViewport = 500;  // Viewport height at small screen
+    const smallHeight = 425;    // Container height you want at 500px viewport
     const largeViewport = 970;  // Viewport height at large screen
-    const largeHeight = 893;    // Container height you want at 968px viewport
+    const largeHeight = 893.5;    // Container height you want at 968px viewport
 
     // Calculate the slope between the two points
     const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
@@ -128,7 +128,7 @@ export default function ProjectsPage() {
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="hide-scrollbar  md:mt-8 overflow-x-auto md:py-5 flex md:max-h-[345px]
+          className="hide-scrollbar  md:mt-8 overflow-x-auto md:py-5 flex md:max-h-[400px]
           items-center justify-center md:justify-start sm:items-center sm:w-auto md:-ml-3"
           style={{ height: `${containerHeight}px` }}
         >
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
                 className="relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
                 rounded-none w-[600px] transition-transform duration-500 transform cursor-pointer
                 hover:outline-[#2bbfec] sm:-mt-7 sm:w-[275px]  sm:max-w-80 sm:h-[450px]
-                md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[345px] md:mb-0"
+                md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[350px] md:mb-0"
               >
                 <Link href={project.link} className="block mb-4 md:h-full sm:h-[500px]">
                   {project.video ? (
