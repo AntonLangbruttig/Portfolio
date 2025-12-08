@@ -12,10 +12,44 @@ export default function ContactPage() {
   const [isOverlapping, setIsOverlapping] = useState(false);
   const [isShortScreen, setIsShortScreen] = useState(false);
   const [isVeryShortScreen, setIsVeryShortScreen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const clampHeight = () => {
+    const viewportHeight = window.innerHeight;
+
+    // Define your desired heights at specific viewport sizes
+    const smallViewport = 500;  // Viewport height at small screen
+    const smallHeight = 429;    // Container height you want at 500px viewport
+    const largeViewport = 970;  // Viewport height at large screen
+    const largeHeight = 893;    // Container height you want at 968px viewport
+
+    // Calculate the slope between the two points
+    const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
+
+    // Linear interpolation: y = mx + b
+    const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
+
+    // Clamp to stay within reasonable bounds
+    const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
+
+    return clampedValue;
+  };
+
+  // Update container height
+  useEffect(() => {
+    const updateHeight = () => {
+      setContainerHeight(clampHeight());
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   useEffect(() => {
     const checkOverlap = () => {
@@ -109,8 +143,9 @@ export default function ContactPage() {
   return (
     <div
       ref={scrollContainerRef}
-      className={`h-[89.3vh] md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity 
+      className={`md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity
       duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+      style={{ height: window.innerWidth < 768 ? `${containerHeight}px` : undefined }}
     >
       <div
         className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[118vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-[10px]" : "pb-8"} md:pb-8`}
