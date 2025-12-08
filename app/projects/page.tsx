@@ -55,7 +55,7 @@ export default function ProjectsPage() {
 
     // Define your desired heights at specific viewport sizes
     const smallViewport = 500;  // Viewport height at small screen
-    const smallHeight = 425;    // Container height you want at 500px viewport
+    const smallHeight = 427;    // Container height you want at 500px viewport
     const largeViewport = 970;  // Viewport height at large screen
     const largeHeight = 893.5;    // Container height you want at 968px viewport
 
