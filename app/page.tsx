@@ -26,10 +26,44 @@ export default function HomePage() {
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
   const [isOverlapping, setIsOverlapping] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
 
   const textRef = useRef<HTMLPreElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const clampHeight = () => {
+    const viewportHeight = window.innerHeight;
+
+    // Define your desired heights at specific viewport sizes
+    const smallViewport = 500;  // Viewport height at small screen
+    const smallHeight = 429;    // Container height you want at 500px viewport
+    const largeViewport = 970;  // Viewport height at large screen
+    const largeHeight = 893;    // Container height you want at 968px viewport
+
+    // Calculate the slope between the two points
+    const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
+
+    // Linear interpolation: y = mx + b
+    const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
+
+    // Clamp to stay within reasonable bounds
+    const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
+
+    return clampedValue;
+  };
+
+  // Update container height
+  useEffect(() => {
+    const updateHeight = () => {
+      setContainerHeight(clampHeight());
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   // Check screen size
   useEffect(() => {
@@ -235,7 +269,8 @@ export default function HomePage() {
       {/* other pages content here  */}
       <div
         ref={scrollContainerRef}
-        className="overflow-y-auto md:overflow-hidden relative w-full h-[81dvh] md:h-full"
+        className="overflow-y-auto md:overflow-hidden relative w-full md:h-full"
+        style={{ height: window.innerWidth < 768 ? `${containerHeight}px` : undefined }}
       >
         {animationState === "content" && (
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
@@ -260,7 +295,7 @@ export default function HomePage() {
             </div>
             {/* Text Container */}
             <div className=" md:w-1/2 flex items-center justify-center md:justify-start mt-10 min-[630px]:mt-18 
-            md:mt-32 md:ml-4 pb-40 min-[630px]:pb-24 md:pb-30">
+            md:mt-32 md:ml-4 pb-5 min-[630px]:pb-24 md:pb-30">
               <div className="w-full max-w-[400px] min-[630px]:max-w-[400px] md:max-w-none p-4 min-[630px]:p-0 md:p-4">
                 <pre
                   className="text-l sm:hidden md:block"
