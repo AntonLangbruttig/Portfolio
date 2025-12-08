@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "/styles/globals.css";
@@ -48,6 +48,39 @@ export default function ProjectsPage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  const clampHeight = () => {
+    const viewportHeight = window.innerHeight;
+
+    // Define your desired heights at specific viewport sizes
+    const smallViewport = 568;  // Viewport height at small screen
+    const smallHeight = 496;    // Container height you want at 568px viewport
+    const largeViewport = 970;  // Viewport height at large screen
+    const largeHeight = 893;    // Container height you want at 968px viewport
+
+    // Calculate the slope between the two points
+    const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
+
+    // Linear interpolation: y = mx + b
+    const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
+
+    // Clamp to stay within reasonable bounds
+    const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
+
+    return clampedValue;
+  };
+
+  useEffect(() => {
+    const updateHeight = () => {
+      setContainerHeight(clampHeight());
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
 
   const scrollToLeft = () => {
     if (scrollContainerRef.current) {
@@ -95,8 +128,9 @@ export default function ProjectsPage() {
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="hide-scrollbar sm:mt-[7px] md:mt-auto overflow-x-auto md:py-5 flex sm:max-h-[calc(100vh)]
+          className="hide-scrollbar  md:mt-8 overflow-x-auto md:py-5 flex md:max-h-[345px]
           items-center justify-center md:justify-start sm:items-center sm:w-auto md:-ml-3"
+          style={{ height: `${containerHeight}px` }}
         >
           <div
             className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-[60px] md:gap-0 mt-10 sm:mt-0 sm:my-auto
@@ -158,7 +192,7 @@ export default function ProjectsPage() {
                   )}
                 </Link>
                 <div
-                  className={`absolute -bottom-8 left-0 right-0 bg-black bg-opacity-90 p-2 sm:pt-1  md:h-[50px] ${
+                  className={`absolute bottom-0 left-0 right-0 bg-black bg-opacity-90 p-2 sm:pt-1  md:h-[50px] ${
                     project.title === "Portfolio Website"
                       ? "sm:h-[110px]"
                       : project.title === "Lets Face it Website"
