@@ -26,7 +26,7 @@ export default function ContactPage() {
 
     // Define your desired heights at specific viewport sizes
     const smallViewport = 500;  // Viewport height at small screen
-    const smallHeight = 429;    // Container height you want at 500px viewport
+    const smallHeight = 430;    // Container height you want at 500px viewport
     const largeViewport = 970;  // Viewport height at large screen
     const largeHeight = 893;    // Container height you want at 968px viewport
 
