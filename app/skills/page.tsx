@@ -13,26 +13,86 @@ const skills = {
 const Skills = () => {
   const { fadeIn } = PageAnimation();
   const [isOverlapping, setIsOverlapping] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const lastSkillItemRef = useRef<HTMLSpanElement>(null);
+  const skillRefsArray = useRef<(HTMLSpanElement | null)[]>([]);
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const clampHeight = () => {
+    if (typeof window === 'undefined') return 0;
+
+    const viewportHeight = window.innerHeight;
+
+    // Define your desired heights at specific viewport sizes
+    const smallViewport = 500;  // Viewport height at small screen
+    const smallHeight = 429;    // Container height you want at 500px viewport
+    const largeViewport = 970;  // Viewport height at large screen
+    const largeHeight = 893;    // Container height you want at 968px viewport
+
+    // Calculate the slope between the two points
+    const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
+
+    // Linear interpolation: y = mx + b
+    const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
+
+    // Clamp to stay within reasonable bounds
+    const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
+
+    return clampedValue;
+  };
+
+  // Update container height and mobile state
+  useEffect(() => {
+    const updateHeight = () => {
+      setContainerHeight(clampHeight());
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
+  }, []);
+
   useEffect(() => {
     const checkOverlap = () => {
-      if (!lastSkillItemRef.current || !logoRef.current) return;
+      if (!logoRef.current) return;
 
-      const textRect = lastSkillItemRef.current.getBoundingClientRect();
       const logoRect = logoRef.current.getBoundingClientRect();
 
-      const overlap = !(
-        textRect.right < logoRect.left ||
-        textRect.left > logoRect.right ||
-        textRect.bottom < logoRect.top ||
-        textRect.top > logoRect.bottom
-      );
+      // Find the first skill box that overlaps or has passed the logo
+      let shouldHide = false;
 
-      setIsOverlapping(overlap);
+      for (const skillRef of skillRefsArray.current) {
+        if (!skillRef) continue;
+
+        const skillRect = skillRef.getBoundingClientRect();
+
+        // Check if this skill box overlaps with the logo
+        const overlaps = !(
+          skillRect.right < logoRect.left ||
+          skillRect.left > logoRect.right ||
+          skillRect.bottom < logoRect.top ||
+          skillRect.top > logoRect.bottom
+        );
+
+        if (overlaps) {
+          shouldHide = true;
+          break;
+        }
+
+        // Check if we've scrolled past this skill (skill is above the logo)
+        if (skillRect.bottom < logoRect.top) {
+          shouldHide = true;
+        } else {
+          // If we find a skill that hasn't passed the logo yet, stop checking
+          break;
+        }
+      }
+
+      setIsOverlapping(shouldHide);
     };
 
     checkOverlap();
@@ -47,10 +107,11 @@ const Skills = () => {
   }, [fadeIn]);
 
   return (
-    <section className="h-[calc(100vh-50px)] overflow-hidden relative">
+    <section className="md:h-[calc(100vh-50px)] overflow-hidden relative">
       <div
         ref={scrollContainerRef}
-        className="h-[96.5%] overflow-y-scroll no-scrollbar py-6"
+        className="md:h-[96.5%] overflow-y-scroll no-scrollbar py-6"
+        style={{ height: isMobile ? `${containerHeight}px` : undefined }}
       >
         {/* Main Header */}
         <h2
@@ -74,14 +135,14 @@ const Skills = () => {
               </h3>
               <div className="pl-6 flex flex-wrap gap-4">
                 {items.map((skill, index) => {
-                  const isLastSkill =
-                    category === "Developing" &&
-                    skill === "Lua";
+                  const globalIndex = Object.entries(skills)
+                    .slice(0, Object.keys(skills).indexOf(category))
+                    .reduce((acc, [_, categoryItems]) => acc + categoryItems.length, 0) + index;
 
                   return (
                     <span
                       key={skill}
-                      ref={isLastSkill ? lastSkillItemRef : null}
+                      ref={(el) => { skillRefsArray.current[globalIndex] = el; }}
                       className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium transition-all duration-300"
                     >
                       {skill}
