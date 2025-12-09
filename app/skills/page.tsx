@@ -115,7 +115,7 @@ const Skills = () => {
       >
         {/* Main Header */}
         <h2
-          className={`font-bold text-cyan-200 text-4xl mb-8 underline px-4 md:px-14 transition-opacity duration-1000 ${
+          className={`font-bold text-cyan-200 text-4xl mb-4 md:mb-6 underline px-4 md:px-14 transition-opacity duration-1000 ${
             fadeIn ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -129,7 +129,7 @@ const Skills = () => {
           }`}
         >
           {Object.entries(skills).map(([category, items]) => (
-            <div key={category} className="mb-4">
+            <div key={category} className="mb-6">
               <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">
                 {category}
               </h3>
