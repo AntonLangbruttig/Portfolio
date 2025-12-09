@@ -152,7 +152,7 @@ export default function ContactPage() {
       style={{ height: isMobile ? `${containerHeight}px` : undefined }}
     >
       <div
-        className={`text-white pl-8 pr-8 pt-5 ${isShortScreen ? "min-h-[109vh]" : ""} md:min-h-0 ${isShortScreen ? "-pb-[10px]" : "pb-8"} md:pb-8`}
+        className={`text-white pl-8 pr-8 pt-5 ${isShortScreen ? "min-h-[107vh]" : ""} md:min-h-0 ${isShortScreen ? "-pb-[10px]" : "pb-8"} md:pb-8`}
       >
         <div className={isShortScreen ? "space-y-0" : "space-y-1"}>
           <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
