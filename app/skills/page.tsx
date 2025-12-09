@@ -152,9 +152,6 @@ const Skills = () => {
               </div>
             </div>
           ))}
-
-          {/* Bottom spacer for mobile */}
-          <div className="h-[66px] md:hidden"></div>
         </div>
       </div>
 
