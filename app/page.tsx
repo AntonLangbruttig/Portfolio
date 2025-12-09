@@ -29,7 +29,7 @@ export default function HomePage() {
   const [containerHeight, setContainerHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  const textRef = useRef<HTMLPreElement>(null);
+  const contentRefsArray = useRef<(HTMLElement | null)[]>([]);
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -85,22 +85,35 @@ export default function HomePage() {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // Check overlap between text and logo
+  // Check overlap between content and logo
   useEffect(() => {
     const checkOverlap = () => {
-      if (!textRef.current || !logoRef.current) return;
+      if (!logoRef.current) return;
 
-      const textRect = textRef.current.getBoundingClientRect();
       const logoRect = logoRef.current.getBoundingClientRect();
+      let shouldHide = false;
 
-      const overlap = !(
-        textRect.right < logoRect.left ||
-        textRect.left > logoRect.right ||
-        textRect.bottom < logoRect.top ||
-        textRect.top > logoRect.bottom
-      );
+      // Check all content elements (text and image) for overlap
+      for (const contentRef of contentRefsArray.current) {
+        if (!contentRef) continue;
 
-      setIsOverlapping(overlap);
+        const contentRect = contentRef.getBoundingClientRect();
+
+        // Check if this content overlaps with the logo
+        const overlaps = !(
+          contentRect.right < logoRect.left ||
+          contentRect.left > logoRect.right ||
+          contentRect.bottom < logoRect.top ||
+          contentRect.top > logoRect.bottom
+        );
+
+        if (overlaps) {
+          shouldHide = true;
+          break;
+        }
+      }
+
+      setIsOverlapping(shouldHide);
     };
 
     checkOverlap();
@@ -280,7 +293,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
             {/* Image Container */}
             <div className="flex items-center justify-center w-full md:w-1/2 pt-8 min-[630px]:pt-12 md:pt-0 md:p-3 md:-ml-4 lg:-ml-4">
-              <div className="relative w-full max-w-[400px] min-[630px]:max-w-[520px] md:max-w-none h-[350px] min-[630px]:h-[480px] md:h-[507px] 
+              <div ref={(el) => { contentRefsArray.current[0] = el; }} className="relative w-full max-w-[400px] min-[630px]:max-w-[520px] md:max-w-none h-[350px] min-[630px]:h-[480px] md:h-[507px]
               md:ml-2 md:mt-[14px]">
                 <Image
                   src="/images/me.webp"
@@ -302,6 +315,7 @@ export default function HomePage() {
             md:mt-32 md:ml-4 pb-5 min-[630px]:pb-24 md:pb-30">
               <div className="w-full max-w-[400px] min-[630px]:max-w-[400px] md:max-w-none p-4 min-[630px]:p-0 md:p-4">
                 <pre
+                  ref={(el) => { contentRefsArray.current[1] = el; }}
                   className="text-l sm:hidden md:block"
                   style={{
                     fontSize: "23px",
@@ -320,7 +334,7 @@ export default function HomePage() {
                   }}
                 >{infoText}<span className="animate-blink ml-1">_</span></pre>
                 <pre
-                  ref={textRef}
+                  ref={(el) => { contentRefsArray.current[2] = el; }}
                   className="text-md md:hidden pt-9 min-[630px]:pt-4 "
                   style={{
                     fontSize: isMidScreen ? "22px" : "20px",
@@ -354,7 +368,7 @@ export default function HomePage() {
             <img
               src="/images/al.png"
               alt="AL Logo"
-              className="w-28 h-auto max-[505px]:hidden min-[870px]:w-36"
+              className="w-28 h-auto min-[870px]:w-36"
             />
           </div>
         )}

@@ -15,7 +15,7 @@ export default function ContactPage() {
   const [containerHeight, setContainerHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRefsArray = useRef<(HTMLElement | null)[]>([]);
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -57,19 +57,32 @@ export default function ContactPage() {
 
   useEffect(() => {
     const checkOverlap = () => {
-      if (!contentRef.current || !logoRef.current) return;
+      if (!logoRef.current) return;
 
-      const textRect = contentRef.current.getBoundingClientRect();
       const logoRect = logoRef.current.getBoundingClientRect();
+      let shouldHide = false;
 
-      const overlap = !(
-        textRect.right < logoRect.left ||
-        textRect.left > logoRect.right ||
-        textRect.bottom < logoRect.top ||
-        textRect.top > logoRect.bottom
-      );
+      // Check all content elements for overlap
+      for (const contentRef of contentRefsArray.current) {
+        if (!contentRef) continue;
 
-      setIsOverlapping(overlap);
+        const contentRect = contentRef.getBoundingClientRect();
+
+        // Check if this content overlaps with the logo
+        const overlaps = !(
+          contentRect.right < logoRect.left ||
+          contentRect.left > logoRect.right ||
+          contentRect.bottom < logoRect.top ||
+          contentRect.top > logoRect.bottom
+        );
+
+        if (overlaps) {
+          shouldHide = true;
+          break;
+        }
+      }
+
+      setIsOverlapping(shouldHide);
     };
 
     const checkHeight = () => {
@@ -152,11 +165,11 @@ export default function ContactPage() {
       style={{ height: isMobile ? `${containerHeight}px` : undefined }}
     >
       <div
-        className={`text-white pl-8 pr-8 pt-5 ${isShortScreen ? "min-h-[97vh]" : ""} md:min-h-0 ${isShortScreen ? "-pb-[10px]" : "pb-8"} md:pb-8`}
+        className={`text-white pl-8 pr-8 pt-3 ${isShortScreen ? "min-h-[97vh]" : ""} md:min-h-0 ${isShortScreen ? "-pb-[10px]" : "pb-8"} md:pb-8`}
       >
         <div className={isShortScreen ? "space-y-0" : "space-y-1"}>
-          <span className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
-          <div ref={contentRef} className={`space-y-2 flex flex-col justify-start ${isShortScreen ? "pb-0" : "pb-4"}`}>
+          <span ref={(el) => { contentRefsArray.current[0] = el; }} className="font-bold text-cyan-200 text-4xl  mb-2  underline">Contact</span>
+          <div ref={(el) => { contentRefsArray.current[1] = el; }} className={`space-y-2 flex flex-col justify-start ${isShortScreen ? "pb-0" : "pb-4"}`}>
             {!status.includes("success") && (
               <>
                 <span className="text-red-50 md:text-xl block space-y-2 ml-4 pt-4 md:pt-2 sm:space-y-0 sm:text-xl sm:ml-3 sm:mb-4">
@@ -229,7 +242,7 @@ export default function ContactPage() {
           </div>
 
           {/* Desktop version - static in flow */}
-          <div className="hidden md:flex items-baseline pt-2 ml-4 space-x-2 bg-transparent">
+          <div className="hidden md:flex items-baseline pt-4 ml-4 space-x-2 bg-transparent">
             <span className="text-2xl">Connect with me on LinkedIn</span>
             <a
               href="https://www.linkedin.com/in/anton-langbruttig/"
@@ -278,10 +291,10 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* AL Logo Watermark - Same as Skills page */}
+      {/* AL Logo Watermark */}
       <div
         ref={logoRef}
-        className={`fixed bottom-4 right-4 hidden min-[500px]:block md:hidden transition-opacity duration-300 ${
+        className={`fixed bottom-4 right-4 md:hidden transition-opacity duration-300 ${
           fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
         } pointer-events-none`}
       >

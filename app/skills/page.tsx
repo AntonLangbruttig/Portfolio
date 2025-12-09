@@ -15,8 +15,10 @@ const Skills = () => {
   const [isOverlapping, setIsOverlapping] = useState(false);
   const [containerHeight, setContainerHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const skillRefsArray = useRef<(HTMLSpanElement | null)[]>([]);
+  const lastSkillRef = useRef<HTMLSpanElement | null>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +50,7 @@ const Skills = () => {
     const updateHeight = () => {
       setContainerHeight(clampHeight());
       setIsMobile(window.innerWidth < 768);
+      setIsSmallScreen(window.innerWidth <= 630);
     };
 
     updateHeight();
@@ -61,10 +64,9 @@ const Skills = () => {
       if (!logoRef.current) return;
 
       const logoRect = logoRef.current.getBoundingClientRect();
-
-      // Find the first skill box that overlaps or has passed the logo
       let shouldHide = false;
 
+      // Check all skill boxes for overlap only
       for (const skillRef of skillRefsArray.current) {
         if (!skillRef) continue;
 
@@ -82,27 +84,20 @@ const Skills = () => {
           shouldHide = true;
           break;
         }
-
-        // Check if we've scrolled past this skill (skill is above the logo)
-        if (skillRect.bottom < logoRect.top) {
-          shouldHide = true;
-        } else {
-          // If we find a skill that hasn't passed the logo yet, stop checking
-          break;
-        }
       }
 
       setIsOverlapping(shouldHide);
     };
 
-    checkOverlap();
+    const scrollContainer = scrollContainerRef.current;
 
-    window.addEventListener("resize", checkOverlap);
-    scrollContainerRef.current?.addEventListener("scroll", checkOverlap);
+    checkOverlap();
+    window.addEventListener('resize', checkOverlap);
+    scrollContainer?.addEventListener('scroll', checkOverlap);
 
     return () => {
-      window.removeEventListener("resize", checkOverlap);
-      scrollContainerRef.current?.removeEventListener("scroll", checkOverlap);
+      window.removeEventListener('resize', checkOverlap);
+      scrollContainer?.removeEventListener('scroll', checkOverlap);
     };
   }, [fadeIn]);
 
@@ -110,7 +105,7 @@ const Skills = () => {
     <section className="md:h-[calc(100vh-30px)] overflow-hidden relative">
       <div
         ref={scrollContainerRef}
-        className="md:h-[96.5%] overflow-y-scroll no-scrollbar pt-6 pb-1"
+        className="md:h-[96.5%] overflow-y-scroll no-scrollbar pt-4 pb-1"
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
       >
         {/* Main Header */}
@@ -139,11 +134,18 @@ const Skills = () => {
                     .slice(0, Object.keys(skills).indexOf(category))
                     .reduce((acc, [_, categoryItems]) => acc + categoryItems.length, 0) + index;
 
+                  // Calculate total number of skills
+                  const totalSkills = Object.values(skills).reduce((acc, categoryItems) => acc + categoryItems.length, 0);
+                  const isLastSkill = globalIndex === totalSkills - 1;
+
                   return (
                     <span
                       key={skill}
-                      ref={(el) => { skillRefsArray.current[globalIndex] = el; }}
-                      className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 
+                      ref={(el) => {
+                        skillRefsArray.current[globalIndex] = el;
+                        if (isLastSkill) lastSkillRef.current = el;
+                      }}
+                      className="px-4 py-2 border rounded-none border-gray-400 text-gray-300
                       text-base font-medium transition-all duration-300"
                     >
                       {skill}
@@ -156,10 +158,10 @@ const Skills = () => {
         </div>
       </div>
 
-      {/* AL Logo Watermark - Same as PortfolioAbout */}
+      {/* AL Logo Watermark */}
       <div
         ref={logoRef}
-        className={`fixed bottom-4 right-4 hidden min-[500px]:block md:hidden transition-opacity duration-300 ${
+        className={`fixed bottom-4 right-4 md:hidden transition-opacity duration-300 ${
           fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
         } pointer-events-none`}
       >

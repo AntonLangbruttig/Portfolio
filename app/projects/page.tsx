@@ -135,9 +135,9 @@ export default function ProjectsPage() {
           style={{ height: `${containerHeight}px` }}
         >
           <div
-            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-[35px] sm:gap-y-[63px] 
-            md:gap-0 mt-10 sm:mt-0 sm:my-auto  sm:w-full md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6 
-            md:space-y-0 sm:px-5 md:px-6"
+            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-[35px] sm:gap-y-[63px]
+            md:gap-0 mt-10 sm:mt-0 sm:my-auto  sm:w-full md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6
+            md:space-y-0 sm:px-5 md:px-6 min-[945px]:max-[979px]:px-[100px]"
           >
             {/* Scrollable heading for small screens */}
             <h2 className={`md:hidden font-bold text-cyan-200 text-4xl underline sm:mt-4 -mb-1   w-full text-start pl-6
@@ -151,7 +151,7 @@ export default function ProjectsPage() {
                 hover:outline-[#2bbfec] sm:-mt-9 sm:w-[275px]  sm:max-w-80 sm:h-[450px]
                 md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[350px] md:mb-0 "
               >
-                <Link href={project.link} className="block mb-3 md:h-full sm:h-[490px]">
+                <Link href={project.link} className="block mb-3 md:h-full sm:h-[40px]">
                   {project.video ? (
                     <>
                       {/* Desktop Video */}
