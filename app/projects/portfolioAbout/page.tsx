@@ -25,7 +25,7 @@ const PortfolioAbout = () => {
     const smallViewport = 500;  // Viewport height at small screen
     const smallHeight = 429;    // Container height you want at 500px viewport
     const largeViewport = 970;  // Viewport height at large screen
-    const largeHeight = 893;    // Container height you want at 968px viewport
+    const largeHeight = 894.5;    // Container height you want at 968px viewport
 
     // Calculate the slope between the two points
     const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
@@ -95,7 +95,7 @@ const PortfolioAbout = () => {
 
   return (
     // Changed from 100vh to 100dvh for better mobile support
-    <section className="h-[100dvh] max-h-[calc(100vh-43px)] overflow-hidden md:mt-0 flex flex-col relative">
+    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-[calc(100vh-430px)] overflow-hidden md:mt-0 flex flex-col relative">
       {/* Scrollable Content */}
       <div
         ref={scrollContainerRef}
@@ -103,7 +103,7 @@ const PortfolioAbout = () => {
         className="md:flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
-        <div className="min-h-fit md:min-h-[calc(100%-120px)]">
+        <div className="min-h-fit md:min-h-[calc(100%+120px)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}

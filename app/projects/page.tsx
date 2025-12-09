@@ -59,7 +59,7 @@ export default function ProjectsPage() {
     const smallViewport = 500;  // Viewport height at small screen
     const smallHeight = 428.5;    // Container height you want at 500px viewport
     const largeViewport = 970;  // Viewport height at large screen
-    const largeHeight = 894.2;    // Container height you want at 968px viewport
+    const largeHeight = 894.5;    // Container height you want at 968px viewport
 
     // Calculate the slope between the two points
     const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
