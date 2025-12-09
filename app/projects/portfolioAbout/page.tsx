@@ -18,16 +18,18 @@ const PortfolioAbout = () => {
   // Dynamic height calculation - FIXED for real mobile browsers
   useEffect(() => {
     const calculateHeight = () => {
+      if (typeof window === 'undefined') return;
+
       // Use visualViewport API if available (more accurate on mobile)
       const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
       const headerHeight = 42;
       // Increased bottom offset to account for mobile browser chrome
       const borderBottomOffset = 14;
-      
+
       // On mobile, be more conservative with height to ensure scrollability
       const isMobile = window.innerWidth <= 768;
       const mobileExtraBuffer = isMobile ? 0 : 0; // Extra buffer for mobile browser UI
-      
+
       setContainerHeight(viewportHeight - headerHeight - borderBottomOffset - mobileExtraBuffer);
     };
 

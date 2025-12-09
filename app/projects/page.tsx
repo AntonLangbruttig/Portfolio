@@ -51,6 +51,8 @@ export default function ProjectsPage() {
   const [containerHeight, setContainerHeight] = useState(0);
 
   const clampHeight = () => {
+    if (typeof window === 'undefined') return 0;
+
     const viewportHeight = window.innerHeight;
 
     // Define your desired heights at specific viewport sizes

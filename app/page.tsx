@@ -34,6 +34,8 @@ export default function HomePage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const clampHeight = () => {
+    if (typeof window === 'undefined') return 0;
+
     const viewportHeight = window.innerHeight;
 
     // Define your desired heights at specific viewport sizes
