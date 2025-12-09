@@ -13,36 +13,43 @@ const PortfolioAbout = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isOverlapping, setIsOverlapping] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Dynamic height calculation - FIXED for real mobile browsers
+  const clampHeight = () => {
+    if (typeof window === 'undefined') return 0;
+
+    const viewportHeight = window.innerHeight;
+
+    // Define your desired heights at specific viewport sizes
+    const smallViewport = 500;  // Viewport height at small screen
+    const smallHeight = 429;    // Container height you want at 500px viewport
+    const largeViewport = 970;  // Viewport height at large screen
+    const largeHeight = 893;    // Container height you want at 968px viewport
+
+    // Calculate the slope between the two points
+    const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
+
+    // Linear interpolation: y = mx + b
+    const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
+
+    // Clamp to stay within reasonable bounds
+    const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
+
+    return clampedValue;
+  };
+
+  // Update container height and mobile state
   useEffect(() => {
-    const calculateHeight = () => {
-      if (typeof window === 'undefined') return;
-
-      // Use visualViewport API if available (more accurate on mobile)
-      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-      const headerHeight = 42;
-      // Increased bottom offset to account for mobile browser chrome
-      const borderBottomOffset = 14;
-
-      // On mobile, be more conservative with height to ensure scrollability
-      const isMobile = window.innerWidth <= 768;
-      const mobileExtraBuffer = isMobile ? 0 : 0; // Extra buffer for mobile browser UI
-
-      setContainerHeight(viewportHeight - headerHeight - borderBottomOffset - mobileExtraBuffer);
+    const updateHeight = () => {
+      setContainerHeight(clampHeight());
+      setIsMobile(window.innerWidth < 768);
     };
 
-    calculateHeight();
-    
-    // Listen to both resize and visualViewport resize (for mobile keyboard, etc.)
-    window.addEventListener('resize', calculateHeight);
-    window.visualViewport?.addEventListener('resize', calculateHeight);
-    
-    return () => {
-      window.removeEventListener('resize', calculateHeight);
-      window.visualViewport?.removeEventListener('resize', calculateHeight);
-    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   useEffect(() => {
@@ -90,9 +97,9 @@ const PortfolioAbout = () => {
     // Changed from 100vh to 100dvh for better mobile support
     <section className="h-[100dvh] max-h-[calc(100vh-43px)] overflow-hidden md:mt-0 flex flex-col relative">
       {/* Scrollable Content */}
-      <div 
+      <div
         ref={scrollContainerRef}
-        style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
+        style={{ height: isMobile ? `${containerHeight}px` : undefined }}
         className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
