@@ -100,10 +100,10 @@ const PortfolioAbout = () => {
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
-        className="flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
+        className="md:flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
-        <div className="min-h-fit md:min-h-[calc(100%+120px)]">
+        <div className="min-h-fit md:min-h-[calc(100%-120px)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
@@ -151,7 +151,8 @@ const PortfolioAbout = () => {
                     style={{ paddingLeft: isSmallScreen ? '0' : '24px' }}
                   >
                       {technologies.map((tech, index) => (
-                          <span key={index} className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium transition-all duration-300">
+                          <span key={index} className="px-4 py-2 border rounded-none border-gray-400
+                           text-gray-300 text-base font-medium transition-all duration-300">
                               {tech}
                           </span>
                       ))}
