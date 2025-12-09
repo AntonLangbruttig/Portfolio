@@ -20,7 +20,7 @@ export default function Bio() {
 
     // Define your desired heights at specific viewport sizes
     const smallViewport = 500;  // Viewport height at small screen
-    const smallHeight = 428;    // Container height you want at 500px viewport
+    const smallHeight = 429;    // Container height you want at 500px viewport
     const largeViewport = 970;  // Viewport height at large screen
     const largeHeight = 895;    // Container height you want at 968px viewport
 
