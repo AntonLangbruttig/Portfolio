@@ -116,7 +116,7 @@ export default function ProjectsPage() {
 
   return (
     <div
-      className={`h-screen flex flex-col md:w-[1000px] sm:justify-start sm:items-start md:[align-items:unset] sm:pl-6
+      className={`h-screen flex flex-col md:w-[1000px] sm:justify-start sm:items-start md:[align-items:unset] sm:pl-0
         sm:w-full md:h-max md:pl-[15px] md:pr-10 mr-64 transition-opacity duration-1000 ${
         fadeIn ? "opacity-100" : "opacity-0"
       }`}
@@ -130,16 +130,17 @@ export default function ProjectsPage() {
         <div
           ref={scrollContainerRef}
           onScroll={handleScroll}
-          className="hide-scrollbar  md:mt-8 overflow-x-auto md:py-5 flex md:max-h-[400px]
+          className="hide-scrollbar  md:mt-0 overflow-x-auto md:py-5 flex  md:max-h-[400px]
           items-center justify-center md:justify-start sm:items-center sm:w-auto md:-ml-3"
           style={{ height: `${containerHeight}px` }}
         >
           <div
-            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-[60px] md:gap-0 mt-10 sm:mt-0 sm:my-auto
-            sm:w-full md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6 md:space-y-0 sm:px-0 md:px-6"
+            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-[35px] sm:gap-y-[63px] 
+            md:gap-0 mt-10 sm:mt-0 sm:my-auto  sm:w-full md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6 
+            md:space-y-0 sm:px-5 md:px-6"
           >
             {/* Scrollable heading for small screens */}
-            <h2 className={`md:hidden font-bold text-cyan-200 text-4xl underline sm:mt-4 sm:mb-2 w-full text-start
+            <h2 className={`md:hidden font-bold text-cyan-200 text-4xl underline sm:mt-4 -mb-1   w-full text-start pl-6
                 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             >Projects</h2>
             {projects.map((project, index) => (
@@ -147,10 +148,10 @@ export default function ProjectsPage() {
                 key={index}
                 className="relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
                 rounded-none w-[600px] transition-transform duration-500 transform cursor-pointer
-                hover:outline-[#2bbfec] sm:-mt-7 sm:w-[275px]  sm:max-w-80 sm:h-[450px]
-                md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[350px] md:mb-0"
+                hover:outline-[#2bbfec] sm:-mt-9 sm:w-[275px]  sm:max-w-80 sm:h-[450px]
+                md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[350px] md:mb-0 "
               >
-                <Link href={project.link} className="block mb-4 md:h-full sm:h-[500px]">
+                <Link href={project.link} className="block mb-3 md:h-full sm:h-[490px]">
                   {project.video ? (
                     <>
                       {/* Desktop Video */}
