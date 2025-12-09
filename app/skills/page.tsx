@@ -129,7 +129,7 @@ const Skills = () => {
           }`}
         >
           {Object.entries(skills).map(([category, items]) => (
-            <div key={category} className="mb-0">
+            <div key={category} className="mb-4">
               <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">
                 {category}
               </h3>
