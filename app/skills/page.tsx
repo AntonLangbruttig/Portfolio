@@ -110,7 +110,7 @@ const Skills = () => {
     <section className="md:h-[calc(100vh-30px)] overflow-hidden relative">
       <div
         ref={scrollContainerRef}
-        className="md:h-[96.5%] overflow-y-scroll no-scrollbar py-6"
+        className="md:h-[96.5%] overflow-y-scroll no-scrollbar pt-6 pb-1"
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
       >
         {/* Main Header */}
