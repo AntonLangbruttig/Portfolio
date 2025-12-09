@@ -27,6 +27,7 @@ export default function HomePage() {
   const [navOpacity, setNavOpacity] = useState(0);
   const [isOverlapping, setIsOverlapping] = useState(false);
   const [containerHeight, setContainerHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const textRef = useRef<HTMLPreElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -53,10 +54,11 @@ export default function HomePage() {
     return clampedValue;
   };
 
-  // Update container height
+  // Update container height and mobile state
   useEffect(() => {
     const updateHeight = () => {
       setContainerHeight(clampHeight());
+      setIsMobile(window.innerWidth < 768);
     };
 
     updateHeight();
@@ -270,7 +272,7 @@ export default function HomePage() {
       <div
         ref={scrollContainerRef}
         className="overflow-y-auto md:overflow-hidden relative w-full md:h-full"
-        style={{ height: window.innerWidth < 768 ? `${containerHeight}px` : undefined }}
+        style={{ height: isMobile ? `${containerHeight}px` : undefined }}
       >
         {animationState === "content" && (
           <div className="flex flex-col md:flex-row h-full animate-fade-in w-full max-w-[1400px] mx-auto px-4 md:px-0">
