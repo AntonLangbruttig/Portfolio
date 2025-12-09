@@ -100,7 +100,7 @@ const PortfolioAbout = () => {
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
-        className="md:flex-1 overflow-y-scroll no-scrollbar py-6 md:ml-1 scrollbar-hide"
+        className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
         <div className="min-h-fit md:min-h-[calc(100%+120px)]">
@@ -171,10 +171,6 @@ const PortfolioAbout = () => {
               </div>
           </div>
         </div>
-        
-        {/* INCREASED spacer for mobile scroll - this ensures content can scroll fully */}
-      
-        <div className="hidden sm:block md:hidden h-10 w-full"></div>
       </div>
 
       {/* Logo watermark - hidden below 630px and on md+ */}
