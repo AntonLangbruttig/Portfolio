@@ -138,7 +138,7 @@ export default function Bio() {
           </p>
 
           {/* Bottom spacer */}
-          <div className="h-[60px] md:hidden"></div>
+          <div className="h-[40px] md:hidden"></div>
         </div>
 
         {/* Logo watermark - hidden below 630px and on md+ */}
