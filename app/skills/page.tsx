@@ -107,7 +107,7 @@ const Skills = () => {
   }, [fadeIn]);
 
   return (
-    <section className="md:h-[calc(100vh-50px)] overflow-hidden relative">
+    <section className="md:h-[calc(100vh-30px)] overflow-hidden relative">
       <div
         ref={scrollContainerRef}
         className="md:h-[96.5%] overflow-y-scroll no-scrollbar py-6"
@@ -129,7 +129,7 @@ const Skills = () => {
           }`}
         >
           {Object.entries(skills).map(([category, items]) => (
-            <div key={category} className="mb-10">
+            <div key={category} className="mb-0">
               <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">
                 {category}
               </h3>
@@ -143,7 +143,8 @@ const Skills = () => {
                     <span
                       key={skill}
                       ref={(el) => { skillRefsArray.current[globalIndex] = el; }}
-                      className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 text-base font-medium transition-all duration-300"
+                      className="px-4 py-2 border rounded-none border-gray-400 text-gray-300 
+                      text-base font-medium transition-all duration-300"
                     >
                       {skill}
                     </span>

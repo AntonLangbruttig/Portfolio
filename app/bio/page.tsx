@@ -134,7 +134,7 @@ export default function Bio() {
           >
             I&apos;m always open to new opportunities and collaborations.
             If you&apos;re building something that demands both creativity and precision, let&apos;s connect.
-            <span className="animate-blink">&nbsp;_</span>
+            <span className="animate-blink">_</span>
           </p>
 
           {/* Bottom spacer */}
