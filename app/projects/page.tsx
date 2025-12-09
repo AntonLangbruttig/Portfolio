@@ -46,9 +46,11 @@ const projects = [
 export default function ProjectsPage() {
   const { fadeIn } = PageAnimation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [containerHeight, setContainerHeight] = useState(0);
+  const [isOverlapping, setIsOverlapping] = useState(false);
 
   const clampHeight = () => {
     if (typeof window === 'undefined') return 0;
@@ -84,6 +86,52 @@ export default function ProjectsPage() {
     return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
+  useEffect(() => {
+    const checkOverlap = () => {
+      if (!logoRef.current || !scrollContainerRef.current) return;
+
+      const logoRect = logoRef.current.getBoundingClientRect();
+      let shouldHide = false;
+
+      // Get all project card elements
+      const projectCards = scrollContainerRef.current.querySelectorAll('.project-card');
+
+      // Check if logo overlaps with any individual project card
+      Array.from(projectCards).forEach((card) => {
+        const cardRect = card.getBoundingClientRect();
+        const overlaps = !(
+          logoRect.right < cardRect.left ||
+          logoRect.left > cardRect.right ||
+          logoRect.bottom < cardRect.top ||
+          logoRect.top > cardRect.bottom
+        );
+
+        if (overlaps) {
+          shouldHide = true;
+        }
+      });
+
+      setIsOverlapping(shouldHide);
+    };
+
+    checkOverlap();
+    window.addEventListener('scroll', checkOverlap);
+    window.addEventListener('resize', checkOverlap);
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkOverlap);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', checkOverlap);
+      window.removeEventListener('resize', checkOverlap);
+      if (container) {
+        container.removeEventListener('scroll', checkOverlap);
+      }
+    };
+  }, [fadeIn]);
+
   const scrollToLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo({
@@ -116,7 +164,7 @@ export default function ProjectsPage() {
 
   return (
     <div
-      className={`h-screen flex flex-col md:w-[1000px] sm:justify-start sm:items-start md:[align-items:unset] sm:pl-0
+      className={`h-screen flex flex-col md:w-[1000px]  sm:justify-start sm:items-start md:[align-items:unset] sm:pl-0
         sm:w-full md:h-max md:pl-[15px] md:pr-10 mr-64 transition-opacity duration-1000 ${
         fadeIn ? "opacity-100" : "opacity-0"
       }`}
@@ -135,18 +183,18 @@ export default function ProjectsPage() {
           style={{ height: `${containerHeight}px` }}
         >
           <div
-            className="group flex md:pl-7 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-[35px] sm:gap-y-[63px]
+            className="group flex md:pl-4 md:pr-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-[35px] sm:gap-y-[63px]
             md:gap-0 mt-10 sm:mt-0 sm:my-auto  sm:w-full md:w-auto md:flex-nowrap sm:space-x-0 md:flex-row md:space-x-6
-            md:space-y-0 sm:px-5 md:px-6 min-[945px]:max-[979px]:px-[100px]"
+            md:space-y-0 sm:px-5 md:px-6 min-[945px]:max-[979px]:px-[100px] pb-10 md:pb-0"
           >
             {/* Scrollable heading for small screens */}
-            <h2 className={`md:hidden font-bold text-cyan-200 text-4xl underline sm:mt-4 -mb-1   w-full text-start pl-6
+            <h2 className={`md:hidden font-bold text-cyan-200 text-4xl underline sm:mt-4 mb-0  w-full text-start pl-6
                 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             >Projects</h2>
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
+                className="project-card relative bg-black outline outline-4 outline-transparent outline-offset-[3.5px]
                 rounded-none w-[600px] transition-transform duration-500 transform cursor-pointer
                 hover:outline-[#2bbfec] sm:-mt-9 sm:w-[275px]  sm:max-w-80 sm:h-[450px]
                 md:mt-0 md:w-[600px] md:min-w-[600px] md:max-w-none md:h-[350px] md:mb-0 "
@@ -275,6 +323,23 @@ export default function ProjectsPage() {
         >
           <ChevronRight className="w-14 h-14" />
         </button>
+      </div>
+
+      {/* AL Logo Watermark - Only visible on small screens */}
+      <div
+        ref={logoRef}
+        className={`fixed bottom-4 right-4 md:hidden transition-opacity duration-300 ${
+          fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
+        } pointer-events-none`}
+      >
+        <Image
+          src="/images/al.png"
+          alt="AL Logo"
+          width={112}
+          height={112}
+          className="w-28 h-auto"
+          priority
+        />
       </div>
     </div>
   );
