@@ -13,6 +13,7 @@ export default function ContactPage() {
   const [isShortScreen, setIsShortScreen] = useState(false);
   const [isVeryShortScreen, setIsVeryShortScreen] = useState(false);
   const [containerHeight, setContainerHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const contentRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
@@ -39,10 +40,11 @@ export default function ContactPage() {
     return clampedValue;
   };
 
-  // Update container height
+  // Update container height and mobile state
   useEffect(() => {
     const updateHeight = () => {
       setContainerHeight(clampHeight());
+      setIsMobile(window.innerWidth < 768);
     };
 
     updateHeight();
@@ -145,7 +147,7 @@ export default function ContactPage() {
       ref={scrollContainerRef}
       className={`md:h-screen ${isShortScreen ? "overflow-y-auto" : "overflow-y-hidden"} md:overflow-y-hidden transition-opacity
       duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
-      style={{ height: window.innerWidth < 768 ? `${containerHeight}px` : undefined }}
+      style={{ height: isMobile ? `${containerHeight}px` : undefined }}
     >
       <div
         className={`text-white p-8 pt-5 ${isShortScreen ? "min-h-[118vh]" : ""} md:min-h-0 ${isShortScreen ? "pb-[10px]" : "pb-8"} md:pb-8`}
@@ -286,7 +288,7 @@ export default function ContactPage() {
           alt="AL Logo"
           width={112}
           height={112}
-          className="w-28 h-auto min-[870px]:w-36"
+          className="w-28 h-auto min-[870px]:w-36 "
           priority
         />
       </div>

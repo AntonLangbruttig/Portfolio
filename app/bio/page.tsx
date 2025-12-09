@@ -10,22 +10,39 @@ export default function Bio() {
   const logoRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isOverlapping, setIsOverlapping] = useState(false);
-  const [containerHeight, setContainerHeight] = useState<number | null>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
 
-  // Dynamic height calculation to stop at border
+  const clampHeight = () => {
+    const viewportHeight = window.innerHeight;
+
+    // Define your desired heights at specific viewport sizes
+    const smallViewport = 500;  // Viewport height at small screen
+    const smallHeight = 427;    // Container height you want at 500px viewport
+    const largeViewport = 970;  // Viewport height at large screen
+    const largeHeight = 893;    // Container height you want at 968px viewport
+
+    // Calculate the slope between the two points
+    const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
+
+    // Linear interpolation: y = mx + b
+    const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
+
+    // Clamp to stay within reasonable bounds
+    const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
+
+    return clampedValue;
+  };
+
+  // Update container height
   useEffect(() => {
-    const calculateHeight = () => {
-      const viewportHeight = window.innerHeight;
-      const headerHeight = 42;
-      const borderBottomOffset = 14; // adjust this to match your border position
-      
-      setContainerHeight(viewportHeight - headerHeight - borderBottomOffset);
+    const updateHeight = () => {
+      setContainerHeight(clampHeight());
     };
 
-    calculateHeight();
-    window.addEventListener('resize', calculateHeight);
-    
-    return () => window.removeEventListener('resize', calculateHeight);
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => window.removeEventListener('resize', updateHeight);
   }, []);
 
   useEffect(() => {
@@ -60,9 +77,9 @@ export default function Bio() {
 
   return (
     <section className="h-[calc(100vh-7px)] overflow-hidden md:mt-0">
-      <div 
+      <div
         ref={scrollContainerRef}
-        style={{ height: containerHeight ? `${containerHeight}px` : undefined }}
+        style={{ height: window.innerWidth < 768 ? `${containerHeight}px` : undefined }}
         className="overflow-y-scroll no-scrollbar py-6 relative pb-0"
       >
         {/* Main Header - hidden below md */}
