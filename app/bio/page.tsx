@@ -11,8 +11,11 @@ export default function Bio() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isOverlapping, setIsOverlapping] = useState(false);
   const [containerHeight, setContainerHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const clampHeight = () => {
+    if (typeof window === 'undefined') return 0;
+
     const viewportHeight = window.innerHeight;
 
     // Define your desired heights at specific viewport sizes
@@ -33,10 +36,11 @@ export default function Bio() {
     return clampedValue;
   };
 
-  // Update container height
+  // Update container height and mobile state
   useEffect(() => {
     const updateHeight = () => {
       setContainerHeight(clampHeight());
+      setIsMobile(window.innerWidth < 768);
     };
 
     updateHeight();
@@ -79,7 +83,7 @@ export default function Bio() {
     <section className="h-[calc(100vh-7px)] overflow-hidden md:mt-0">
       <div
         ref={scrollContainerRef}
-        style={{ height: window.innerWidth < 768 ? `${containerHeight}px` : undefined }}
+        style={{ height: isMobile ? `${containerHeight}px` : undefined }}
         className="overflow-y-scroll no-scrollbar py-6 relative pb-0"
       >
         {/* Main Header - hidden below md */}
