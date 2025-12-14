@@ -88,6 +88,15 @@ export default function ProjectsPage() {
   }, []);
 
   useEffect(() => {
+    // Initialize arrow states after component mounts
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth);
+    }
+  }, [containerHeight]);
+
+  useEffect(() => {
     const checkOverlap = () => {
       if (!logoRef.current || !scrollContainerRef.current) return;
 
@@ -135,23 +144,47 @@ export default function ProjectsPage() {
 
   const scrollToLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        left: 0,
+      const container = scrollContainerRef.current;
+      const cardWidth = 600;
+      const gap = 24;
+      const containerWidth = container.clientWidth;
+      const offset = 150; // Shift center point to the left by this amount
+
+      // Calculate current card index
+      const currentScroll = container.scrollLeft;
+      const currentCardIndex = Math.round(currentScroll / (cardWidth + gap));
+
+      // Go to previous card
+      const targetCardIndex = Math.max(0, currentCardIndex - 1);
+      const targetScroll = targetCardIndex * (cardWidth + gap) - (containerWidth - cardWidth) / 2 + offset;
+
+      container.scrollTo({
+        left: Math.max(0, targetScroll),
         behavior: "smooth",
       });
-      setShowLeftArrow(false);
-      setShowRightArrow(true);
     }
   };
 
   const scrollToRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTo({
-        left: scrollContainerRef.current.scrollWidth,
+      const container = scrollContainerRef.current;
+      const cardWidth = 600;
+      const gap = 24;
+      const containerWidth = container.clientWidth;
+      const offset = 150; // Shift center point to the left by this amount
+
+      // Calculate current card index
+      const currentScroll = container.scrollLeft;
+      const currentCardIndex = Math.round(currentScroll / (cardWidth + gap));
+
+      // Go to next card
+      const targetCardIndex = Math.min(projects.length - 1, currentCardIndex + 1);
+      const targetScroll = targetCardIndex * (cardWidth + gap) - (containerWidth - cardWidth) / 2 + offset;
+
+      container.scrollTo({
+        left: Math.max(0, targetScroll),
         behavior: "smooth",
       });
-      setShowLeftArrow(true);
-      setShowRightArrow(false);
     }
   };
 
@@ -335,24 +368,26 @@ export default function ProjectsPage() {
         </div>
 
         {/* Left Arrow */}
-        <button
-          onClick={scrollToLeft}
-          className={`hidden md:block lg:block absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-opacity-0 p-3 -ml-7
-                     group-hover:text-opacity-100 transition-all duration-300 z-10 text-2xl
-                     ${showLeftArrow ? "group-hover:opacity-100" : "opacity-0 pointer-events-none"}`}
-        >
-          <ChevronLeft className="w-14 h-14" />
-        </button>
+        {showLeftArrow && (
+          <button
+            onClick={scrollToLeft}
+            className="hidden md:block lg:block absolute left-0 top-1/2 transform -translate-y-1/2 text-white p-3 -ml-7
+                       transition-all duration-300 z-[110] text-2xl opacity-0 group-hover:opacity-100"
+          >
+            <ChevronLeft className="w-14 h-14" />
+          </button>
+        )}
 
         {/* Right Arrow */}
-        <button
-          onClick={scrollToRight}
-          className={`hidden md:block lg:block absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-opacity-0 p-3 -mr-4
-                     group-hover:text-opacity-100 transition-all duration-300 z-10 text-2xl
-                     ${showRightArrow ? "group-hover:opacity-100" : "opacity-0 pointer-events-none"}`}
-        >
-          <ChevronRight className="w-14 h-14" />
-        </button>
+        {showRightArrow && (
+          <button
+            onClick={scrollToRight}
+            className="hidden md:block lg:block absolute right-0 top-1/2 transform -translate-y-1/2 text-white p-3 -mr-4
+                       transition-all duration-300 z-[110] text-2xl opacity-0 group-hover:opacity-100"
+          >
+            <ChevronRight className="w-14 h-14" />
+          </button>
+        )}
       </div>
 
       {/* AL Logo Watermark - Only visible on small screens */}
