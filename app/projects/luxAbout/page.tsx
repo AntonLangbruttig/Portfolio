@@ -95,7 +95,7 @@ const LuxAbout = () => {
 
   return (
     // Changed from 100vh to 100dvh for better mobile support
-    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-[calc(100vh-430px)] overflow-hidden md:mt-0 flex flex-col relative">
+    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:mt-0 flex flex-col relative">
       {/* Scrollable Content */}
       <div
         ref={scrollContainerRef}
