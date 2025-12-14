@@ -86,7 +86,7 @@ export default function ViewWindow() {
               ))}
 
               {/* Dark Mode Toggle - At the end of side nav */}
-              <div className="mt-8 flex items-center gap-3 justify-center -ml-[28px]">
+              <div className="mt-8 flex items-center gap-5 justify-center -ml-[20px]">
                 <span
                   className="text-[#B19CD9] text-2xl transition-all duration-300 "
                   style={{
@@ -100,7 +100,7 @@ export default function ViewWindow() {
                 </span>
                 <button
                   onClick={toggleDarkMode}
-                  className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff] focus:ring-offset-2"
+                  className="relative inline-flex  items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff] focus:ring-offset-2"
                   style={{
                     backgroundColor: isDarkMode ? "#00ffff" : "#6b7280",
                   }}
