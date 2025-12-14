@@ -5,6 +5,7 @@ import { animationSequence } from "../utils/animation";
 import { SIDENAV_ITEMS } from "@/constants";
 import "@/styles/globals.css";
 import MenuItem from "../utils/menu-item";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function ViewWindow() {
   const [infoText, setInfoText] = useState("");
@@ -14,6 +15,7 @@ export default function ViewWindow() {
   const [showLine, setShowLine] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   useEffect(() => {
     animationSequence(
@@ -73,7 +75,7 @@ export default function ViewWindow() {
         {showNav && (
           <div className={`absolute inset-0 flex items-start justify-center z-0 nav-container
             ${showNav ? "visible" : ""}`}
-            style={{ 
+            style={{
               "--nav-opacity": navOpacity,
               paddingTop: "max(8.2rem, calc(50% - 300px))"
             } as React.CSSProperties}
@@ -82,6 +84,35 @@ export default function ViewWindow() {
               {SIDENAV_ITEMS.map((item, idx) => (
                 <MenuItem key={idx} item={item} />
               ))}
+
+              {/* Dark Mode Toggle - At the end of side nav */}
+              <div className="mt-8 flex items-center gap-3 justify-center -ml-[28px]">
+                <span
+                  className="text-[#B19CD9] text-2xl transition-all duration-300 "
+                  style={{
+                    fontFamily: '"VT323", monospace',
+                    fontWeight: "400",
+                    letterSpacing: "0.05em",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  Theme
+                </span>
+                <button
+                  onClick={toggleDarkMode}
+                  className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff] focus:ring-offset-2"
+                  style={{
+                    backgroundColor: isDarkMode ? "#00ffff" : "#6b7280",
+                  }}
+                  aria-label="Toggle dark mode"
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
+                      isDarkMode ? "translate-x-6" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+              </div>
             </nav>
           </div>
         )}

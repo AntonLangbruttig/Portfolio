@@ -89,8 +89,7 @@ const TaAppAbout = () => {
   }, [fadeIn]);
 
   const technologies = [
-    "React", "Next.js", "Tailwind CSS", "Framer Motion", "TypeScript",
-     "AWS SES", "Yarn","JavaScript","HTML"
+    "Python", "Django", "SQLite", "HTML", "CSS", "Git"
   ];
 
   return (
@@ -100,10 +99,10 @@ const TaAppAbout = () => {
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
-        className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:ml-1 scrollbar-hide"
+        className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:pt-4 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
-        <div className="min-h-fit md:min-h-[calc(100%+120px)]">
+        <div className="min-h-fit md:min-h-[calc(100%)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
@@ -117,29 +116,29 @@ const TaAppAbout = () => {
             TA App
           </h2>
           
-          <div 
+         <div 
             className={`transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ paddingLeft: isSmallScreen ? '46px' : '68px', paddingRight: isSmallScreen ? '30px' : '75px' , marginTop: isSmallScreen ? '-8px' : undefined }}
           >
-              <p 
+              <p
                 className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
                 style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
               >
-                Personal portfolio built from scratch, featuring synchronized boot animations and vintage CRT visual effects.</p>
-              <div className="mb-6">
-              <div className="mb-6">
-                <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 mb-4">Description</h3>
+                Team project from UW-Milwaukee&apos;s Software Engineering course.</p>
+              <div className="mb-6 md:mb-4">
+              <div className="mb-6 md:mb-4">
+                <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 md:-mt-5 mb-4 md:mb-2">Description</h3>
                 <ul 
                   className={`text-gray-300 text-lg space-y-3 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
                   style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
                 >
-                  <li>{">"} Custom animation system using requestAnimationFrame for frame-precise timing</li>
-                  <li>{">"} CRT effects (scanlines, RGB shift, screen glow) built with CSS</li>
-                  <li>{">"} SVG line-draw animations synchronized with boot sequence</li>
-                  <li>{">"} Typewriter text effect with blinking cursor</li>
-                  <li>{">"} Fully responsive with separate mobile/desktop experiences</li>
-                  <li>{">"} Serverless contact form via AWS SES</li>
-                  <li ref={lastListItemRef}>{">"} Auto-deploy pipeline via GitHub to AWS<span className="animate-blink"> __</span></li>
+                  <li>{">"} User authentication with session management</li>
+                  <li>{">"} Role-based access control (Supervisor, Instructor, TA)</li>
+                  <li>{">"} Database design with 4 related tables (Users, Courses, TAs, Sections)</li>
+                  <li>{">"} Full CRUD operations for accounts, courses, and sections</li>
+                  <li>{">"} TA assignment system with lab capacity tracking</li>
+                  <li>{">"} Course section scheduling (Lecture, Lab, Discussion)</li>
+                  <li ref={lastListItemRef}>{">"} Comprehensive unit test coverage<span className="animate-blink"> __</span></li>
                 </ul>
               </div>
               </div>

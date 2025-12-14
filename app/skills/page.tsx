@@ -161,17 +161,14 @@ const Skills = () => {
       {/* AL Logo Watermark */}
       <div
         ref={logoRef}
-        className={`fixed bottom-4 right-4 md:hidden transition-opacity duration-300 ${
-          fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
-        } pointer-events-none`}
+        className={`fixed bottom-2 right-1 block md:hidden transition-opacity duration-300 ${
+          !isOverlapping ? "opacity-70" : "opacity-0"
+        }`}
       >
-        <Image
+        <img
           src="/images/al.png"
           alt="AL Logo"
-          width={112}
-          height={112}
-          className="w-28 h-auto min-[870px]:w-36"
-          priority
+          className="w-20 h-auto min-[870px]:w-36"
         />
       </div>
     </section>

@@ -8,6 +8,7 @@ import { MenuItemWithSubMenuProps, SideNavItem } from "../types";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import { useMobileMenu } from "@/contexts/MobileMenuContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const sidebarVariants = {
   open: {
@@ -29,6 +30,7 @@ const HeaderMobile = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { height } = useDimensions(containerRef);
   const { isOpen, toggleOpen } = useMobileMenu();
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
 
@@ -169,6 +171,31 @@ const HeaderMobile = () => {
               )}
             </div>
           ))}
+
+          {/* Theme Toggle */}
+          <MenuItem className="my-3 h-[2px] w-full bg-[#00ffff]" />
+          <MenuItem>
+            <div className="flex items-center justify-between w-full text-2xl">
+              <span className="text-[#B19CD9] hover:text-white">Theme</span>
+              <button
+                onClick={() => {
+                  toggleDarkMode();
+                  toggleOpen();
+                }}
+                className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff] focus:ring-offset-2"
+                style={{
+                  backgroundColor: isDarkMode ? "#00ffff" : "#6b7280",
+                }}
+                aria-label="Toggle dark mode"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
+                    isDarkMode ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
+          </MenuItem>
         </motion.ul>
       </motion.nav>
     </>

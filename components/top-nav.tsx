@@ -8,6 +8,7 @@ import { animationSequence } from "../utils/animation";
 import "../styles/globals.css";
 import { SIDENAV_ITEMS } from "@/constants";
 import { useMobileMenu } from "@/contexts/MobileMenuContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function ViewWindow() {
   const [infoText, setInfoText] = useState("");
@@ -18,6 +19,7 @@ export default function ViewWindow() {
   const [showNav, setShowNav] = useState(false);
   const [navOpacity, setNavOpacity] = useState(0);
   const { closeMenu } = useMobileMenu();
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   const pathname = usePathname(); // Get the current route
 
@@ -113,7 +115,7 @@ export default function ViewWindow() {
           >
             <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%]"></div>
 
-            <div className="relative z-0 flex">
+            <div className="relative z-0 flex w-full">
               <Link
                 href="/"
                 onClick={closeMenu}
@@ -167,6 +169,36 @@ export default function ViewWindow() {
                   })}
                 </div>
               </nav>
+
+              {/* Theme Toggle - Positioned absolutely on the far right */}
+              <div className="hidden md:flex items-center gap-3 absolute right-0 top-10 pr-4">
+                <span
+                  className="text-[#B19CD9] text-2xl transition-all duration-300 hover:text-white"
+                  style={{
+                    fontFamily: '"VT323", monospace',
+                    fontWeight: "400",
+                    letterSpacing: "0.05em",
+                    lineHeight: "1.6",
+                    fontSize: "1.5rem",
+                  }}
+                >
+                  Theme
+                </span>
+                <button
+                  onClick={toggleDarkMode}
+                  className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff] focus:ring-offset-2"
+                  style={{
+                    backgroundColor: isDarkMode ? "#00ffff" : "#6b7280",
+                  }}
+                  aria-label="Toggle dark mode"
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
+                      isDarkMode ? "translate-x-6" : "translate-x-1"
+                    }`}
+                  />
+                </button>
+              </div>
             </div>
           </div>
         )}

@@ -89,8 +89,8 @@ const DataExtractorAbout = () => {
   }, [fadeIn]);
 
   const technologies = [
-  "Python", "pdfplumber", "pandas", "OpenPyXL", "Regular Expressions"
-  ];
+      "Python", "pdfplumber", "pandas", "Regular Expressions", "OpenPyXL"
+    ];
 
   return (
     // Changed from 100vh to 100dvh for better mobile support
@@ -99,12 +99,12 @@ const DataExtractorAbout = () => {
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
-        className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:ml-1 scrollbar-hide"
+        className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:pt-4 md:ml-1 scrollbar-hide"
       >
         {/* Inner wrapper - increased height multiplier for more scroll room */}
-        <div className="min-h-fit md:min-h-[calc(100%+120px)]">
+        <div className="min-h-fit md:min-h-[calc(100% -2)]">
           <h2 
-            className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
+            className={`sm:mt-2 md:mt-[1px] font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ 
             marginTop: isSmallScreen ? '-10px' : undefined,
@@ -124,27 +124,27 @@ const DataExtractorAbout = () => {
                 className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
                 style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
               >
-                Personal portfolio built from scratch, featuring synchronized boot animations and vintage CRT visual effects.</p>
+                Automated batch processing tool built for a client to extract structured data from PDFs.</p>
               <div className="mb-6">
               <div className="mb-6">
-                <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 mb-4">Description</h3>
+                <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 md:-mt-4 mb-4 md:mb-2">Description</h3>
                 <ul 
                   className={`text-gray-300 text-lg space-y-3 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
                   style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
                 >
-                  <li>{">"} Custom animation system using requestAnimationFrame for frame-precise timing</li>
-                  <li>{">"} CRT effects (scanlines, RGB shift, screen glow) built with CSS</li>
-                  <li>{">"} SVG line-draw animations synchronized with boot sequence</li>
-                  <li>{">"} Typewriter text effect with blinking cursor</li>
-                  <li>{">"} Fully responsive with separate mobile/desktop experiences</li>
-                  <li>{">"} Serverless contact form via AWS SES</li>
-                  <li ref={lastListItemRef}>{">"} Auto-deploy pipeline via GitHub to AWS<span className="animate-blink"> __</span></li>
+                  <li>{">"} Batch processes multiple PDF files from a single folder</li>
+                  <li>{">"} Extracts text with layout preservation using pdfplumber</li>
+                  <li>{">"} Regex pattern matching to identify and parse dates</li>
+                  <li>{">"} Handles multi-line entries by combining split data</li>
+                  <li>{">"} Cleans and normalizes extracted data</li>
+                  <li>{">"} Outputs structured Excel spreadsheet with pandas</li>
+                  <li ref={lastListItemRef}>{">"} 99% time reduction compared to manual data entry<span className="animate-blink"> __</span></li>
                 </ul>
               </div>
               </div>
 
               <div className="mb-6"> 
-                  <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">Technologies Used</h3>
+                  <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4 md:-mt-2 ">Technologies Used</h3>
                   <div 
                     className="flex flex-wrap gap-4"
                     style={{ paddingLeft: isSmallScreen ? '0' : '24px' }}

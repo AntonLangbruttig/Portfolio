@@ -125,7 +125,7 @@ const LuxAbout = () => {
                 className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
                 style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
               >
-                Personal portfolio built from scratch, featuring synchronized boot animations and vintage CRT visual effects.</p>
+                Complete business website for a luxury makeup studio in Atlanta.</p>
               <div className="mb-6">
               <div className="mb-6">
                 <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 mb-4">Description</h3>
@@ -133,13 +133,15 @@ const LuxAbout = () => {
                   className={`text-gray-300 text-lg space-y-3 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
                   style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
                 >
-                  <li>{">"} Custom animation system using requestAnimationFrame for frame-precise timing</li>
-                  <li>{">"} CRT effects (scanlines, RGB shift, screen glow) built with CSS</li>
-                  <li>{">"} SVG line-draw animations synchronized with boot sequence</li>
-                  <li>{">"} Typewriter text effect with blinking cursor</li>
-                  <li>{">"} Fully responsive with separate mobile/desktop experiences</li>
-                  <li>{">"} Serverless contact form via AWS SES</li>
-                  <li ref={lastListItemRef}>{">"} Auto-deploy pipeline via GitHub to AWS<span className="animate-blink"> __</span></li>
+                  <li>{">"} Services page with 6 service categories and individual CTAs</li>
+                  <li>{">"} Booking concierge system with detailed request form</li>
+                  <li>{">"} Google Business email integration for appointment requests</li>
+                  <li>{">"} Portfolio gallery with image carousel</li>
+                  <li>{">"} Expandable FAQ section with multiple categories</li>
+                  <li>{">"} Complete legal pages (Privacy, Terms, Copyright & Credits)</li>
+                  <li>{">"} Our Story page with brand narrative</li>
+                  <li>{">"} Click-to-call functionality for direct booking</li>
+                  <li ref={lastListItemRef}>{">"} Mobile-first responsive design with elegant typography<span className="animate-blink"> __</span></li>
                 </ul>
               </div>
               </div>
