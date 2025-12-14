@@ -115,7 +115,7 @@ export default function HomePage({ children }: { children: ReactNode }) {
                   animationState === "content" ? "screen-on" : ""
                 } sm:h-screen sm:overflow-none flex-wrap `}
             >
-              <div className="absolute inset-0 h-screen pointer-events-none before:content-[''] before:absolute before:inset-0 before:h-screen before:from-transparent before:via-black/10 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%] before:bg-[linear-gradient(rgba(18,16,16,0)_70%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))]"></div>
+              <div className="absolute inset-0 h-screen pointer-events-none before:content-[''] before:absolute before:inset-0 before:h-screen before:from-transparent before:via-black/10 before:to-transparent before:z-[5] before:bg-[length:100%_2px,3px_100%] before:bg-[linear-gradient(rgba(18,16,16,0)_70%,rgba(0,0,0,0.15)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))]"></div>
               <div
                 className={`absolute inset-x-0 flex h-[470px] sm:min-h-min overflow-hidden `}
                 style={{ zIndex: 2 }}
