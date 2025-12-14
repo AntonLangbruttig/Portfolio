@@ -151,7 +151,7 @@ const PortfolioAbout = () => {
                     style={{ paddingLeft: isSmallScreen ? '0' : '24px' }}
                   >
                       {technologies.map((tech, index) => (
-                          <span key={index} className="px-4 py-2 border rounded-none border-gray-400
+                          <span key={index} className="px-4 py-2 border rounded-none border-gray-300
                            text-gray-300 text-base font-medium transition-all duration-300">
                               {tech}
                           </span>
@@ -194,3 +194,6 @@ const PortfolioAbout = () => {
 };
 
 export default PortfolioAbout;
+
+
+

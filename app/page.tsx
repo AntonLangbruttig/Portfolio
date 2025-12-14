@@ -361,14 +361,14 @@ export default function HomePage() {
         {animationState === "content" && (
           <div
             ref={logoRef}
-            className={`fixed bottom-4 right-4 block md:hidden transition-opacity duration-300 ${
+            className={`fixed bottom-2 right-1 block md:hidden transition-opacity duration-300 ${
               !isOverlapping ? "opacity-70" : "opacity-0"
             }`}
           >
             <img
               src="/images/al.png"
               alt="AL Logo"
-              className="w-28 h-auto min-[870px]:w-36"
+              className="w-20 h-auto min-[870px]:w-36"
             />
           </div>
         )}
