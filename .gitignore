@@ -56,6 +56,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-
-# Keep team-provider-info.json out of version control
-amplify/team-provider-info.json
