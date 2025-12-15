@@ -22,7 +22,7 @@ const projects = [
     image: "/images/pdf-extractor-image.png",
     mobileImage: "/images/pdf-extractor-mobile.png",
     moreInfoLink: "/projects/dataExtractor/",
-    github: "https://github.com/AntonLangbruttig",
+    github: "https://github.com/AntonLangbruttig/PDF-Data-Extractor",
   },
   {
     title: "TA App",
