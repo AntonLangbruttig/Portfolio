@@ -9,6 +9,10 @@ frontend:
     preBuild:
       commands:
         - yarn install --frozen-lockfile
+        - echo "AWS_ACCESS_KEY_ID=$MY_AWS_ACCESS_KEY_ID" >> .env.production
+        - echo "AWS_SECRET_ACCESS_KEY=$MY_AWS_SECRET_ACCESS_KEY" >> .env.production
+        - echo "SES_SENDER_EMAIL=$SES_SENDER_EMAIL" >> .env.production
+        - echo "SES_RECIPIENT_EMAIL=$SES_RECIPIENT_EMAIL" >> .env.production
     build:
       commands:
         - yarn run build
