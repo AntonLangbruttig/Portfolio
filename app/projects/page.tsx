@@ -27,8 +27,8 @@ const projects = [
   {
     title: "TA App",
     link: "/projects/taApp/",
-    image: "/images/ta_app_full.png",
-    mobileImage: "/images/ta_app_small.png",
+    image: "/images/ta_app_full.webp",
+    mobileImage: "/images/ta_app_small.webp",
     moreInfoLink: "/projects/taApp/",
     goto: "https://ta-app-example.com/",
     github: "https://github.com/AntonLangbruttig/TA_App",
