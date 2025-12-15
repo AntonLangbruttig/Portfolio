@@ -157,7 +157,7 @@ export default function Bio() {
         {/* AL Logo Watermark */}
         <div
           ref={logoRef}
-          className={`fixed bottom-4 right-4 md:hidden transition-opacity duration-300 ${
+          className={`fixed bottom-2 right-0 md:hidden transition-opacity duration-300 ${
             fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
           } pointer-events-none`}
         >

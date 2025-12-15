@@ -68,7 +68,7 @@ const HeaderMobile = () => {
           onClick={() => toggleOpen()}
           initial={{ opacity: 0 }}
           animate={{ opacity: navOpacity }}
-          className="pointer-events-auto fixed top-5 right-4 z-50 md:hidden"
+          className="pointer-events-auto fixed top-6 right-4 z-50 md:hidden"
           aria-label="Toggle menu"
         >
           <motion.svg width="23" height="23" viewBox="0 0 23 23">

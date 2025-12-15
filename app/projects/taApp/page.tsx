@@ -175,7 +175,7 @@ const TaAppAbout = () => {
       {/* Logo watermark - hidden below 630px and on md+ */}
       <div
         ref={logoRef}
-        className={`fixed bottom-4 right-4 hidden min-[630px]:block md:hidden transition-opacity duration-300 ${
+        className={`fixed bottom-2 right-0 hidden min-[630px]:block md:hidden transition-opacity duration-300 ${
           fadeIn && !isOverlapping ? "opacity-70" : "opacity-0"
         } pointer-events-none`}
       >

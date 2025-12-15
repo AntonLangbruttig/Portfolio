@@ -361,7 +361,7 @@ export default function HomePage() {
         {animationState === "content" && (
           <div
             ref={logoRef}
-            className={`fixed bottom-2 right-1 block md:hidden transition-opacity duration-300 ${
+            className={`fixed bottom-2 right-0 block md:hidden transition-opacity duration-300 ${
               !isOverlapping ? "opacity-70" : "opacity-0"
             }`}
           >

@@ -113,20 +113,21 @@ export default function ViewWindow() {
               zIndex: 2,
             }}
           >
-            <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%]"></div>
+            <div className="absolute inset-0 pointer-events-none before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-t 
+            before:from-transparent before:via-black/25 before:to-transparent before:z-10 before:bg-[length:100%_2px,3px_100%]"></div>
 
             <div className="relative z-0 flex w-full">
               <Link
                 href="/"
                 onClick={closeMenu}
-                className="text-2xl font-bold text-[#00ffff] mr-3 ml-0 hover:opacity-60"
+                className="text-2xl font-bold text-[#00ffff] mr-2 ml-2 hover:opacity-60"
               >
                 <Image
                   src="/images/al.png"
                   alt="AL Logo"
-                  width={77} // Set fixed width
-                  height={77} // Set fixed height
-                  className="md:w-[77px] md:h-[77px] md:mt-[1px] sm:w-[50px] sm:h-[50px] sm:mt-2"
+                  width={74} // Set fixed width
+                  height={74} // Set fixed height
+                  className="md:w-[74px] md:h-[74px] md:mt-[3.5px] sm:w-[50px] sm:h-[50px] sm:mt-2"
                 />
               </Link>
               <h2 className="md:hidden text-[#ab91dd] transition-all duration-300 py-6 text-3xl text-bold capitalize">
@@ -137,7 +138,7 @@ export default function ViewWindow() {
                   : pageTitle}
               </h2>
               <nav className="flex container py-10 px-0">
-                <div className="hidden md:flex space-x-8">
+                <div className="hidden md:flex space-x-4">
                   {SIDENAV_ITEMS.map((item) => {
                     const isActive =
                       item.path === "/"
@@ -186,7 +187,8 @@ export default function ViewWindow() {
                 </span>
                 <button
                   onClick={toggleDarkMode}
-                  className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[#00ffff] focus:ring-offset-2"
+                  className="relative inline-flex items-center h-6 w-11 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 
+                  focus:ring-[#00ffff] focus:ring-offset-2"
                   style={{
                     backgroundColor: isDarkMode ? "#00ffff" : "#6b7280",
                   }}
