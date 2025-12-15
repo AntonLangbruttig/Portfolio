@@ -21,25 +21,18 @@ const TaAppAbout = () => {
 
     const viewportHeight = window.innerHeight;
 
-    // Define your desired heights at specific viewport sizes
-    const smallViewport = 500;  // Viewport height at small screen
-    const smallHeight = 429;    // Container height you want at 500px viewport
-    const largeViewport = 970;  // Viewport height at large screen
-    const largeHeight = 894.5;    // Container height you want at 968px viewport
+    const smallViewport = 500;
+    const smallHeight = 429;
+    const largeViewport = 970;
+    const largeHeight = 894.5;
 
-    // Calculate the slope between the two points
     const slope = (largeHeight - smallHeight) / (largeViewport - smallViewport);
-
-    // Linear interpolation: y = mx + b
     const interpolatedHeight = smallHeight + slope * (viewportHeight - smallViewport);
-
-    // Clamp to stay within reasonable bounds
     const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
   
     return clampedValue;
   };
 
-  // Update container height and mobile state
   useEffect(() => {
     const updateHeight = () => {
       setContainerHeight(clampHeight());
@@ -57,7 +50,6 @@ const TaAppAbout = () => {
       setIsSmallScreen(window.innerWidth <= 630);
     };
  
-    
     const checkOverlap = () => {
       if (lastListItemRef.current && logoRef.current) {
         const textRect = lastListItemRef.current.getBoundingClientRect();
@@ -94,86 +86,85 @@ const TaAppAbout = () => {
   ];
 
   return (
-    // Changed from 100vh to 100dvh for better mobile support
-    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:mt-0 flex flex-col relative">
+    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:-mt-1 flex flex-col relative">
       {/* Scrollable Content */}
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
         className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:pt-4 md:ml-1 scrollbar-hide"
       >
-        {/* Inner wrapper - increased height multiplier for more scroll room */}
         <div className="min-h-fit md:min-h-[calc(100%)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ 
-            marginTop: isSmallScreen ? '-10px' : undefined,
-            marginLeft: isSmallScreen ? '-31px': undefined,
-            fontSize: isSmallScreen ? '28px' : undefined, 
-            
-          }}
+              marginTop: isSmallScreen ? '-10px' : undefined,
+              marginLeft: isSmallScreen ? '-31px': undefined,
+              fontSize: isSmallScreen ? '28px' : undefined, 
+            }}
           >
             TA App
           </h2>
           
-         <div 
+          <div 
             className={`transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
-            style={{ paddingLeft: isSmallScreen ? '46px' : '68px', paddingRight: isSmallScreen ? '30px' : '75px' , marginTop: isSmallScreen ? '-8px' : undefined }}
+            style={{ paddingLeft: isSmallScreen ? '46px' : '68px', paddingRight: isSmallScreen ? '30px' : '75px', marginTop: isSmallScreen ? '-8px' : undefined }}
           >
-              <p
-                className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
-                style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
-              >
-                Team project from UW-Milwaukee&apos;s Software Engineering course.</p>
-              <div className="mb-6 md:mb-4">
+            <p
+              className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
+              style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
+            >
+              Full-stack Django web app built as a team project for UW-Milwaukee&apos;s Software Engineering course.
+            </p>
+            
+            <div className="mb-6 md:mb-4">
               <div className="mb-6 md:mb-4">
                 <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 md:-mt-5 mb-4 md:mb-2">Description</h3>
                 <ul 
                   className={`text-gray-300 text-lg space-y-3 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
                   style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
                 >
-                  <li>{">"} User authentication with session management</li>
+                  <li>{">"} User authentication with Django session management</li>
                   <li>{">"} Role-based access control (Supervisor, Instructor, TA)</li>
-                  <li>{">"} Database design with 4 related tables (Users, Courses, TAs, Sections)</li>
-                  <li>{">"} Full CRUD operations for accounts, courses, and sections</li>
-                  <li>{">"} TA assignment system with lab capacity tracking</li>
-                  <li>{">"} Course section scheduling (Lecture, Lab, Discussion)</li>
-                  <li ref={lastListItemRef}>{">"} Comprehensive unit test coverage<span className="animate-blink"> __</span></li>
+                  <li>{">"} Relational database with 4 models and foreign key relationships</li>
+                  <li>{">"} Full CRUD operations across 11 views for accounts, courses, and sections</li>
+                  <li>{">"} TA assignment system with grader status and lab capacity tracking</li>
+                  <li>{">"} Course section scheduling (Lecture, Lab, Discussion) with time/day selection</li>
+                  <li ref={lastListItemRef}>{">"} 11 test files covering unit and acceptance testing<span className="animate-blink"> __</span></li>
                 </ul>
               </div>
-              </div>
+            </div>
 
-              <div className="mb-6"> 
-                  <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">Technologies Used</h3>
-                  <div 
-                    className="flex flex-wrap gap-4"
-                    style={{ paddingLeft: isSmallScreen ? '0' : '24px' }}
-                  >
-                      {technologies.map((tech, index) => (
-                          <span key={index} className="px-4 py-2 border rounded-none border-gray-300
-                           text-gray-300 text-base font-medium transition-all duration-300">
-                              {tech}
-                          </span>
-                      ))}
-                  </div>
+            <div className="mb-6"> 
+              <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4 md:-mt-3">Technologies Used</h3>
+              <div 
+                className="flex flex-wrap gap-4"
+                style={{ paddingLeft: isSmallScreen ? '0' : '24px' }}
+              >
+                {technologies.map((tech, index) => (
+                  <span key={index} className="px-4 py-2 border rounded-none border-gray-300
+                    text-gray-300 text-base font-medium transition-all duration-300">
+                    {tech}
+                  </span>
+                ))}
               </div>
+            </div>
 
-              {/* Chevron - now inside the content like Lux */}
-              <div className="w-5 lg:-mt-7 md:-mt-9 block md:hidden">
-                <Link href="/projects">
-                  <div className="cursor-pointer w-20 h-80 md:relative md:justify-end md:-bottom-2
-                   md:items-end md:-ml-[85px] sm:fixed sm:-bottom-[230px] sm:-ml-[85px] text-[#0ccbed] duration-300 hover:opacity-50"
-                   style={{ marginLeft: isSmallScreen ? '-63px' : undefined }}>
-                    <Icon icon="lucide:chevron-left" width="80" height="80" />
-                  </div>
-                </Link>
-              </div>
+            {/* Chevron */}
+            <div className="w-5 lg:-mt-7 md:-mt-9 block md:hidden">
+              <Link href="/projects">
+                <div className="cursor-pointer w-20 h-80 md:relative md:justify-end md:-bottom-2
+                  md:items-end md:-ml-[85px] sm:fixed sm:-bottom-[230px] sm:-ml-[85px] text-[#0ccbed] duration-300 hover:opacity-50"
+                  style={{ marginLeft: isSmallScreen ? '-63px' : undefined }}>
+                  <Icon icon="lucide:chevron-left" width="80" height="80" />
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Logo watermark - hidden below 630px and on md+ */}
+      {/* Logo watermark */}
       <div
         ref={logoRef}
         className={`fixed bottom-2 right-0 hidden min-[630px]:block md:hidden transition-opacity duration-300 ${
