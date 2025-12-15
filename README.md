@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Anton Langbruttig Portfolio
 
-## Getting Started
+A personal portfolio website built from scratch featuring a retro-futuristic CRT monitor aesthetic with synchronized boot animations and vintage visual effects.
 
-First, run the development server:
+🔗 **Live Site:** [antonlangbruttig.com](https://antonlangbruttig.com)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **CRT Boot Animation** — Simulated monitor power-on sequence with static noise, screen flicker, and scanline effects
+- **Custom Animation System** — Built with `requestAnimationFrame` for frame-precise timing
+- **SVG Line-Draw Animations** — Synchronized border animations during boot sequence
+- **Typewriter Text Effect** — Dynamic text reveal with blinking cursor
+- **CRT Visual Effects** — CSS-based scanlines, RGB shift, and screen glow
+- **Dark/Light Theme Toggle** — Switch between dark mode and background image
+- **Fully Responsive** — Separate optimized experiences for mobile, tablet, and desktop
+- **Serverless Contact Form** — Integrated with AWS SES for email delivery
+- **Auto-Deploy Pipeline** — GitHub to AWS Amplify CI/CD
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion, Custom CSS
+- **Fonts:** VT323 (Google Fonts) for retro terminal aesthetic
+- **Icons:** Iconify
+- **Email:** AWS SES (Lambda)
+- **Hosting:** AWS Amplify
+- **CI/CD:** GitHub Actions → AWS Amplify
+
+## Project Structure
+
+```
+portfolio/
+├── app/
+│   ├── layout.tsx          # Root layout with metadata, providers
+│   ├── page.tsx            # Home page with intro animation
+│   ├── bio/                # Bio page
+│   ├── projects/           # Projects listing and detail pages
+│   ├── skills/             # Skills page
+│   └── contact/            # Contact form page
+├── components/
+│   ├── background.tsx      # Theme-aware background wrapper
+│   ├── view-window.tsx     # Main CRT monitor frame component
+│   ├── side-nav.tsx        # Desktop sidebar navigation
+│   ├── top-nav.tsx         # Tablet/mobile top navigation
+│   └── header-mobile.tsx   # Mobile hamburger menu
+├── contexts/
+│   ├── ThemeContext.tsx    # Dark/light mode state
+│   └── MobileMenuContext.tsx
+├── utils/
+│   └── animation.ts        # Animation sequence controller
+├── styles/
+│   └── globals.css         # CRT effects, animations, Tailwind
+├── constants/              # Navigation items
+├── amplify.yml             # AWS Amplify build config
+└── lambda.js               # Serverless function for contact form
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Animation System (`utils/animation.ts`)
+Controls the boot sequence timing:
+1. Line draw animation (SVG borders)
+2. Static noise effect
+3. Screen flicker
+4. Content fade-in with typewriter effect
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### View Window (`components/view-window.tsx`)
+The main CRT monitor frame that wraps all page content with:
+- Animated border on load
+- Scanline overlay
+- Screen glow effect
+- Back navigation for nested pages
 
-## Learn More
+### Responsive Breakpoints
+- **Desktop (lg+):** Side navigation, full CRT frame
+- **Tablet (md):** Top navigation bar, adjusted layout
+- **Mobile (sm):** Hamburger menu, optimized content flow
 
-To learn more about Next.js, take a look at the following resources:
+## Running Locally
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Clone the repo
+git clone https://github.com/AntonLangbruttig/Portfolio.git
+cd Portfolio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Install dependencies
+yarn install
 
-## Deploy on Vercel
+# Set up environment variables
+cp .env.example .env.local
+# Add your AWS SES credentials
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Run development server
+yarn dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open [http://localhost:3000](http://localhost:3000)
+
+## Environment Variables
+
+```env
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+SES_SENDER_EMAIL=your_verified_email
+SES_RECIPIENT_EMAIL=your_email
+```
+
+## Deployment
+
+The site auto-deploys to AWS Amplify on push to `main` branch. Build configuration is in `amplify.yml`.
+
+## License
+
+MIT
