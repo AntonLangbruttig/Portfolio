@@ -7,13 +7,13 @@ A personal portfolio website built from scratch featuring a retro-futuristic CRT
 ## Features
 
 - **CRT Boot Animation** — Simulated monitor power-on sequence with static noise, screen flicker, and scanline effects
-- **Custom Animation System** — Built with `requestAnimationFrame` for frame-precise timing
+- **Custom Animation System** — Built with `requestAnimationFrame` for frame-precise timing, with session caching so animation only plays once
 - **SVG Line-Draw Animations** — Synchronized border animations during boot sequence
 - **Typewriter Text Effect** — Dynamic text reveal with blinking cursor
 - **CRT Visual Effects** — CSS-based scanlines, RGB shift, and screen glow
 - **Dark/Light Theme Toggle** — Switch between dark mode and background image
 - **Fully Responsive** — Separate optimized experiences for mobile, tablet, and desktop
-- **Serverless Contact Form** — Integrated with AWS SES for email delivery
+- **Serverless Contact Form** — AWS SES integration with Redis rate limiting (3 requests/minute)
 - **Auto-Deploy Pipeline** — GitHub to AWS Amplify CI/CD
 
 ## Tech Stack
@@ -25,6 +25,7 @@ A personal portfolio website built from scratch featuring a retro-futuristic CRT
 - **Fonts:** VT323 (Google Fonts) for retro terminal aesthetic
 - **Icons:** Iconify
 - **Email:** AWS SES (Lambda)
+- **Rate Limiting:** Redis (ioredis)
 - **Hosting:** AWS Amplify
 - **CI/CD:** GitHub Actions → AWS Amplify
 
@@ -44,27 +45,44 @@ portfolio/
 │   ├── view-window.tsx     # Main CRT monitor frame component
 │   ├── side-nav.tsx        # Desktop sidebar navigation
 │   ├── top-nav.tsx         # Tablet/mobile top navigation
-│   └── header-mobile.tsx   # Mobile hamburger menu
+│   └── header-mobile.tsx   # Mobile hamburger menu (Framer Motion)
 ├── contexts/
 │   ├── ThemeContext.tsx    # Dark/light mode state
 │   └── MobileMenuContext.tsx
 ├── utils/
-│   └── animation.ts        # Animation sequence controller
+│   ├── animation.js        # Animation sequence controller
+│   ├── menu-item.js        # Navigation menu item component
+│   └── rateLimiter.ts      # Redis rate limiting for contact form
 ├── styles/
 │   └── globals.css         # CRT effects, animations, Tailwind
 ├── constants/              # Navigation items
+├── types.tsx               # TypeScript type definitions
 ├── amplify.yml             # AWS Amplify build config
 └── lambda.js               # Serverless function for contact form
 ```
 
-## Key Components
+## Key Technical Features
 
-### Animation System (`utils/animation.ts`)
-Controls the boot sequence timing:
+### Animation System (`utils/animation.js`)
+Controls the boot sequence timing with session caching:
 1. Line draw animation (SVG borders)
 2. Static noise effect
 3. Screen flicker
 4. Content fade-in with typewriter effect
+5. **Caches animation state** — only plays on first visit, instant load on navigation
+
+### Rate Limiting (`utils/rateLimiter.ts`)
+Redis-based protection for the contact form:
+- 3 requests per minute per IP
+- Automatic expiration window
+- Prevents spam submissions
+
+### CRT Effects (`styles/globals.css`)
+Pure CSS visual effects:
+- Scanline overlay with gradient
+- RGB color shift
+- Screen glow and flicker animations
+- Static noise animation
 
 ### View Window (`components/view-window.tsx`)
 The main CRT monitor frame that wraps all page content with:
@@ -74,9 +92,11 @@ The main CRT monitor frame that wraps all page content with:
 - Back navigation for nested pages
 
 ### Responsive Breakpoints
-- **Desktop (lg+):** Side navigation, full CRT frame
-- **Tablet (md):** Top navigation bar, adjusted layout
-- **Mobile (sm):** Hamburger menu, optimized content flow
+Custom Tailwind breakpoints optimized for the CRT aesthetic:
+- `sm`: 0px+ (mobile)
+- `md`: 980px+ (tablet)
+- `lg`: 1267px+ (desktop)
+- `xl`: 1354px+ (large desktop)
 
 ## Running Locally
 
@@ -90,7 +110,7 @@ yarn install
 
 # Set up environment variables
 cp .env.example .env.local
-# Add your AWS SES credentials
+# Add your AWS and Redis credentials
 
 # Run development server
 yarn dev
@@ -98,19 +118,10 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
-## Environment Variables
-
-```env
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-SES_SENDER_EMAIL=your_verified_email
-SES_RECIPIENT_EMAIL=your_email
-```
-
 ## Deployment
 
 The site auto-deploys to AWS Amplify on push to `main` branch. Build configuration is in `amplify.yml`.
 
 ## License
 
-MIT
+This project is public for portfolio/demonstration purposes only. The code is not licensed for reuse, modification, or distribution.
