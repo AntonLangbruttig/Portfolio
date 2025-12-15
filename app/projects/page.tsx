@@ -116,6 +116,7 @@ export default function ProjectsPage() {
           logoRect.top > cardRect.bottom
         );
 
+      
         if (overlaps) {
           shouldHide = true;
         }
