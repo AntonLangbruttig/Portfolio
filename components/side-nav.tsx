@@ -86,7 +86,7 @@ export default function ViewWindow() {
               ))}
 
               {/* Dark Mode Toggle - At the end of side nav */}
-              <div className="mt-8 flex items-center gap-5 justify-center -ml-[20px]">
+              <div className="mt-8 flex items-center gap-5 justify-center -ml-[35px]">
                 <span
                   className="text-[#B19CD9] text-2xl transition-all duration-300 "
                   style={{
