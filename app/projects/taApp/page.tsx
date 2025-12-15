@@ -35,7 +35,7 @@ const TaAppAbout = () => {
 
     // Clamp to stay within reasonable bounds
     const clampedValue = Math.max(smallHeight, Math.min(interpolatedHeight, largeHeight));
-
+  
     return clampedValue;
   };
 
@@ -56,7 +56,8 @@ const TaAppAbout = () => {
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth <= 630);
     };
-
+ 
+    
     const checkOverlap = () => {
       if (lastListItemRef.current && logoRef.current) {
         const textRect = lastListItemRef.current.getBoundingClientRect();
