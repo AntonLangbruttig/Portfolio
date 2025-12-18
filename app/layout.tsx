@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: previewImage,
-        width: 1200,
-        height: 630,
+        width: 3456,
+        height: 1986,
         alt: "Preview of Anton Langbruttig's portfolio website",
       },
     ],
