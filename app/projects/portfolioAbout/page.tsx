@@ -87,14 +87,14 @@ const PortfolioAbout = () => {
   ];
 
   return (
-    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:mt-0 flex flex-col relative">
+    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:-mt-2 flex flex-col relative">
       {/* Scrollable Content */}
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
         className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:ml-1 scrollbar-hide"
       >
-        <div className="min-h-fit md:min-h-[calc(100%+120px)]">
+        <div className="min-h-fit md:min-h-[calc(100%+110px)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}

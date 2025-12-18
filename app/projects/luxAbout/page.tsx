@@ -87,14 +87,14 @@ const LuxAbout = () => {
   ];
 
   return (
-    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:mt-0 flex flex-col relative">
+    <section className="h-[100dvh] max-h-[calc(100vh-43px)] md:h-full overflow-hidden md:-mt-2 flex flex-col relative">
       {/* Scrollable Content */}
       <div
         ref={scrollContainerRef}
         style={{ height: isMobile ? `${containerHeight}px` : undefined }}
         className="md:flex-1 overflow-y-scroll no-scrollbar pt-6 md:ml-1 scrollbar-hide"
       >
-        <div className="min-h-fit md:min-h-[calc(100%+157px)]">
+        <div className="min-h-fit md:min-h-[calc(100%+230px)]">
           <h2 
             className={`sm:mt-2 md:mt-0 font-bold text-cyan-200 sm:text-4xl mb-3 underline px-14 transition-opacity 
               duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
@@ -111,32 +111,34 @@ const LuxAbout = () => {
             className={`transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
             style={{ paddingLeft: isSmallScreen ? '46px' : '68px', paddingRight: isSmallScreen ? '30px' : '75px', marginTop: isSmallScreen ? '-8px' : undefined }}
           >
-            <p 
-              className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
-              style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
-            >
-              Full-stack luxury makeup studio website with serverless backend for a business in Atlanta.
-            </p>
-            
+          <p 
+            className="text-gray-300 text-lg mb-6 sm:pt-3 md:pt-0"
+            style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
+          >
+            Full-stack luxury makeup studio website with serverless backend for a business in Atlanta.
+          </p>
+
+          <div className="mb-6">
             <div className="mb-6">
-              <div className="mb-6">
-                <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 mb-4">Description</h3>
-                <ul 
-                  className={`text-gray-300 text-lg space-y-3 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
-                  style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
-                >
-                  <li>{">"} Serverless backend with AWS Lambda, API Gateway, and SES for consultation requests</li>
-                  <li>{">"} Custom booking form with date picker, service selection, and real-time validation</li>
-                  <li>{">"} Services page with 6 service categories and individual CTAs</li>
-                  <li>{">"} Portfolio gallery with image carousel on desktop and grid on mobile</li>
-                  <li>{">"} Expandable FAQ section with multiple categories</li>
-                  <li>{">"} Complete legal pages (Privacy, Terms, Copyright & Credits)</li>
-                  <li>{">"} Our Story page with brand narrative and responsive imagery</li>
-                  <li>{">"} Deployed on AWS Amplify with CI/CD pipeline from GitHub</li>
-                  <li ref={lastListItemRef}>{">"} Mobile-first responsive design with custom typography<span className="animate-blink"> __</span></li>
-                </ul>
-              </div>
+              <h3 className="text-red-50 md:text-xl text-2xl font-bold -mt-3 mb-4">Description</h3>
+              <ul 
+                className={`text-gray-300 text-lg space-y-3 transition-opacity duration-1000 ${fadeIn ? "opacity-100" : "opacity-0"}`}
+                style={{ paddingLeft: isSmallScreen ? '0' : '45px' }}
+              >
+                <li>{">"} Serverless backend with AWS Lambda, API Gateway, and SES for consultation requests</li>
+                <li>{">"} Custom booking form with date picker, service selection, and real-time validation</li>
+                <li>{">"} Services page with 6 service categories and individual CTAs</li>
+                <li>{">"} Portfolio gallery with image carousel on desktop and grid on mobile</li>
+                <li>{">"} Expandable FAQ section with multiple categories</li>
+                <li>{">"} Complete legal pages (Privacy, Terms, Copyright & Credits)</li>
+                <li>{">"} Our Story page with brand narrative and responsive imagery</li>
+                <li>{">"} SEO-optimized with meta tags, structured data, and local Atlanta targeting</li>
+                <li>{">"} Integrated with Google Business Profile for local search visibility</li>
+                <li>{">"} Deployed on AWS Amplify with CI/CD pipeline from GitHub</li>
+                <li ref={lastListItemRef}>{">"} Mobile-first responsive design with custom typography and animations<span className="animate-blink"> __</span></li>
+              </ul>
             </div>
+          </div>
 
             <div className="mb-6"> 
               <h3 className="text-red-50 md:text-xl text-2xl font-bold mb-4">Technologies Used</h3>
