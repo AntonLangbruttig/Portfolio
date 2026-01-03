@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Anton Langbruttig",
   description:
     "Anton Langbruttig's personal website.",
+  alternates: {
+    canonical: siteUrl,
+  },
   icons: {
     icon: [
       { url: "/images/favicon.ico", type: "image/x-icon" },
