@@ -16,8 +16,6 @@
     "@iconify/react": "^5.0.1",
     "@vercel/nft": "^0.29.2",
     "acorn": "^8.14.1",
-    "aws-lambda": "^1.0.7",
-    "aws-sdk": "^2.1692.0",
     "braces": "^3.0.3",
     "clsx": "^2.1.1",
     "cookie": "^1.0.2",
@@ -40,7 +38,7 @@
     "swiper": "^11.2.2",
     "tailwind-merge": "^2.4.0",
     "tailwind-scrollbar-hide": "^2.0.0",
-    "tar": "^7.4.3",
+    "tar": "^7.5.7",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
