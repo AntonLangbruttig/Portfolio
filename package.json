@@ -20,14 +20,14 @@
     "clsx": "^2.1.1",
     "cookie": "^1.0.2",
     "dotenv": "^16.4.7",
-    "fast-xml-parser": "^5.0.8",
+    "fast-xml-parser": "^5.5.3",
     "framer-motion": "^11.3.6",
     "got": "^14.4.6",
     "install": "^0.13.0",
     "ioredis": "^5.6.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.475.0",
-    "next": "^14.2.35",
+    "next": "^15.3.0",
     "punycode": "^2.3.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -35,10 +35,10 @@
     "send": "^1.1.0",
     "serverless": "^4.8.0",
     "sharp": "^0.33.5",
-    "swiper": "^11.2.2",
+    "swiper": "^12.1.2",
     "tailwind-merge": "^2.4.0",
     "tailwind-scrollbar-hide": "^2.0.0",
-    "tar": "^7.5.7",
+    "tar": "^7.5.11",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
@@ -47,17 +47,22 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint-config-next": "^15.3.0",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.6",
     "typescript": "^5.5.3"
   },
   "overrides": {
-    "axios": "1.12.0",
+    "axios": "1.13.6",
     "brace-expansion": "2.0.2",
+    "@isaacs/brace-expansion": "5.0.1",
     "form-data": "4.0.5",
     "glob": "13.0.0",
-    "js-yaml": "4.1.1"
+    "js-yaml": "4.1.1",
+    "minimatch": "3.1.5",
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "9.0.9"
+    }
   },
   "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
   "main": "index.js",
