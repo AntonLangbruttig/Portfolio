@@ -8,6 +8,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - nvm use 22
         - yarn install --frozen-lockfile
         - echo "AWS_ACCESS_KEY_ID=$MY_AWS_ACCESS_KEY_ID" >> .env.production
         - echo "AWS_SECRET_ACCESS_KEY=$MY_AWS_SECRET_ACCESS_KEY" >> .env.production
