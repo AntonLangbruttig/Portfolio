@@ -1,7 +1,7 @@
 "use client";
 
 import ViewWindow from "@/components/view-window";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { animationSequence } from "@/utils/animation";
 
@@ -298,15 +298,15 @@ export default function HomePage() {
                 <Image
                   src="/images/me.webp"
                   alt="Anton Langbruttig"
-                  layout="fill"
-                  objectFit="contain"
-                  priority={true} 
+                  fill
                   style={{
+                    objectFit: "contain",
                     clipPath: `inset(0 0 ${100 - imageLines * 3}% 0)`,
                     transition: "clip-path 0.2s ease-out",
                     filter: "brightness(150%)",
                     zIndex: 50,
                   }}
+                  priority={true}
                 />
               </div>
             </div>
