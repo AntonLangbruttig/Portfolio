@@ -3,6 +3,9 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Bio - Anton Langbruttig",
   description: "Learn more about Anton Langbruttig, a software developer passionate about elegant design and intuitive user experiences.",
+  alternates: {
+    canonical: "https://antonlangbruttig.com/bio",
+  },
   icons: {
     icon: { url: "/images/favicon.ico", type: "image/x-icon" },
   },

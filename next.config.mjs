@@ -1,4 +1,17 @@
 export default {
+  trailingSlash: false,
+
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.antonlangbruttig.com" }],
+        destination: "https://antonlangbruttig.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       {
