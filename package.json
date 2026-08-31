@@ -55,7 +55,8 @@
     "fast-xml-parser": "5.8.0",
     "fast-xml-builder": "1.2.0",
     "picomatch": "4.0.4",
-    "follow-redirects": "1.16.0"
+    "follow-redirects": "1.16.0",
+    "nanoid": "3.3.18"
   },
   "overrides": {
     "fast-xml-parser": "5.8.0",
@@ -66,6 +67,7 @@
     "picomatch": "4.0.4",
     "follow-redirects": "1.16.0",
     "form-data": "4.0.6",
+    "nanoid": "3.3.18",
     "glob": {
       ".": "13.0.6",
       "minimatch": "10.2.6"
